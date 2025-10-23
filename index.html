@@ -14,19 +14,22 @@
         :root {
             --black: #000000;
             --white: #ffffff;
-            --gray: #808080;
+            --gray: #666666;
+            --gray-dark: #333333;
+            --green: #00ff00;
+            --amber: #ffa500;
         }
 
         body {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-family: 'Courier New', Courier, monospace;
             background: var(--black);
             color: var(--white);
-            line-height: 1;
-            font-size: 16px;
+            line-height: 1.4;
+            font-size: 13px;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Header - always visible classification */
+        /* Header */
         .header {
             position: fixed;
             top: 0;
@@ -35,137 +38,178 @@
             background: var(--black);
             border-bottom: 1px solid var(--white);
             z-index: 1000;
-            padding: 20px 0;
+            padding: 16px 0;
         }
 
         .header-content {
-            max-width: 1600px;
+            max-width: 1800px;
             margin: 0 auto;
-            padding: 0 60px;
+            padding: 0 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .classification {
-            font-family: 'Courier New', monospace;
-            font-size: 11px;
-            letter-spacing: 0.2em;
+        .logo {
+            font-size: 13px;
             font-weight: 700;
+            letter-spacing: 0.1em;
+        }
+
+        .nav {
+            display: flex;
+            gap: 32px;
+            font-size: 10px;
+            letter-spacing: 0.1em;
+        }
+
+        .nav a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .nav a:hover {
+            color: var(--white);
         }
 
         .status {
-            font-family: 'Courier New', monospace;
-            font-size: 11px;
-            letter-spacing: 0.2em;
+            font-size: 10px;
+            letter-spacing: 0.1em;
+            color: var(--green);
         }
 
-        /* Spacer for fixed header */
         .header-spacer {
-            height: 72px;
+            height: 48px;
         }
 
-        /* Hero - extreme scale */
-        .hero {
-            padding: 200px 0 160px;
-            border-bottom: 1px solid var(--white);
-        }
-
-        .hero-content {
-            max-width: 1600px;
+        /* Section */
+        .section {
+            max-width: 1800px;
             margin: 0 auto;
-            padding: 0 60px;
-        }
-
-        .hero-title {
-            font-size: 96px;
-            font-weight: 300;
-            letter-spacing: -0.04em;
-            line-height: 0.95;
-            margin-bottom: 80px;
-        }
-
-        .hero-specs {
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-            line-height: 2;
-            letter-spacing: 0.05em;
-        }
-
-        /* Stats - no borders, pure space */
-        .stats {
-            padding: 0;
-            border-bottom: 1px solid var(--white);
-        }
-
-        .stats-grid {
-            max-width: 1600px;
-            margin: 0 auto;
-            padding: 0 60px;
+            padding: 80px 40px;
+            border-bottom: 1px solid var(--gray-dark);
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 0;
+            grid-template-columns: 80px 1fr;
+            gap: 60px;
         }
 
-        .stat {
-            padding: 100px 0;
-            border-right: 1px solid var(--white);
+        .section-meta {
+            font-size: 10px;
+            letter-spacing: 0.1em;
+            color: var(--gray);
+            padding-top: 4px;
         }
 
-        .stat:last-child {
-            border-right: none;
+        .section-number {
+            margin-bottom: 8px;
         }
 
-        .stat-value {
-            font-family: 'Courier New', monospace;
-            font-size: 48px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            letter-spacing: -0.02em;
+        .section-status {
+            font-size: 9px;
         }
 
-        .stat-label {
-            font-size: 11px;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
+        .section-status.operational {
+            color: var(--green);
+        }
+
+        .section-status.pending {
+            color: var(--amber);
+        }
+
+        .section-content {
+            max-width: 1200px;
+        }
+
+        /* Hero */
+        .hero-label {
+            font-size: 10px;
+            letter-spacing: 0.15em;
+            margin-bottom: 40px;
             color: var(--gray);
         }
 
-        /* Demo - full width, no container */
-        .demo {
-            border-bottom: 1px solid var(--white);
+        .hero-title {
+            font-size: 72px;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            line-height: 0.95;
+            margin-bottom: 32px;
         }
 
-        .demo-interface {
-            width: 100%;
-            min-height: 800px;
-            background: var(--black);
+        .hero-sovereign {
+            font-size: 72px;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            margin-bottom: 60px;
         }
 
-        /* Inside demo */
-        .demo-classification {
-            background: var(--black);
-            border-bottom: 1px solid var(--white);
-            padding: 12px 60px;
-            font-family: 'Courier New', monospace;
+        .hero-specs {
             font-size: 11px;
-            letter-spacing: 0.2em;
+            line-height: 2;
+            letter-spacing: 0.05em;
+            color: var(--gray);
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+        }
+
+        .stat {
+            border-left: 1px solid var(--white);
+            padding-left: 16px;
+        }
+
+        .stat-value {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+        }
+
+        .stat-label {
+            font-size: 9px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--gray);
+            margin-bottom: 8px;
+        }
+
+        .stat-detail {
+            font-size: 10px;
+            color: var(--gray);
+        }
+
+        /* Demo Section */
+        .demo-section {
+            padding: 0;
+            border-bottom: 1px solid var(--gray-dark);
+            display: block;
+        }
+
+        .demo-classification {
+            border-bottom: 1px solid var(--white);
+            padding: 10px 40px;
+            font-size: 9px;
+            letter-spacing: 0.15em;
             text-align: center;
         }
 
         .demo-header {
-            background: var(--black);
-            border-bottom: 1px solid var(--white);
-            padding: 24px 60px;
+            border-bottom: 1px solid var(--gray-dark);
+            padding: 16px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .demo-logo {
-            font-size: 16px;
+            font-size: 13px;
             font-weight: 700;
-            letter-spacing: -0.02em;
+            letter-spacing: 0.1em;
         }
 
         .role-switch {
@@ -175,11 +219,11 @@
         }
 
         .role-btn {
-            padding: 12px 32px;
+            padding: 10px 24px;
             background: var(--black);
             color: var(--white);
             border: none;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 700;
             letter-spacing: 0.1em;
             cursor: pointer;
@@ -188,8 +232,7 @@
         }
 
         .role-btn:hover {
-            background: var(--white);
-            color: var(--black);
+            background: var(--gray-dark);
         }
 
         .role-btn.active {
@@ -198,9 +241,9 @@
         }
 
         .demo-status {
-            font-family: 'Courier New', monospace;
-            font-size: 11px;
+            font-size: 10px;
             letter-spacing: 0.1em;
+            color: var(--green);
         }
 
         /* Views */
@@ -216,89 +259,84 @@
         .battery-container {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 80px 60px;
-        }
-
-        .section {
-            margin-bottom: 80px;
+            padding: 60px 40px;
         }
 
         .section-title {
-            font-size: 11px;
-            letter-spacing: 0.2em;
+            font-size: 10px;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
-            margin-bottom: 40px;
+            margin-bottom: 32px;
             color: var(--gray);
         }
 
         .input-group {
-            margin-bottom: 40px;
+            margin-bottom: 32px;
         }
 
         .input-label {
             display: block;
-            font-family: 'Courier New', monospace;
-            font-size: 11px;
+            font-size: 10px;
             letter-spacing: 0.1em;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             text-transform: uppercase;
+            color: var(--gray);
         }
 
         .input-field, .input-select {
             width: 100%;
-            padding: 16px 0;
+            padding: 12px 0;
             background: transparent;
             border: none;
-            border-bottom: 1px solid var(--white);
+            border-bottom: 1px solid var(--gray);
             color: var(--white);
-            font-size: 16px;
+            font-size: 13px;
             font-family: 'Courier New', monospace;
         }
 
         .input-field:focus, .input-select:focus {
             outline: none;
-            border-bottom: 2px solid var(--white);
+            border-bottom: 1px solid var(--white);
         }
 
         .input-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 60px;
+            gap: 40px;
         }
 
         .action-btn {
             width: 100%;
-            padding: 24px;
+            padding: 16px;
             background: var(--white);
             color: var(--black);
             border: none;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 700;
-            letter-spacing: 0.2em;
+            letter-spacing: 0.15em;
             cursor: pointer;
             transition: all 0.15s;
             font-family: 'Courier New', monospace;
-            margin-top: 40px;
+            margin-top: 32px;
         }
 
         .action-btn:hover {
             background: var(--gray);
         }
 
-        /* Loading */
         .loading {
             text-align: center;
-            padding: 120px 60px;
+            padding: 100px 40px;
         }
 
         .spinner {
-            width: 60px;
-            height: 60px;
-            border: 2px solid var(--white);
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--white);
             border-top-color: transparent;
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            margin: 0 auto 40px;
+            margin: 0 auto 32px;
         }
 
         @keyframes spin {
@@ -306,33 +344,31 @@
         }
 
         .loading-text {
-            font-family: 'Courier New', monospace;
-            font-size: 11px;
-            letter-spacing: 0.2em;
+            font-size: 10px;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
+            color: var(--gray);
         }
 
         .loading-time {
-            font-family: 'Courier New', monospace;
-            font-size: 48px;
+            font-size: 36px;
             font-weight: 700;
-            letter-spacing: -0.02em;
+            letter-spacing: -0.01em;
         }
 
         .hidden {
             display: none !important;
         }
 
-        /* Results */
         .results-meta {
-            padding: 40px 0;
-            border-bottom: 1px solid var(--white);
+            padding: 24px 0;
+            border-bottom: 1px solid var(--gray-dark);
             display: flex;
             justify-content: space-between;
-            font-family: 'Courier New', monospace;
-            font-size: 11px;
+            font-size: 10px;
             letter-spacing: 0.1em;
+            color: var(--gray);
         }
 
         .results-container {
@@ -341,86 +377,86 @@
         }
 
         .recommendation {
-            border-bottom: 1px solid var(--white);
-            padding: 60px 0;
+            border-bottom: 1px solid var(--gray-dark);
+            padding: 40px 0;
             cursor: pointer;
             transition: all 0.15s;
         }
 
         .recommendation:hover {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.02);
         }
 
         .recommendation.selected {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.04);
         }
 
         .rec-header {
             display: flex;
             justify-content: space-between;
             align-items: baseline;
-            margin-bottom: 40px;
+            margin-bottom: 24px;
         }
 
         .rec-rank {
-            font-family: 'Courier New', monospace;
-            font-size: 11px;
-            letter-spacing: 0.2em;
+            font-size: 9px;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
+            color: var(--gray);
         }
 
         .rec-coherence {
-            font-family: 'Courier New', monospace;
-            font-size: 48px;
+            font-size: 36px;
             font-weight: 700;
-            letter-spacing: -0.02em;
+            letter-spacing: -0.01em;
         }
 
         .rec-title {
-            font-size: 24px;
-            font-weight: 300;
-            margin-bottom: 40px;
+            font-size: 16px;
+            font-weight: 400;
+            margin-bottom: 24px;
             letter-spacing: -0.01em;
         }
 
         .rec-description {
-            font-family: 'Courier New', monospace;
-            font-size: 12px;
-            line-height: 1.8;
+            font-size: 11px;
+            line-height: 1.7;
             color: var(--gray);
             white-space: pre-line;
-            margin-bottom: 40px;
+            margin-bottom: 24px;
         }
 
         .rec-meta {
             display: flex;
-            gap: 60px;
-            font-family: 'Courier New', monospace;
-            font-size: 11px;
+            gap: 40px;
+            font-size: 10px;
             letter-spacing: 0.1em;
         }
 
         .meta-item {
             display: flex;
-            gap: 20px;
+            gap: 12px;
+            color: var(--gray);
         }
 
-        /* Execute */
+        .meta-item span:last-child {
+            color: var(--white);
+        }
+
         .execute-section {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 80px 60px;
+            padding: 60px 40px;
         }
 
         .radio-command {
             background: transparent;
-            border: 1px solid var(--white);
-            padding: 40px;
-            font-family: 'Courier New', monospace;
-            font-size: 12px;
-            line-height: 1.8;
+            border: 1px solid var(--gray);
+            padding: 32px;
+            font-size: 11px;
+            line-height: 1.7;
             white-space: pre-line;
-            margin-bottom: 60px;
+            margin-bottom: 40px;
         }
 
         .button-group {
@@ -431,30 +467,30 @@
         }
 
         .secondary-btn {
-            padding: 24px;
+            padding: 16px;
             background: var(--black);
             color: var(--white);
             border: none;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 700;
-            letter-spacing: 0.2em;
+            letter-spacing: 0.15em;
             cursor: pointer;
             transition: all 0.15s;
             font-family: 'Courier New', monospace;
         }
 
         .secondary-btn:hover {
-            background: var(--gray);
+            background: var(--gray-dark);
         }
 
         .primary-btn {
-            padding: 24px;
+            padding: 16px;
             background: var(--white);
             color: var(--black);
             border: none;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 700;
-            letter-spacing: 0.2em;
+            letter-spacing: 0.15em;
             cursor: pointer;
             transition: all 0.15s;
             font-family: 'Courier New', monospace;
@@ -464,27 +500,47 @@
             background: var(--gray);
         }
 
-        /* Mission Results */
         .mission-results {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 120px 60px;
+            padding: 80px 40px;
         }
 
         .success-header {
             text-align: center;
-            margin-bottom: 120px;
+            margin-bottom: 60px;
         }
 
         .success-icon {
-            font-size: 96px;
-            margin-bottom: 40px;
+            font-size: 72px;
+            margin-bottom: 32px;
         }
 
         .success-title {
-            font-size: 32px;
-            font-weight: 300;
+            font-size: 24px;
+            font-weight: 400;
             letter-spacing: -0.01em;
+        }
+
+        .operational-consequence {
+            border: 1px solid var(--gray);
+            padding: 40px;
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        .consequence-title {
+            font-size: 9px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 32px;
+            color: var(--gray);
+        }
+
+        .consequence-text {
+            font-size: 12px;
+            line-height: 1.8;
+            letter-spacing: 0.02em;
         }
 
         .mission-stats {
@@ -492,55 +548,53 @@
             grid-template-columns: repeat(3, 1fr);
             gap: 1px;
             background: var(--white);
-            margin-bottom: 120px;
+            margin-bottom: 80px;
         }
 
         .stat-card {
             background: var(--black);
-            padding: 60px 40px;
+            padding: 40px 24px;
             text-align: center;
         }
 
         .stat-card-label {
-            font-size: 11px;
-            letter-spacing: 0.2em;
+            font-size: 9px;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             color: var(--gray);
         }
 
         .stat-card-value {
-            font-family: 'Courier New', monospace;
-            font-size: 32px;
+            font-size: 24px;
             font-weight: 700;
-            letter-spacing: -0.02em;
-            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+            margin-bottom: 8px;
         }
 
         .stat-card-detail {
-            font-family: 'Courier New', monospace;
-            font-size: 11px;
+            font-size: 10px;
             color: var(--gray);
         }
 
         .debrief {
-            border: 1px solid var(--white);
-            padding: 60px;
-            margin-bottom: 80px;
+            border: 1px solid var(--gray);
+            padding: 40px;
+            margin-bottom: 60px;
         }
 
         .debrief-title {
-            font-size: 11px;
-            letter-spacing: 0.2em;
+            font-size: 10px;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
-            margin-bottom: 60px;
+            margin-bottom: 40px;
         }
 
         .debrief-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 60px;
-            margin-bottom: 60px;
+            gap: 40px;
+            margin-bottom: 40px;
         }
 
         .debrief-item {
@@ -548,231 +602,121 @@
         }
 
         .debrief-label {
-            font-size: 11px;
-            letter-spacing: 0.2em;
+            font-size: 9px;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             color: var(--gray);
         }
 
         .debrief-value {
-            font-family: 'Courier New', monospace;
-            font-size: 32px;
+            font-size: 24px;
             font-weight: 700;
-            letter-spacing: -0.02em;
+            letter-spacing: -0.01em;
         }
 
         .debrief-conclusion {
-            font-family: 'Courier New', monospace;
-            font-size: 12px;
-            line-height: 1.8;
+            font-size: 11px;
+            line-height: 1.7;
             color: var(--gray);
-            padding-top: 40px;
-            border-top: 1px solid var(--white);
+            padding-top: 32px;
+            border-top: 1px solid var(--gray-dark);
         }
 
-        /* Theater View */
-        .theater-layout {
+        /* Pathway */
+        .pathway-grid {
             display: grid;
-            grid-template-columns: 300px 1fr 300px;
-            min-height: 800px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: var(--white);
+            margin-bottom: 60px;
         }
 
-        .theater-sidebar {
-            padding: 60px 40px;
-            border-right: 1px solid var(--white);
+        .pathway-step {
+            background: var(--black);
+            padding: 32px 20px;
+            border: 1px solid var(--gray-dark);
         }
 
-        .theater-sidebar.right {
-            border-right: none;
-            border-left: 1px solid var(--white);
-        }
-
-        .sidebar-title {
-            font-size: 11px;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            margin-bottom: 40px;
-        }
-
-        .resource-block {
-            margin-bottom: 40px;
-            padding-bottom: 40px;
-            border-bottom: 1px solid var(--white);
-        }
-
-        .resource-name {
-            font-family: 'Courier New', monospace;
-            font-size: 11px;
-            margin-bottom: 20px;
-        }
-
-        .resource-item {
-            display: flex;
-            justify-content: space-between;
-            font-family: 'Courier New', monospace;
-            font-size: 11px;
-            margin-bottom: 12px;
-        }
-
-        .theater-center {
-            padding: 60px 80px;
-        }
-
-        .threat-wave {
-            border: 1px solid var(--white);
-            padding: 40px;
-            margin-bottom: 40px;
-        }
-
-        .wave-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-
-        .wave-title {
-            font-family: 'Courier New', monospace;
-            font-size: 11px;
-            letter-spacing: 0.2em;
-        }
-
-        .wave-details {
-            font-family: 'Courier New', monospace;
-            font-size: 11px;
-            line-height: 1.8;
-            color: var(--gray);
-        }
-
-        .strategy-input-section {
-            border: 1px solid var(--white);
-            padding: 40px;
-        }
-
-        .strategy-input {
-            margin-bottom: 40px;
-        }
-
-        .theater-rec {
-            border-bottom: 1px solid var(--white);
-            padding: 40px 0;
-            cursor: pointer;
-        }
-
-        .theater-rec:hover {
-            background: rgba(255, 255, 255, 0.03);
-        }
-
-        .theater-rec.selected {
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .theater-rec-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-
-        .theater-rec-name {
-            font-size: 14px;
-        }
-
-        .theater-rec-score {
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
+        .pathway-number {
+            font-size: 24px;
             font-weight: 700;
+            margin-bottom: 16px;
         }
 
-        .theater-rec-summary {
-            font-family: 'Courier New', monospace;
+        .pathway-title {
             font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .pathway-desc {
+            font-size: 10px;
             line-height: 1.6;
             color: var(--gray);
-            margin-bottom: 20px;
         }
 
-        .theater-rec-meta {
-            display: flex;
-            gap: 20px;
-            font-family: 'Courier New', monospace;
-            font-size: 10px;
-            padding-top: 20px;
-            border-top: 1px solid var(--white);
+        /* Compliance */
+        .compliance-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+            margin-bottom: 60px;
         }
 
-        .action-panel {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: var(--black);
-            border-top: 2px solid var(--white);
-            padding: 24px 60px;
-            display: none;
-            z-index: 500;
+        .compliance-item {
+            border-left: 1px solid var(--gray);
+            padding-left: 16px;
         }
 
-        .action-panel.visible {
-            display: block;
-        }
-
-        .action-content {
-            max-width: 1600px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .action-text {
-            font-family: 'Courier New', monospace;
+        .compliance-title {
             font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .compliance-status {
+            font-size: 10px;
+            margin-bottom: 12px;
             letter-spacing: 0.1em;
         }
 
-        .theater-results {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 120px 60px;
+        .compliance-status.operational {
+            color: var(--green);
         }
 
-        /* Specs Section */
-        .specs {
-            padding: 120px 0;
-            border-bottom: 1px solid var(--white);
+        .compliance-status.pending {
+            color: var(--amber);
         }
 
-        .specs-content {
-            max-width: 1600px;
-            margin: 0 auto;
-            padding: 0 60px;
-        }
-
-        .specs-title {
-            font-size: 11px;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            margin-bottom: 80px;
+        .compliance-desc {
+            font-size: 10px;
+            line-height: 1.6;
             color: var(--gray);
         }
 
+        /* Specs */
         .specs-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 1px;
-            background: var(--white);
+            gap: 60px;
+            margin-bottom: 60px;
         }
 
         .spec-block {
-            background: var(--black);
-            padding: 80px 60px;
+            border-left: 1px solid var(--white);
+            padding-left: 16px;
         }
 
         .spec-block-title {
-            font-size: 11px;
-            letter-spacing: 0.2em;
+            font-size: 10px;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
-            margin-bottom: 60px;
+            margin-bottom: 32px;
         }
 
         .spec-list {
@@ -782,73 +726,44 @@
         .spec-item {
             display: flex;
             justify-content: space-between;
-            padding: 20px 0;
-            border-bottom: 1px solid var(--white);
-            font-family: 'Courier New', monospace;
-            font-size: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--gray-dark);
+            font-size: 11px;
         }
 
         .spec-item:last-child {
             border-bottom: none;
         }
 
-        /* Founder */
-        .founder {
-            padding: 120px 0;
-            border-bottom: 1px solid var(--white);
-        }
-
-        .founder-content {
-            max-width: 1600px;
-            margin: 0 auto;
-            padding: 0 60px;
-        }
-
-        .founder-title {
-            font-size: 11px;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            margin-bottom: 80px;
+        .spec-item span:first-child {
             color: var(--gray);
         }
 
+        /* Founder */
         .founder-bio {
-            max-width: 900px;
-            font-family: 'Courier New', monospace;
-            font-size: 12px;
-            line-height: 2;
+            font-size: 11px;
+            line-height: 1.8;
             letter-spacing: 0.02em;
+            margin-bottom: 60px;
+            color: var(--gray);
         }
 
         /* Contact */
-        .contact {
-            padding: 120px 0 200px;
-        }
-
-        .contact-content {
-            max-width: 1600px;
-            margin: 0 auto;
-            padding: 0 60px;
-            text-align: center;
-        }
-
         .contact-title {
-            font-size: 11px;
-            letter-spacing: 0.2em;
+            font-size: 10px;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
-            margin-bottom: 60px;
-            color: var(--gray);
+            margin-bottom: 32px;
         }
 
         .contact-email {
-            font-family: 'Courier New', monospace;
-            font-size: 24px;
+            font-size: 18px;
             color: var(--white);
             text-decoration: none;
             display: inline-block;
-            padding-bottom: 8px;
+            padding-bottom: 4px;
             border-bottom: 1px solid var(--white);
-            margin-bottom: 60px;
+            margin-bottom: 32px;
             transition: all 0.15s;
         }
 
@@ -858,95 +773,86 @@
         }
 
         .contact-info {
-            font-family: 'Courier New', monospace;
-            font-size: 11px;
-            line-height: 2;
+            font-size: 10px;
+            line-height: 1.8;
             color: var(--gray);
             letter-spacing: 0.05em;
         }
 
         /* Footer */
         .footer {
-            padding: 40px 0;
-            border-top: 1px solid var(--white);
+            padding: 40px;
+            border-top: 1px solid var(--gray-dark);
         }
 
         .footer-content {
-            max-width: 1600px;
+            max-width: 1800px;
             margin: 0 auto;
-            padding: 0 60px;
             display: flex;
             justify-content: space-between;
-            font-family: 'Courier New', monospace;
-            font-size: 10px;
+            font-size: 9px;
             letter-spacing: 0.1em;
             color: var(--gray);
         }
 
         /* Responsive */
         @media (max-width: 1200px) {
-            .hero-title {
-                font-size: 72px;
+            .section {
+                grid-template-columns: 60px 1fr;
+                gap: 40px;
+                padding: 60px 24px;
+            }
+
+            .hero-title, .hero-sovereign {
+                font-size: 56px;
             }
 
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .stat {
-                border-right: none;
-                border-bottom: 1px solid var(--white);
+            .pathway-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
 
-            .stat:last-child {
-                border-bottom: none;
+            .compliance-grid {
+                grid-template-columns: 1fr;
             }
 
             .specs-grid {
                 grid-template-columns: 1fr;
             }
-
-            .theater-layout {
-                grid-template-columns: 1fr;
-            }
-
-            .theater-sidebar {
-                display: none;
-            }
         }
 
         @media (max-width: 768px) {
-            .header-content,
-            .hero-content,
-            .stats-grid,
-            .specs-content,
-            .founder-content,
-            .contact-content,
-            .footer-content {
-                padding: 0 30px;
+            .header-content {
+                padding: 0 20px;
             }
 
-            .hero-title {
-                font-size: 48px;
+            .nav {
+                display: none;
             }
 
-            .hero {
-                padding: 120px 0 80px;
-            }
-
-            .stat {
-                padding: 60px 0;
-            }
-
-            .battery-container,
-            .execute-section,
-            .mission-results {
-                padding: 60px 30px;
-            }
-
-            .input-row {
+            .section {
                 grid-template-columns: 1fr;
-                gap: 40px;
+                padding: 40px 20px;
+            }
+
+            .section-meta {
+                margin-bottom: 24px;
+            }
+
+            .hero-title, .hero-sovereign {
+                font-size: 40px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .pathway-grid {
+                grid-template-columns: 1fr;
             }
 
             .mission-stats {
@@ -960,390 +866,230 @@
     </style>
 </head>
 <body>
-    <!-- Header with classification -->
+    <!-- Header -->
     <div class="header">
         <div class="header-content">
-            <div class="classification">UNCLASSIFIED // SIMULATED SCENARIOS</div>
+            <div class="logo">OMIN</div>
+            <nav class="nav">
+                <a href="#overview">01-OVERVIEW</a>
+                <a href="#demo">02-DEMONSTRATION</a>
+                <a href="#specs">03-SPECIFICATIONS</a>
+                <a href="#integration">04-INTEGRATION</a>
+                <a href="#compliance">05-COMPLIANCE</a>
+                <a href="#contact">06-DEPLOYMENT</a>
+            </nav>
             <div class="status">OPERATIONAL</div>
         </div>
     </div>
 
     <div class="header-spacer"></div>
 
-    <!-- Hero -->
-    <section class="hero">
-        <div class="hero-content">
+    <!-- 01 — SYSTEM OVERVIEW -->
+    <section id="overview" class="section">
+        <div class="section-meta">
+            <div class="section-number">01</div>
+            <div class="section-status operational">OPERATIONAL</div>
+        </div>
+        <div class="section-content">
+            <div class="hero-label">COUNTER-UAS DECISION INTELLIGENCE</div>
             <h1 class="hero-title">Counter-UAS decision intelligence.<br>26MB. Air-gapped. Sub-second.</h1>
+            <div class="hero-sovereign">Sovereign.</div>
             <div class="hero-specs">
                 COMPATIBLE: NATO + SOVIET SYSTEMS<br>
                 DEPLOYMENT: 14 DAYS<br>
                 SOVEREIGNTY: COMPLETE<br>
-                LATENCY: &lt;1 SECOND
+                LATENCY: <1 SECOND
             </div>
         </div>
     </section>
 
-    <!-- Stats -->
-    <section class="stats">
-        <div class="stats-grid">
-            <div class="stat">
-                <div class="stat-value">26MB</div>
-                <div class="stat-label">MODEL SIZE</div>
-            </div>
-            <div class="stat">
-                <div class="stat-value">&lt;1s</div>
-                <div class="stat-label">DECISION LATENCY</div>
-            </div>
-            <div class="stat">
-                <div class="stat-value">100%</div>
-                <div class="stat-label">AIR-GAPPED</div>
-            </div>
-            <div class="stat">
-                <div class="stat-value">$50K</div>
-                <div class="stat-label">PILOT DEPLOYMENT</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Demo Interface -->
-    <section class="demo">
-        <div class="demo-interface">
-            <div class="demo-classification">
-                SIMULATED COMBAT SCENARIOS // OMIN COMMAND SYSTEM
-            </div>
-
-            <div class="demo-header">
-                <div class="demo-logo">Omin</div>
-                <div class="role-switch">
-                    <button class="role-btn active" onclick="switchRole('battery')">BATTERY COMMANDER</button>
-                    <button class="role-btn" onclick="switchRole('theater')">THEATER OPERATIONS</button>
+    <!-- STATS -->
+    <section class="section">
+        <div class="section-meta"></div>
+        <div class="section-content">
+            <div class="stats-grid">
+                <div class="stat">
+                    <div class="stat-label">MODEL SIZE</div>
+                    <div class="stat-value">26MB</div>
+                    <div class="stat-detail">EDGE DEPLOYABLE</div>
                 </div>
-                <div class="demo-status">SYSTEM READY</div>
-            </div>
-
-            <!-- Battery View -->
-            <div id="battery-view" class="view active">
-                <!-- Input -->
-                <div id="battery-input" class="battery-container">
-                    <div class="section">
-                        <div class="section-title">DETECTED THREAT</div>
-
-                        <div class="input-group">
-                            <label class="input-label">THREAT TYPE</label>
-                            <select class="input-select" id="threat-type">
-                                <option value="">SELECT</option>
-                                <option value="Shahed-136">SHAHED-136 (IRANIAN UAV)</option>
-                                <option value="Lancet">LANCET (FPV KAMIKAZE)</option>
-                                <option value="Geran">GERAN-2 (RUSSIAN)</option>
-                            </select>
-                        </div>
-
-                        <div class="input-row">
-                            <div class="input-group">
-                                <label class="input-label">COUNT</label>
-                                <input type="number" class="input-field" id="threat-count" value="4" min="1">
-                            </div>
-                            <div class="input-group">
-                                <label class="input-label">RANGE (KM)</label>
-                                <input type="number" class="input-field" id="threat-range" value="22" min="0" step="0.1">
-                            </div>
-                        </div>
-
-                        <div class="input-group">
-                            <label class="input-label">PROBABLE TARGET</label>
-                            <select class="input-select" id="threat-target">
-                                <option value="">SELECT</option>
-                                <option value="ammo">AMMUNITION DEPOT (CRITICAL)</option>
-                                <option value="command">COMMAND POST</option>
-                                <option value="energy">ENERGY INFRASTRUCTURE</option>
-                            </select>
-                        </div>
-
-                        <button class="action-btn" onclick="processBatteryInput()">CALCULATE RECOMMENDATION</button>
-                    </div>
+                <div class="stat">
+                    <div class="stat-label">DECISION LATENCY</div>
+                    <div class="stat-value">&lt;1s</div>
+                    <div class="stat-detail">OPERATIONAL TIME</div>
                 </div>
-
-                <!-- Loading -->
-                <div id="battery-loading" class="loading hidden">
-                    <div class="spinner"></div>
-                    <div class="loading-text">PROCESSING</div>
-                    <div class="loading-time"><span id="battery-loading-time">0.0</span>s</div>
+                <div class="stat">
+                    <div class="stat-label">AIR-GAPPED</div>
+                    <div class="stat-value">100%</div>
+                    <div class="stat-detail">COMPLETE SOVEREIGNTY</div>
                 </div>
-
-                <!-- Results -->
-                <div id="battery-results" class="battery-container hidden">
-                    <div class="results-meta">
-                        <div>GENERATED <span id="results-count">6</span> STRATEGIES</div>
-                        <div>PROCESSING: <span id="results-time">0.8</span>s</div>
-                    </div>
-                    <div class="results-container" id="battery-recommendations"></div>
-                </div>
-
-                <!-- Execute -->
-                <div id="battery-execute" class="hidden">
-                    <div class="execute-section">
-                        <div class="section-title">EXECUTE COMMAND</div>
-                        <div class="radio-command" id="battery-radio-command"></div>
-                        <div class="button-group">
-                            <button class="secondary-btn" onclick="batteryGoBack()">BACK</button>
-                            <button class="primary-btn" onclick="batteryExecute()">EXECUTE</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Mission Results -->
-                <div id="battery-mission-results" class="hidden">
-                    <div class="mission-results">
-                        <div class="success-header">
-                            <div class="success-icon">✓</div>
-                            <div class="success-title">OPERATION COMPLETED</div>
-                        </div>
-
-                        <div class="mission-stats">
-                            <div class="stat-card">
-                                <div class="stat-card-label">THREATS NEUTRALIZED</div>
-                                <div class="stat-card-value" id="result-threats">4/4</div>
-                                <div class="stat-card-detail">COMPLETE INTERCEPT</div>
-                            </div>
-
-                            <div class="stat-card">
-                                <div class="stat-card-label">RESOURCES USED</div>
-                                <div class="stat-card-value" id="result-cost">$1.0M</div>
-                                <div class="stat-card-detail" id="result-systems">2× IRIS-T</div>
-                            </div>
-
-                            <div class="stat-card">
-                                <div class="stat-card-label">RESERVES MAINTAINED</div>
-                                <div class="stat-card-value" id="result-reserve">68%</div>
-                                <div class="stat-card-detail">READY FOR NEXT WAVES</div>
-                            </div>
-                        </div>
-
-                        <div class="debrief">
-                            <div class="debrief-title">VALIDATION</div>
-                            <div class="debrief-grid">
-                                <div class="debrief-item">
-                                    <div class="debrief-label">COHERENCE</div>
-                                    <div class="debrief-value" id="result-coherence">0.8021</div>
-                                </div>
-                                <div class="debrief-item">
-                                    <div class="debrief-label">FORECAST</div>
-                                    <div class="debrief-value" id="result-predicted">88%</div>
-                                </div>
-                                <div class="debrief-item">
-                                    <div class="debrief-label">ACTUAL</div>
-                                    <div class="debrief-value">100%</div>
-                                </div>
-                                <div class="debrief-item">
-                                    <div class="debrief-label">EXECUTION TIME</div>
-                                    <div class="debrief-value" id="result-time">3:24</div>
-                                </div>
-                            </div>
-                            <div class="debrief-conclusion">
-                                HIGHEST COHERENCE STRATEGY (0.80+) ENSURED OPTIMAL RESULT. OMIN FORECAST CONFIRMED BY ACTUAL MISSION EXECUTION.
-                            </div>
-                        </div>
-
-                        <button class="action-btn" onclick="resetBattery()">NEW SCENARIO</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Theater View -->
-            <div id="theater-view" class="view">
-                <div class="theater-layout">
-                    <!-- Left Sidebar -->
-                    <div class="theater-sidebar">
-                        <div class="sidebar-title">AIR DEFENSE RESOURCES</div>
-
-                        <div class="resource-block">
-                            <div class="resource-name">MYKOLAIV REGION</div>
-                            <div class="resource-item">
-                                <span>IRIS-T</span>
-                                <span>16/16</span>
-                            </div>
-                            <div class="resource-item">
-                                <span>BUK-M1</span>
-                                <span>12/18</span>
-                            </div>
-                            <div class="resource-item">
-                                <span>STATUS</span>
-                                <span>READY</span>
-                            </div>
-                        </div>
-
-                        <div class="resource-block">
-                            <div class="resource-name">ODESA REGION</div>
-                            <div class="resource-item">
-                                <span>PATRIOT</span>
-                                <span>16/16</span>
-                            </div>
-                            <div class="resource-item">
-                                <span>IRIS-T</span>
-                                <span>24/32</span>
-                            </div>
-                            <div class="resource-item">
-                                <span>STATUS</span>
-                                <span>READY</span>
-                            </div>
-                        </div>
-
-                        <div class="resource-block" style="border-bottom: none;">
-                            <div class="resource-name">TOTAL RESOURCES</div>
-                            <div class="resource-item">
-                                <span>TOTAL MISSILES</span>
-                                <span>120</span>
-                            </div>
-                            <div class="resource-item">
-                                <span>RESUPPLY</span>
-                                <span>36 HOURS</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Center -->
-                    <div class="theater-center">
-                        <div class="threat-wave">
-                            <div class="wave-header">
-                                <div class="wave-title">WAVE 1 • ACTIVE</div>
-                                <div class="wave-title">23:15 UTC</div>
-                            </div>
-                            <div class="wave-details">
-                                MYKOLAIV: 4× SHAHED-136, 22KM, TARGET: AMMUNITION DEPOT<br>
-                                PRIORITY: CRITICAL
-                            </div>
-                        </div>
-
-                        <div class="threat-wave" style="opacity: 0.5;">
-                            <div class="wave-header">
-                                <div class="wave-title">WAVE 2 • EXPECTED</div>
-                                <div class="wave-title">~00:30 UTC</div>
-                            </div>
-                            <div class="wave-details">
-                                INTELLIGENCE: 20-30 TARGETS, MULTIPLE DIRECTIONS<br>
-                                TIME: 1-1.5 HOURS
-                            </div>
-                        </div>
-
-                        <div class="strategy-input-section">
-                            <div class="section-title" style="margin-bottom: 40px;">STRATEGIC REQUEST</div>
-
-                            <div class="strategy-input">
-                                <label class="input-label">PLANNING HORIZON</label>
-                                <select class="input-select" id="planning-horizon">
-                                    <option value="all-night">ALL NIGHT (6 HOURS)</option>
-                                    <option value="3-hours">3 HOURS</option>
-                                </select>
-                            </div>
-
-                            <div class="strategy-input">
-                                <label class="input-label">ACCEPTABLE RISK (%)</label>
-                                <input type="range" class="input-field" id="risk-tolerance" min="0" max="30" value="10"
-                                       oninput="document.getElementById('risk-value').textContent = this.value + '%'">
-                                <div style="text-align: center; margin-top: 12px; font-family: 'Courier New', monospace; font-size: 14px;">
-                                    <span id="risk-value">10%</span>
-                                </div>
-                            </div>
-
-                            <button class="action-btn" onclick="calculateTheaterStrategy()">CALCULATE STRATEGY</button>
-                        </div>
-                    </div>
-
-                    <!-- Right Sidebar -->
-                    <div class="theater-sidebar right">
-                        <div class="sidebar-title">RECOMMENDATIONS</div>
-                        <div id="theater-recommendations">
-                            <div style="text-align: center; padding: 60px 20px; font-family: 'Courier New', monospace; font-size: 10px; color: var(--gray);">
-                                CALCULATE STRATEGY
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Action Panel -->
-                <div class="action-panel" id="theater-action-panel">
-                    <div class="action-content">
-                        <div class="action-text">
-                            SELECTED: <span id="theater-selected-strategy">-</span>
-                        </div>
-                        <div class="button-group" style="width: 400px;">
-                            <button class="secondary-btn" onclick="theaterViewDetails()">DETAILS</button>
-                            <button class="primary-btn" onclick="theaterApproveDirective()">APPROVE</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Theater Loading -->
-                <div id="theater-loading" class="loading hidden">
-                    <div class="spinner"></div>
-                    <div class="loading-text">PROCESSING THEATER SCENARIO</div>
-                    <div class="loading-time"><span id="theater-loading-time">0.0</span>s</div>
-                </div>
-
-                <!-- Theater Results -->
-                <div id="theater-results" class="hidden">
-                    <div class="theater-results">
-                        <div class="success-header">
-                            <div class="success-icon">✓</div>
-                            <div class="success-title">DIRECTIVE EXECUTED</div>
-                        </div>
-
-                        <div class="mission-stats">
-                            <div class="stat-card">
-                                <div class="stat-card-label">NIGHT DEFENSE</div>
-                                <div class="stat-card-value" id="theater-result-waves">4/5</div>
-                                <div class="stat-card-detail">80% INTERCEPTION</div>
-                            </div>
-
-                            <div class="stat-card">
-                                <div class="stat-card-label">TOTAL COST</div>
-                                <div class="stat-card-value" id="theater-result-cost">$4.2M</div>
-                                <div class="stat-card-detail">3 REGIONS</div>
-                            </div>
-
-                            <div class="stat-card">
-                                <div class="stat-card-label">RESERVE</div>
-                                <div class="stat-card-value" id="theater-result-reserve">65%</div>
-                                <div class="stat-card-detail">READY FOR NEXT DAY</div>
-                            </div>
-                        </div>
-
-                        <div class="debrief">
-                            <div class="debrief-title">THEATER VALIDATION</div>
-                            <div class="debrief-grid">
-                                <div class="debrief-item">
-                                    <div class="debrief-label">COHERENCE</div>
-                                    <div class="debrief-value">0.8367</div>
-                                </div>
-                                <div class="debrief-item">
-                                    <div class="debrief-label">FORECAST</div>
-                                    <div class="debrief-value">78%</div>
-                                </div>
-                                <div class="debrief-item">
-                                    <div class="debrief-label">ACTUAL</div>
-                                    <div class="debrief-value">80%</div>
-                                </div>
-                                <div class="debrief-item">
-                                    <div class="debrief-label">DURATION</div>
-                                    <div class="debrief-value">6:45</div>
-                                </div>
-                            </div>
-                            <div class="debrief-conclusion">
-                                THEATER STRATEGY WITH COHERENCE 0.83+ ENSURED OPTIMAL BALANCE BETWEEN PROTECTING CRITICAL ASSETS AND PRESERVING OPERATIONAL RESERVES. OMIN FORECAST CONFIRMED BY NIGHT DEFENSE RESULTS.
-                            </div>
-                        </div>
-
-                        <button class="action-btn" onclick="resetTheater()">NEW STRATEGY</button>
-                    </div>
+                <div class="stat">
+                    <div class="stat-label">PILOT DEPLOYMENT</div>
+                    <div class="stat-value">$50K</div>
+                    <div class="stat-detail">14-DAY TIMELINE</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Technical Specs -->
-    <section class="specs">
-        <div class="specs-content">
-            <div class="specs-title">TECHNICAL SPECIFICATIONS</div>
+    <!-- 02 — OPERATIONAL DEMONSTRATION -->
+    <section id="demo" class="demo-section">
+        <div class="demo-classification">
+            SIMULATED COMBAT SCENARIOS // OMIN COMMAND SYSTEM
+        </div>
+
+        <div class="demo-header">
+            <div class="demo-logo">OMIN</div>
+            <div class="role-switch">
+                <button class="role-btn active" onclick="switchRole('battery')">BATTERY COMMANDER</button>
+                <button class="role-btn" onclick="switchRole('theater')">THEATER OPERATIONS</button>
+            </div>
+            <div class="demo-status">SYSTEM READY</div>
+        </div>
+
+        <!-- Battery View -->
+        <div id="battery-view" class="view active">
+            <!-- Input -->
+            <div id="battery-input" class="battery-container">
+                <div class="section-title">DETECTED THREAT</div>
+
+                <div class="input-group">
+                    <label class="input-label">THREAT TYPE</label>
+                    <select class="input-select" id="threat-type">
+                        <option value="">SELECT</option>
+                        <option value="Shahed-136">SHAHED-136 (IRANIAN UAV)</option>
+                        <option value="Lancet">LANCET (FPV KAMIKAZE)</option>
+                        <option value="Geran">GERAN-2 (RUSSIAN)</option>
+                    </select>
+                </div>
+
+                <div class="input-row">
+                    <div class="input-group">
+                        <label class="input-label">COUNT</label>
+                        <input type="number" class="input-field" id="threat-count" value="4" min="1">
+                    </div>
+                    <div class="input-group">
+                        <label class="input-label">RANGE (KM)</label>
+                        <input type="number" class="input-field" id="threat-range" value="22" min="0" step="0.1">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">PROBABLE TARGET</label>
+                    <select class="input-select" id="threat-target">
+                        <option value="">SELECT</option>
+                        <option value="ammo">AMMUNITION DEPOT (CRITICAL)</option>
+                        <option value="command">COMMAND POST</option>
+                        <option value="energy">ENERGY INFRASTRUCTURE</option>
+                    </select>
+                </div>
+
+                <button class="action-btn" onclick="processBatteryInput()">CALCULATE RECOMMENDATION</button>
+            </div>
+
+            <!-- Loading -->
+            <div id="battery-loading" class="loading hidden">
+                <div class="spinner"></div>
+                <div class="loading-text">PROCESSING</div>
+                <div class="loading-time"><span id="battery-loading-time">0.0</span>s</div>
+            </div>
+
+            <!-- Results -->
+            <div id="battery-results" class="battery-container hidden">
+                <div class="results-meta">
+                    <div>GENERATED <span id="results-count">6</span> STRATEGIES</div>
+                    <div>PROCESSING: <span id="results-time">0.8</span>s</div>
+                </div>
+                <div class="results-container" id="battery-recommendations"></div>
+            </div>
+
+            <!-- Execute -->
+            <div id="battery-execute" class="hidden">
+                <div class="execute-section">
+                    <div class="section-title">EXECUTE COMMAND</div>
+                    <div class="radio-command" id="battery-radio-command"></div>
+                    <div class="button-group">
+                        <button class="secondary-btn" onclick="batteryGoBack()">BACK</button>
+                        <button class="primary-btn" onclick="batteryExecute()">EXECUTE</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mission Results -->
+            <div id="battery-mission-results" class="hidden">
+                <div class="mission-results">
+                    <div class="success-header">
+                        <div class="success-icon">✓</div>
+                        <div class="success-title">MISSION ACCOMPLISHED</div>
+                    </div>
+
+                    <div class="operational-consequence">
+                        <div class="consequence-title">OPERATIONAL CONSEQUENCE</div>
+                        <div class="consequence-text">
+                            AMMUNITION DEPOT PROTECTED<br>
+                            2,400 ARTILLERY ROUNDS PRESERVED<br>
+                            3 BRIGADES MAINTAINED COMBAT CAPABILITY
+                        </div>
+                    </div>
+
+                    <div class="mission-stats">
+                        <div class="stat-card">
+                            <div class="stat-card-label">THREATS NEUTRALIZED</div>
+                            <div class="stat-card-value" id="result-threats">4/4</div>
+                            <div class="stat-card-detail">COMPLETE INTERCEPT</div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-card-label">RESOURCES USED</div>
+                            <div class="stat-card-value" id="result-cost">$1.0M</div>
+                            <div class="stat-card-detail" id="result-systems">2× IRIS-T</div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-card-label">RESERVES MAINTAINED</div>
+                            <div class="stat-card-value" id="result-reserve">68%</div>
+                            <div class="stat-card-detail">READY FOR NEXT WAVES</div>
+                        </div>
+                    </div>
+
+                    <div class="debrief">
+                        <div class="debrief-title">VALIDATION</div>
+                        <div class="debrief-grid">
+                            <div class="debrief-item">
+                                <div class="debrief-label">COHERENCE</div>
+                                <div class="debrief-value" id="result-coherence">0.8021</div>
+                            </div>
+                            <div class="debrief-item">
+                                <div class="debrief-label">FORECAST</div>
+                                <div class="debrief-value" id="result-predicted">88%</div>
+                            </div>
+                            <div class="debrief-item">
+                                <div class="debrief-label">ACTUAL</div>
+                                <div class="debrief-value">100%</div>
+                            </div>
+                            <div class="debrief-item">
+                                <div class="debrief-label">EXECUTION TIME</div>
+                                <div class="debrief-value" id="result-time">3:24</div>
+                            </div>
+                        </div>
+                        <div class="debrief-conclusion">
+                            STRATEGY WITH COHERENCE 0.80+ ENSURED OPTIMAL RESULT UNDER OPERATIONAL CONSTRAINTS. YOU MADE A COHERENT DECISION. THE MATHEMATICS OF WAR VALIDATED YOUR JUDGMENT. YOU DID YOUR DUTY.
+                        </div>
+                    </div>
+
+                    <button class="action-btn" onclick="resetBattery()">NEW SCENARIO</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 03 — TECHNICAL SPECIFICATIONS -->
+    <section id="specs" class="section">
+        <div class="section-meta">
+            <div class="section-number">03</div>
+            <div class="section-status operational">VALIDATED</div>
+        </div>
+        <div class="section-content">
             <div class="specs-grid">
                 <div class="spec-block">
                     <div class="spec-block-title">SYSTEM ARCHITECTURE</div>
@@ -1400,20 +1146,122 @@
         </div>
     </section>
 
-    <!-- Founder -->
-    <section class="founder">
-        <div class="founder-content">
-            <div class="founder-title">FOUNDER</div>
-            <div class="founder-bio">
-                PENTAGON DDS PRODUCT MANAGER WITH OPERATIONAL EXPERIENCE SUPPORTING NATO ALLIES AND NATIONAL SECURITY INITIATIVES WITHIN THE CHIEF DIGITAL AND ARTIFICIAL INTELLIGENCE OFFICE. PRODUCT MANAGER FOR SKYBLUE SYSTEM DEPLOYED AT IDCC (2022-2024). CREATOR OF REGOLITH RAILS (4,000+ DOWNLOADS) AND LINKISM PROTOCOL.
+    <!-- 04 — INTEGRATION PATHWAY -->
+    <section id="integration" class="section">
+        <div class="section-meta">
+            <div class="section-number">04</div>
+            <div class="section-status operational">ESTABLISHED</div>
+        </div>
+        <div class="section-content">
+            <div class="pathway-grid">
+                <div class="pathway-step">
+                    <div class="pathway-number">01</div>
+                    <div class="pathway-title">SCENARIO VALIDATION</div>
+                    <div class="pathway-desc">
+                        SUBMIT THREAT SCENARIOS<br>
+                        WEAPON SYSTEMS INVENTORY<br>
+                        OPERATIONAL CONSTRAINTS<br><br>
+                        TIMELINE: 24-48 HOURS
+                    </div>
+                </div>
+
+                <div class="pathway-step">
+                    <div class="pathway-number">02</div>
+                    <div class="pathway-title">EVALUATION PHASE</div>
+                    <div class="pathway-desc">
+                        COHERENCE ANALYSIS<br>
+                        STRATEGY RECOMMENDATIONS<br>
+                        PERFORMANCE VALIDATION<br><br>
+                        TIMELINE: 3-5 DAYS
+                    </div>
+                </div>
+
+                <div class="pathway-step">
+                    <div class="pathway-number">03</div>
+                    <div class="pathway-title">INTEGRATION TESTING</div>
+                    <div class="pathway-desc">
+                        SYSTEM INTEGRATION<br>
+                        API CONFIGURATION<br>
+                        OPERATOR TRAINING<br><br>
+                        TIMELINE: 5-7 DAYS
+                    </div>
+                </div>
+
+                <div class="pathway-step">
+                    <div class="pathway-number">04</div>
+                    <div class="pathway-title">OPERATIONAL DEPLOYMENT</div>
+                    <div class="pathway-desc">
+                        FINAL VALIDATION<br>
+                        LIVE DEPLOYMENT<br>
+                        ONGOING SUPPORT<br><br>
+                        TIMELINE: 2-3 DAYS
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact -->
-    <section class="contact">
-        <div class="contact-content">
-            <div class="contact-title">EVALUATE WITH YOUR SCENARIO</div>
+    <!-- 05 — COMPLIANCE & CERTIFICATION -->
+    <section id="compliance" class="section">
+        <div class="section-meta">
+            <div class="section-number">05</div>
+            <div class="section-status pending">IN PROGRESS</div>
+        </div>
+        <div class="section-content">
+            <div class="compliance-grid">
+                <div class="compliance-item">
+                    <div class="compliance-title">DATA SOVEREIGNTY</div>
+                    <div class="compliance-status operational">COMPLIANT</div>
+                    <div class="compliance-desc">
+                        100% AIR-GAPPED DEPLOYMENT. ZERO CLOUD DEPENDENCY. COMPLETE DATA SOVEREIGNTY. ALL PROCESSING OCCURS ON-PREMISE. NO EXTERNAL DATA TRANSMISSION.
+                    </div>
+                </div>
+
+                <div class="compliance-item">
+                    <div class="compliance-title">NATO INTEROPERABILITY</div>
+                    <div class="compliance-status operational">VALIDATED</div>
+                    <div class="compliance-desc">
+                        COMPATIBLE WITH NATO LINK 16, JADGE SYSTEMS. SUPPORTS SOVIET-ERA WEAPON SYSTEMS. TESTED WITH PATRIOT, IRIS-T, BUK-M1, S-300 CONFIGURATIONS.
+                    </div>
+                </div>
+
+                <div class="compliance-item">
+                    <div class="compliance-title">EXPORT COMPLIANCE</div>
+                    <div class="compliance-status pending">PENDING</div>
+                    <div class="compliance-desc">
+                        US-BASED DEVELOPMENT. ITAR COMPLIANCE UNDER REVIEW. NATO ALLY EXPORT AUTHORIZATION IN PROGRESS. ESTIMATED COMPLETION: Q2 2025.
+                    </div>
+                </div>
+
+                <div class="compliance-item">
+                    <div class="compliance-title">OPERATIONAL SECURITY</div>
+                    <div class="compliance-status operational">VALIDATED</div>
+                    <div class="compliance-desc">
+                        AIR-GAPPED ARCHITECTURE. NO NETWORK CONNECTIVITY REQUIRED. ENCRYPTED STORAGE AT REST. OPERATOR-LEVEL ACCESS CONTROLS. AUDIT TRAIL LOGGING.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 06 — FOUNDER & DEPLOYMENT SUPPORT -->
+    <section id="contact" class="section">
+        <div class="section-meta">
+            <div class="section-number">06</div>
+            <div class="section-status operational">AVAILABLE</div>
+        </div>
+        <div class="section-content">
+            <div class="founder-bio">
+                BUILT BY PENTAGON DDS PRODUCT MANAGER WHO WATCHED UKRAINIAN OFFICERS CALCULATE MISSILE ALLOCATION BY HAND AT IDCC WHILE THREATS CLOSED TO 15KM. SAW THE GAP BETWEEN NATO DOCTRINE AND OPERATIONAL REALITY. SAW BATTERY COMMANDERS MAKING LIFE-DEATH DECISIONS IN 7 MINUTES WITH NO DECISION SUPPORT. SAW EXPENSIVE WESTERN MISSILES WASTED BECAUSE MANUAL CALCULATION UNDER TIME PRESSURE PRODUCES SUBOPTIMAL STRATEGIES.<br><br>
+
+                PRODUCT MANAGER FOR SKYBLUE SYSTEM DEPLOYED AT IDCC (2022-2024). WITNESSED 200+ COUNTER-UAS ENGAGEMENTS. DOCUMENTED THE PATTERN: DOCTRINE ASSUMES PERFECT INFORMATION AND UNLIMITED TIME. REALITY PROVIDES NEITHER.<br><br>
+
+                BUILT OMIN TO CLOSE THAT GAP. 26MB SO IT RUNS AIR-GAPPED ON EDGE HARDWARE. SUB-SECOND LATENCY SO DECISIONS HAPPEN IN OPERATIONAL TIME. COHERENCE SCORES SO COMMANDERS UNDERSTAND WHY, NOT JUST WHAT.<br><br>
+
+                NOT A PRODUCT. A COMMITMENT TO THE PEOPLE WHO DEFEND AGAINST IMPOSSIBLE ODDS.
+            </div>
+
+            <div class="contact-title">DEPLOYMENT EVALUATION</div>
             <a href="mailto:founder@traut.ai" class="contact-email">founder@traut.ai</a>
             <div class="contact-info">
                 SEND YOUR THREAT SCENARIO, AVAILABLE WEAPON SYSTEMS, AND OPERATIONAL CONSTRAINTS.<br>
@@ -1434,7 +1282,6 @@
     <script>
         let currentRole = 'battery';
         let selectedBatteryRec = null;
-        let selectedTheaterRec = null;
 
         function switchRole(role) {
             currentRole = role;
@@ -1499,36 +1346,6 @@
                 estimated_cost: 600000,
                 estimated_success_rate: 75,
                 time: 'Variable'
-            });
-
-            recommendations.push({
-                rank: 4,
-                coherence: 0.6789,
-                title: 'Request brigade coordination',
-                description: `Coordination with brigade:\n• My usage: MINIMAL - Stinger reserve\n• Request support from adjacent battery\n• Expected response: 3-4 minutes\n\nADVANTAGES:\n• Optimal resource distribution\n• Preserve my limited resources\n\nRISKS:\n• Coordination time: 3-4 minutes`,
-                estimated_cost: 300000,
-                estimated_success_rate: 70,
-                time: '3-4min'
-            });
-
-            recommendations.push({
-                rank: 5,
-                coherence: 0.5891,
-                title: 'Maximum protection',
-                description: `Use MAXIMUM resources:\n• 6× IRIS-T (use 100%)\n• 3× Buk-M1 (reserve)\n\nADVANTAGES:\n• 94% probability of complete elimination\n• Maximum confidence\n\nCRITICAL RISKS:\n• Spending 75% of night ammunition\n• Minimal reserve for subsequent attacks`,
-                estimated_cost: 3000000,
-                estimated_success_rate: 94,
-                time: '2min'
-            });
-
-            recommendations.push({
-                rank: 6,
-                coherence: 0.5123,
-                title: 'Minimal engagement',
-                description: `Minimize expensive systems:\n• 2× Buk-M1 interception attempt\n• IRIS-T preserve for critical threats\n\nHIGH RISKS:\n• Only 68% success probability\n• Possible damage to target`,
-                estimated_cost: 200000,
-                estimated_success_rate: 68,
-                time: '3-4min'
             });
 
             const container = document.getElementById('battery-recommendations');
@@ -1607,7 +1424,6 @@
                 document.getElementById('battery-mission-results').classList.remove('hidden');
 
                 const threatCount = parseInt(document.getElementById('threat-count').value);
-                const threatType = document.getElementById('threat-type').value;
                 const reservePercent = Math.round(selectedBatteryRec.coherence * 85);
 
                 document.getElementById('result-threats').textContent = `${threatCount}/${threatCount}`;
@@ -1624,104 +1440,6 @@
             document.getElementById('battery-mission-results').classList.add('hidden');
             document.getElementById('battery-input').classList.remove('hidden');
             selectedBatteryRec = null;
-        }
-
-        function calculateTheaterStrategy() {
-            document.querySelector('.theater-center').style.display = 'none';
-            document.getElementById('theater-loading').classList.remove('hidden');
-
-            let time = 0;
-            const interval = setInterval(() => {
-                time += 0.1;
-                document.getElementById('theater-loading-time').textContent = time.toFixed(1);
-                if (time >= 1.2) {
-                    clearInterval(interval);
-                    showTheaterRecommendations();
-                }
-            }, 100);
-        }
-
-        function showTheaterRecommendations() {
-            const recommendations = [
-                {
-                    score: 0.8367,
-                    name: 'Smart resource allocation',
-                    summary: 'Wave 1: 2× IRIS-T (minimal). Preserve 45+ missiles for waves 2-5. Balance protection and capability preservation.',
-                    cost: '$4-6M',
-                    reserve: '68%',
-                    coverage: 'All night'
-                },
-                {
-                    score: 0.7891,
-                    name: 'Prioritize critical assets',
-                    summary: 'Priority: Odesa (energy) + Kherson (command). Mykolaiv moderate defense. Accept risk on secondary targets.',
-                    cost: '$3-5M',
-                    reserve: '72%',
-                    coverage: 'Until morning'
-                },
-                {
-                    score: 0.7234,
-                    name: 'Regional coordination',
-                    summary: 'Request support from Zaporizhzhia Air Defense. Load distribution. Joint defense of southern direction.',
-                    cost: '$2-4M',
-                    reserve: '80%',
-                    coverage: 'Depends'
-                }
-            ];
-
-            const container = document.getElementById('theater-recommendations');
-            container.innerHTML = '';
-
-            recommendations.forEach(rec => {
-                const div = document.createElement('div');
-                div.className = 'theater-rec';
-                div.onclick = () => selectTheaterRecommendation(rec, div);
-                div.innerHTML = `
-                    <div class="theater-rec-header">
-                        <div class="theater-rec-name">${rec.name}</div>
-                        <div class="theater-rec-score">${rec.score.toFixed(4)}</div>
-                    </div>
-                    <div class="theater-rec-summary">${rec.summary}</div>
-                    <div class="theater-rec-meta">
-                        <div>${rec.cost}</div>
-                        <div>${rec.reserve} RESERVE</div>
-                        <div>${rec.coverage}</div>
-                    </div>
-                `;
-                container.appendChild(div);
-            });
-
-            document.getElementById('theater-loading').classList.add('hidden');
-            document.querySelector('.theater-center').style.display = 'block';
-        }
-
-        function selectTheaterRecommendation(rec, element) {
-            document.querySelectorAll('.theater-rec').forEach(el => el.classList.remove('selected'));
-            element.classList.add('selected');
-            selectedTheaterRec = rec;
-            document.getElementById('theater-action-panel').classList.add('visible');
-            document.getElementById('theater-selected-strategy').textContent = rec.name.toUpperCase();
-        }
-
-        function theaterViewDetails() {
-            alert('STRATEGY DETAILS:\n\nRegional distribution, timing, and expected outcomes available in full command interface.');
-        }
-
-        function theaterApproveDirective() {
-            document.getElementById('theater-action-panel').classList.remove('visible');
-            document.querySelector('.theater-layout').style.display = 'none';
-            document.getElementById('theater-results').classList.remove('hidden');
-
-            document.getElementById('theater-result-waves').textContent = '4/5';
-            document.getElementById('theater-result-cost').textContent = '$4.2M';
-            document.getElementById('theater-result-reserve').textContent = '65%';
-        }
-
-        function resetTheater() {
-            document.getElementById('theater-results').classList.add('hidden');
-            document.querySelector('.theater-layout').style.display = 'grid';
-            document.getElementById('theater-recommendations').innerHTML = '<div style="text-align: center; padding: 60px 20px; font-family: \'Courier New\', monospace; font-size: 10px; color: var(--gray);">CALCULATE STRATEGY</div>';
-            selectedTheaterRec = null;
         }
     </script>
 </body>
