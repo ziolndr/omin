@@ -1,1456 +1,861 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Omin | Counter-UAS Decision Intelligence</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --black: #000000;
-            --darker: #0a0a0a;
-            --dark: #111111;
-            --border: #1a1a1a;
-            --gray-dark: #666666;
-            --gray: #999999;
-            --gray-light: #cccccc;
-            --white: #ffffff;
-            --accent: #c8a882;
-            --accent-dim: #8a7560;
-            --green: #7a9b76;
-            --red: #c26d5f;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', system-ui, sans-serif;
-            background: var(--black);
-            color: var(--white);
-            line-height: 1.6;
-            font-size: 15px;
-            -webkit-font-smoothing: antialiased;
-            position: relative;
-        }
-
-        /* Tactical grid overlay */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: 
-                linear-gradient(rgba(200, 168, 130, 0.02) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(200, 168, 130, 0.02) 1px, transparent 1px);
-            background-size: 40px 40px;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        /* Noise texture */
-        body::after {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
-            pointer-events: none;
-            z-index: 1;
-            mix-blend-mode: overlay;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 40px;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* Header */
-        .header {
-            border-bottom: 1px solid var(--border);
-            padding: 32px 0;
-            position: sticky;
-            top: 0;
-            background: rgba(0, 0, 0, 0.98);
-            backdrop-filter: blur(20px);
-            z-index: 100;
-        }
-
-        .header-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 14px;
-            font-weight: 500;
-            letter-spacing: 0.1em;
-            color: var(--white);
-            position: relative;
-        }
-
-        .logo::before {
-            content: '//';
-            position: absolute;
-            left: -20px;
-            color: var(--accent);
-            opacity: 0.5;
-        }
-
-        .status {
-            font-family: 'SF Mono', monospace;
-            font-size: 9px;
-            color: var(--green);
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            position: relative;
-            padding-left: 16px;
-        }
-
-        .status::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 8px;
-            height: 8px;
-            background: var(--green);
-            border-radius: 50%;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
-        }
-
-        /* Hero */
-        .hero {
-            padding: 140px 0 120px;
-            border-bottom: 2px solid var(--border);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(200, 168, 130, 0.03) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .hero-label {
-            font-family: 'SF Mono', monospace;
-            font-size: 9px;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            margin-bottom: 40px;
-            font-weight: 500;
-        }
-
-        .hero-title {
-            font-size: 82px;
-            font-weight: 400;
-            letter-spacing: -0.04em;
-            line-height: 1;
-            margin-bottom: 40px;
-            max-width: 1000px;
-            color: var(--white);
-        }
-
-        .hero-description {
-            font-size: 18px;
-            color: var(--gray);
-            max-width: 680px;
-            line-height: 1.8;
-            font-weight: 400;
-            margin-bottom: 56px;
-            letter-spacing: -0.01em;
-        }
-
-        .hero-cta {
-            display: inline-block;
-            padding: 20px 56px;
-            background: transparent;
-            color: var(--accent);
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            border: 1px solid var(--accent-dim);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'SF Mono', monospace;
-            text-decoration: none;
-            position: relative;
-        }
-
-        .hero-cta::before,
-        .hero-cta::after {
-            content: '';
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            border: 1px solid var(--accent);
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
-
-        .hero-cta::before {
-            top: -1px;
-            left: -1px;
-            border-right: none;
-            border-bottom: none;
-        }
-
-        .hero-cta::after {
-            bottom: -1px;
-            right: -1px;
-            border-left: none;
-            border-top: none;
-        }
-
-        .hero-cta:hover {
-            background: var(--accent);
-            color: var(--black);
-            border-color: var(--accent);
-            transform: translateY(-2px);
-        }
-
-        .hero-cta:hover::before,
-        .hero-cta:hover::after {
-            opacity: 1;
-        }
-
-        /* Stats */
-        .stats-section {
-            padding: 0;
-            margin: 0;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1px;
-            background: var(--border);
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .stat {
-            background: var(--black);
-            padding: 64px 32px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat::before {
-            content: '//';
-            position: absolute;
-            top: 24px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-family: 'SF Mono', monospace;
-            font-size: 10px;
-            color: var(--accent);
-            opacity: 0.2;
-        }
-
-        .stat::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-            animation: statPulse 4s ease-in-out infinite;
-        }
-
-        @keyframes statPulse {
-            0%, 100% { opacity: 0.1; }
-            50% { opacity: 0.4; }
-        }
-
-        .stat:nth-child(2)::after { animation-delay: 1s; }
-        .stat:nth-child(3)::after { animation-delay: 2s; }
-        .stat:nth-child(4)::after { animation-delay: 3s; }
-
-        .stat-value {
-            font-family: 'SF Mono', monospace;
-            font-size: 42px;
-            font-weight: 400;
-            margin-bottom: 16px;
-            color: var(--accent);
-            letter-spacing: -0.02em;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .stat-label {
-            font-size: 10px;
-            color: var(--gray);
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            font-weight: 500;
-        }
-
-        /* Founder Section */
-        .founder-section {
-            padding: 120px 0;
-            background: linear-gradient(180deg, var(--black) 0%, var(--darker) 50%, var(--black) 100%);
-            border-top: 1px solid var(--accent);
-            border-bottom: 1px solid var(--accent);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .founder-section::before {
-            content: '01.00 / OPERATIONAL BACKGROUND';
-            position: absolute;
-            top: 40px;
-            left: 40px;
-            font-family: 'SF Mono', monospace;
-            font-size: 9px;
-            letter-spacing: 0.25em;
-            color: var(--accent);
-            opacity: 0.4;
-        }
-
-        /* Scan line animation */
-        .founder-section::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-            animation: scan 12s ease-in-out infinite;
-            opacity: 0.3;
-        }
-
-        @keyframes scan {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(600px); }
-        }
-
-        .founder-content {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 40px;
-            position: relative;
-        }
-
-        .founder-highlight {
-            font-size: 32px;
-            line-height: 1.5;
-            color: var(--white);
-            margin-bottom: 48px;
-            font-weight: 400;
-            letter-spacing: -0.02em;
-            max-width: 1000px;
-            position: relative;
-            padding-left: 40px;
-        }
-
-        .founder-highlight::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: var(--accent);
-        }
-
-        .founder-details {
-            font-size: 17px;
-            line-height: 2;
-            color: var(--gray);
-            max-width: 900px;
-            letter-spacing: -0.01em;
-        }
-
-        /* Corner brackets */
-        .founder-content::before,
-        .founder-content::after {
-            content: '';
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            border: 1px solid var(--accent);
-            opacity: 0.2;
-        }
-
-        .founder-content::before {
-            top: -20px;
-            left: 0;
-            border-right: none;
-            border-bottom: none;
-        }
-
-        .founder-content::after {
-            bottom: -20px;
-            right: 0;
-            border-left: none;
-            border-top: none;
-        }
-
-        /* Demo Section */
-        .demo-section {
-            padding: 120px 0;
-            border-bottom: 1px solid var(--border);
-            position: relative;
-        }
-
-        .demo-section::before {
-            content: '02.00 / SYSTEM DEMONSTRATION';
-            position: absolute;
-            top: 40px;
-            left: 40px;
-            font-family: 'SF Mono', monospace;
-            font-size: 9px;
-            letter-spacing: 0.25em;
-            color: var(--accent);
-            opacity: 0.4;
-        }
-
-        .demo-header {
-            margin-bottom: 64px;
-        }
-
-        .demo-label {
-            font-family: 'SF Mono', monospace;
-            font-size: 9px;
-            color: var(--green);
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            margin-bottom: 24px;
-        }
-
-        .demo-title {
-            font-size: 48px;
-            font-weight: 400;
-            letter-spacing: -0.02em;
-            margin-bottom: 20px;
-            color: var(--white);
-        }
-
-        .demo-subtitle {
-            font-size: 16px;
-            color: var(--gray);
-            max-width: 800px;
-        }
-
-        /* Demo Interface */
-        .demo-frame-wrapper {
-            position: relative;
-            border: 1px solid var(--border);
-            background: var(--black);
-            padding: 0;
-        }
-
-        /* Corner markers */
-        .demo-frame-wrapper::before,
-        .demo-frame-wrapper::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            border: 1px solid var(--accent);
-            opacity: 0.3;
-            z-index: 10;
-        }
-
-        .demo-frame-wrapper::before {
-            top: 10px;
-            left: 10px;
-            border-right: none;
-            border-bottom: none;
-        }
-
-        .demo-frame-wrapper::after {
-            bottom: 10px;
-            right: 10px;
-            border-left: none;
-            border-top: none;
-        }
-
-        .demo-interface {
-            background: var(--darker);
-            min-height: 600px;
-            position: relative;
-            padding: 48px;
-        }
-
-        /* Live indicator */
-        .demo-interface::before {
-            content: 'LIVE SIMULATION';
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-family: 'SF Mono', monospace;
-            font-size: 9px;
-            color: var(--green);
-            letter-spacing: 0.2em;
-            padding-left: 16px;
-        }
-
-        .demo-interface::after {
-            content: '';
-            position: absolute;
-            top: 24px;
-            right: 140px;
-            width: 6px;
-            height: 6px;
-            background: var(--green);
-            border-radius: 50%;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        /* Demo steps */
-        .demo-step {
-            display: none;
-            animation: fadeIn 0.4s ease;
-        }
-
-        .demo-step.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Step 1: Scenario */
-        .demo-scenario {
-            max-width: 700px;
-            margin: 60px auto;
-        }
-
-        .scenario-label {
-            font-family: 'SF Mono', monospace;
-            font-size: 11px;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            margin-bottom: 32px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .scenario-grid {
-            display: grid;
-            gap: 24px;
-            margin-bottom: 48px;
-        }
-
-        .scenario-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 16px 0;
-            border-bottom: 1px solid var(--border);
-            font-size: 15px;
-        }
-
-        .scenario-item .label {
-            color: var(--gray);
-            font-weight: 500;
-        }
-
-        .scenario-item .value {
-            color: var(--white);
-            font-family: 'SF Mono', monospace;
-            font-size: 14px;
-        }
-
-        .demo-cta {
-            width: 100%;
-            padding: 20px;
-            background: transparent;
-            color: var(--accent);
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            border: 1px solid var(--accent-dim);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'SF Mono', monospace;
-            position: relative;
-        }
-
-        .demo-cta::before,
-        .demo-cta::after {
-            content: '';
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            border: 1px solid var(--accent);
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
-
-        .demo-cta::before {
-            top: -1px;
-            left: -1px;
-            border-right: none;
-            border-bottom: none;
-        }
-
-        .demo-cta::after {
-            bottom: -1px;
-            right: -1px;
-            border-left: none;
-            border-top: none;
-        }
-
-        .demo-cta:hover {
-            background: var(--accent);
-            color: var(--black);
-            border-color: var(--accent);
-        }
-
-        .demo-cta:hover::before,
-        .demo-cta:hover::after {
-            opacity: 1;
-        }
-
-        /* Step 2: Processing */
-        .processing {
-            text-align: center;
-            padding: 120px 40px;
-        }
-
-        .spinner {
-            width: 48px;
-            height: 48px;
-            border: 2px solid var(--border);
-            border-top-color: var(--accent);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 32px;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .processing-text {
-            font-size: 14px;
-            color: var(--gray);
-            margin-bottom: 16px;
-        }
-
-        .processing-time {
-            font-family: 'SF Mono', monospace;
-            font-size: 32px;
-            color: var(--accent);
-            font-weight: 400;
-        }
-
-        /* Step 3: Results */
-        .demo-results {
-            max-width: 900px;
-            margin: 40px auto;
-        }
-
-        .results-header {
-            display: flex;
-            justify-content: space-between;
-            padding: 16px 20px;
-            background: var(--black);
-            border: 1px solid var(--border);
-            font-size: 12px;
-            margin-bottom: 24px;
-            font-family: 'SF Mono', monospace;
-        }
-
-        .results-header span:first-child {
-            color: var(--gray);
-        }
-
-        .results-header span:last-child {
-            color: var(--green);
-        }
-
-        .recommendation {
-            background: var(--black);
-            border: 1px solid var(--border);
-            padding: 28px;
-            margin-bottom: 16px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .recommendation:hover {
-            border-color: var(--accent);
-        }
-
-        .recommendation.top {
-            border-color: var(--accent);
-            background: rgba(200, 168, 130, 0.03);
-        }
-
-        .recommendation.top::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: var(--accent);
-        }
-
-        .rec-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-        }
-
-        .rec-rank {
-            font-family: 'SF Mono', monospace;
-            font-size: 10px;
-            color: var(--gray);
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-        }
-
-        .recommendation.top .rec-rank {
-            color: var(--accent);
-            font-weight: 600;
-        }
-
-        .rec-score {
-            font-family: 'SF Mono', monospace;
-            font-size: 24px;
-            font-weight: 400;
-            color: var(--accent);
-        }
-
-        .rec-title {
-            font-size: 18px;
-            font-weight: 500;
-            margin-bottom: 16px;
-            color: var(--white);
-        }
-
-        .rec-details {
-            font-size: 14px;
-            line-height: 1.8;
-            color: var(--gray);
-            margin-bottom: 16px;
-        }
-
-        .rec-meta {
-            font-family: 'SF Mono', monospace;
-            font-size: 11px;
-            color: var(--gray-dark);
-            padding-top: 16px;
-            border-top: 1px solid var(--border);
-        }
-
-        /* Step 4: Success */
-        .demo-success {
-            max-width: 700px;
-            margin: 60px auto;
-            text-align: center;
-        }
-
-        .success-icon {
-            font-size: 64px;
-            color: var(--green);
-            margin-bottom: 24px;
-        }
-
-        .success-title {
-            font-size: 24px;
-            font-weight: 500;
-            margin-bottom: 48px;
-            color: var(--white);
-            letter-spacing: 0.05em;
-        }
-
-        .success-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            margin-bottom: 40px;
-        }
-
-        .success-stat {
-            padding: 24px;
-            background: var(--black);
-            border: 1px solid var(--border);
-        }
-
-        .success-stat-label {
-            font-size: 10px;
-            color: var(--gray);
-            text-transform: uppercase;
-            letter-spacing: 0.12em;
-            margin-bottom: 12px;
-        }
-
-        .success-stat-value {
-            font-family: 'SF Mono', monospace;
-            font-size: 20px;
-            color: var(--accent);
-            font-weight: 400;
-        }
-
-        .success-note {
-            padding: 24px;
-            background: rgba(200, 168, 130, 0.03);
-            border-left: 2px solid var(--accent-dim);
-            font-size: 14px;
-            color: var(--gray);
-            line-height: 1.8;
-            margin-bottom: 32px;
-            text-align: left;
-        }
-
-        .demo-note {
-            margin-top: 32px;
-            padding: 24px 32px;
-            background: rgba(200, 168, 130, 0.03);
-            border-left: 2px solid var(--accent-dim);
-            font-size: 13px;
-            color: var(--gray);
-            line-height: 1.9;
-            max-width: 900px;
-        }
-
-        /* Specs */
-        .specs {
-            padding: 120px 0;
-            border-bottom: 1px solid var(--border);
-            position: relative;
-        }
-
-        .specs::before {
-            content: '03.00 / TECHNICAL SPECIFICATIONS';
-            position: absolute;
-            top: 40px;
-            left: 40px;
-            font-family: 'SF Mono', monospace;
-            font-size: 9px;
-            letter-spacing: 0.25em;
-            color: var(--accent);
-            opacity: 0.4;
-        }
-
-        .specs-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            position: relative;
-        }
-
-        /* Connecting line */
-        .specs-grid::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 1px;
-            height: 60%;
-            background: linear-gradient(180deg, transparent, var(--accent-dim), transparent);
-            opacity: 0.3;
-        }
-
-        .spec-block {
-            border: 1px solid var(--border);
-            padding: 56px 48px;
-            background: var(--darker);
-            position: relative;
-        }
-
-        .spec-block::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, var(--accent-dim), transparent);
-            opacity: 0.2;
-        }
-
-        .spec-block-title {
-            font-size: 12px;
-            font-weight: 500;
-            margin-bottom: 40px;
-            color: var(--white);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            position: relative;
-            padding-bottom: 16px;
-        }
-
-        .spec-block-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 1px;
-            background: var(--accent);
-        }
-
-        .spec-list {
-            list-style: none;
-        }
-
-        .spec-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 18px 0;
-            border-bottom: 1px solid var(--border);
-            font-size: 14px;
-            position: relative;
-            padding-left: 20px;
-        }
-
-        .spec-item::before {
-            content: '—';
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-            opacity: 0.3;
-        }
-
-        .spec-item:last-child {
-            border-bottom: none;
-        }
-
-        .spec-key {
-            color: var(--gray);
-            font-weight: 400;
-        }
-
-        .spec-value {
-            color: var(--accent);
-            font-weight: 500;
-            font-family: 'SF Mono', monospace;
-            font-size: 13px;
-        }
-
-        /* Contact */
-        .contact {
-            padding: 120px 0 140px;
-            position: relative;
-        }
-
-        .contact::before {
-            content: '04.00 / DEPLOYMENT';
-            position: absolute;
-            top: 40px;
-            left: 40px;
-            font-family: 'SF Mono', monospace;
-            font-size: 9px;
-            letter-spacing: 0.25em;
-            color: var(--accent);
-            opacity: 0.4;
-        }
-
-        .contact-box {
-            border: 1px solid var(--border);
-            padding: 80px 64px;
-            text-align: center;
-            background: var(--darker);
-            position: relative;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .contact-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent-dim), transparent);
-            opacity: 0.3;
-        }
-
-        .contact-label {
-            font-family: 'SF Mono', monospace;
-            font-size: 9px;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            margin-bottom: 32px;
-            font-weight: 500;
-        }
-
-        .contact-title {
-            font-size: 36px;
-            font-weight: 400;
-            margin-bottom: 48px;
-            letter-spacing: -0.02em;
-            color: var(--white);
-        }
-
-        .contact-email {
-            font-family: 'SF Mono', monospace;
-            font-size: 18px;
-            color: var(--accent);
-            text-decoration: none;
-            display: inline-block;
-            padding: 20px 48px;
-            border: 1px solid var(--accent-dim);
-            margin-bottom: 32px;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .contact-email::before,
-        .contact-email::after {
-            content: '';
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            border: 1px solid var(--accent);
-            opacity: 0;
-            transition: all 0.3s ease;
-        }
-
-        .contact-email::before {
-            top: -1px;
-            left: -1px;
-            border-right: none;
-            border-bottom: none;
-        }
-
-        .contact-email::after {
-            bottom: -1px;
-            right: -1px;
-            border-left: none;
-            border-top: none;
-        }
-
-        .contact-email:hover {
-            border-color: var(--accent);
-            background: var(--accent);
-            color: var(--black);
-        }
-
-        .contact-email:hover::before,
-        .contact-email:hover::after {
-            opacity: 1;
-        }
-
-        .contact-info {
-            font-size: 14px;
-            color: var(--gray);
-            line-height: 2;
-            letter-spacing: -0.01em;
-        }
-
-        /* Footer */
-        .footer {
-            padding: 48px 0;
-            border-top: 1px solid var(--border);
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-family: 'SF Mono', monospace;
-            font-size: 10px;
-            color: var(--gray-dark);
-            letter-spacing: 0.1em;
-        }
-
-        /* Responsive */
-        @media (max-width: 968px) {
-            .hero-title { font-size: 56px; }
-            .founder-highlight { font-size: 24px; }
-            .stats { grid-template-columns: repeat(2, 1fr); }
-            .specs-grid { grid-template-columns: 1fr; gap: 40px; }
-            .specs-grid::before { display: none; }
-            .success-stats { grid-template-columns: 1fr; }
-        }
-
-        @media (max-width: 640px) {
-            .container { padding: 0 20px; }
-            .hero-title { font-size: 40px; }
-            .founder-highlight { font-size: 20px; padding-left: 20px; }
-            .stats { grid-template-columns: 1fr; }
-            .stat { padding: 48px 24px; }
-            .demo-interface { padding: 24px; }
-            .demo-scenario, .demo-results, .demo-success { margin: 20px auto; }
-        }
-    </style>
-</head>
-<body>
-    <!-- Header -->
-    <div class="header">
-        <div class="header-content">
-            <div class="logo">OMIN</div>
-            <div class="status">OPERATIONAL</div>
-        </div>
-    </div>
-
-    <!-- Hero -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-label">COUNTER-UAS DECISION INTELLIGENCE</div>
-            <h1 class="hero-title">Real-time tactical<br/>decision intelligence.<br/>Deployed in 14 days.</h1>
-            <p class="hero-description">
-                Built by Pentagon operators deployed to theater during active conflict.
-                Air-gapped decision support for NATO and allied forces.
-                Compatible with all existing sensor and weapon systems.
-            </p>
-            <a href="#demo" class="hero-cta">View System Demo</a>
-        </div>
-    </section>
-
-    <!-- Stats -->
-    <section class="stats-section">
-        <div class="stats">
-            <div class="stat">
-                <div class="stat-value">26MB</div>
-                <div class="stat-label">Runs on tactical hardware</div>
-            </div>
-            <div class="stat">
-                <div class="stat-value">&lt;1s</div>
-                <div class="stat-label">Multi-domain decisions</div>
-            </div>
-            <div class="stat">
-                <div class="stat-value">100%</div>
-                <div class="stat-label">Air-gapped deployment</div>
-            </div>
-            <div class="stat">
-                <div class="stat-value">14d</div>
-                <div class="stat-label">Pilot to operational</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Founder Section -->
-    <section class="founder-section">
-        <div class="founder-content">
-            <div class="founder-highlight">
-                Pentagon DDS Product Manager deployed to IDCC (Germany) during Ukraine conflict operations.
-            </div>
-            <div class="founder-details">
-                Led five-person technical team conducting live operational assessments of SKYBLUE - the allied weapons coordination platform publicly referenced by Pentagon AI Chief Craig Martell (C4ISRNET, Nov 2023).
-                <br/><br/>
-                Conducted assessments with operational commanders on active duty floor, produced technical recommendations under conflict conditions.
-                <br/><br/>
-                Identified critical capability gap during theater operations: logistics coordination solved, tactical decision intelligence still manual.
-                <br/><br/>
-                Built Omin to address that operational gap.
-                <br/><br/>
-                Creator of Regolith Rails (4,000+ downloads) and Linkism Protocol.
-            </div>
-        </div>
-    </section>
-
-    <!-- Demo Section -->
-    <section id="demo" class="demo-section">
-        <div class="container">
-            <div class="demo-header">
-                <div class="demo-label">SYSTEM DEMONSTRATION</div>
-                <h2 class="demo-title">Operational Command Interface</h2>
-                <p class="demo-subtitle">
-                    Battery-level tactical decision support. One pre-loaded scenario demonstrating
-                    sub-second strategy generation with explainable coherence scores.
-                </p>
-            </div>
-
-            <div class="demo-frame-wrapper">
-                <div class="demo-interface">
-                    <!-- Step 1: Scenario Input -->
-                    <div id="demo-step-1" class="demo-step active">
-                        <div class="demo-scenario">
-                            <div class="scenario-label">DETECTED THREAT</div>
-                            <div class="scenario-grid">
-                                <div class="scenario-item">
-                                    <span class="label">Type:</span>
-                                    <span class="value">4x Shahed-136</span>
-                                </div>
-                                <div class="scenario-item">
-                                    <span class="label">Range:</span>
-                                    <span class="value">22km</span>
-                                </div>
-                                <div class="scenario-item">
-                                    <span class="label">Target:</span>
-                                    <span class="value">Ammunition Depot (CRITICAL)</span>
-                                </div>
-                                <div class="scenario-item">
-                                    <span class="label">Time to Impact:</span>
-                                    <span class="value">7 minutes</span>
-                                </div>
-                            </div>
-                            <button class="demo-cta" onclick="startDemo()">
-                                Calculate Recommendations
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Step 2: Processing -->
-                    <div id="demo-step-2" class="demo-step">
-                        <div class="processing">
-                            <div class="spinner"></div>
-                            <div class="processing-text">Analyzing threat parameters...</div>
-                            <div class="processing-time">0.0s</div>
-                        </div>
-                    </div>
-
-                    <!-- Step 3: Results -->
-                    <div id="demo-step-3" class="demo-step">
-                        <div class="demo-results">
-                            <div class="results-header">
-                                <span>Generated 3 strategies</span>
-                                <span>Processing: 0.8s</span>
-                            </div>
-                            
-                            <div class="recommendation top" onclick="selectStrategy()">
-                                <div class="rec-header">
-                                    <span class="rec-rank">Recommendation #1 (Optimal)</span>
-                                    <span class="rec-score">0.8021</span>
-                                </div>
-                                <div class="rec-title">Wait 3 minutes for optimal range</div>
-                                <div class="rec-details">
-                                    • 2x IRIS-T missiles at 12km engagement range<br/>
-                                    • 88% predicted success rate<br/>
-                                    • Preserves 68% ammunition reserves for follow-on waves<br/>
-                                    • If breakthrough: Buk-M1 ready as backup layer
-                                </div>
-                                <div class="rec-meta">
-                                    Cost: $1.0M  |  Execution: 3min  |  Reserve: 4x IRIS-T, 3x Buk-M1, 8x Stinger
-                                </div>
-                            </div>
-
-                            <div class="recommendation" onclick="selectStrategy()">
-                                <div class="rec-header">
-                                    <span class="rec-rank">Recommendation #2</span>
-                                    <span class="rec-score">0.7654</span>
-                                </div>
-                                <div class="rec-title">Immediate long-range engagement</div>
-                                <div class="rec-details">
-                                    • 4x IRIS-T missiles at 22km current range<br/>
-                                    • 82% predicted success rate at extended range<br/>
-                                    • Maximum time for reattack if needed
-                                </div>
-                                <div class="rec-meta">
-                                    Cost: $2.0M  |  Execution: 2min  |  Reserve: 2x IRIS-T, all other systems
-                                </div>
-                            </div>
-
-                            <div class="recommendation" onclick="selectStrategy()">
-                                <div class="rec-header">
-                                    <span class="rec-rank">Recommendation #3</span>
-                                    <span class="rec-score">0.7234</span>
-                                </div>
-                                <div class="rec-title">Layered defense (economical)</div>
-                                <div class="rec-details">
-                                    • Level 1: 4x Stinger at 5km (first attempt)<br/>
-                                    • Level 2: 2x Buk-M1 at 12km (if breakthrough)<br/>
-                                    • Level 3: 2x IRIS-T at 20km (final layer)
-                                </div>
-                                <div class="rec-meta">
-                                    Cost: $0.6M  |  Execution: Variable  |  Reserve: 75% preserved
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Step 4: Success -->
-                    <div id="demo-step-4" class="demo-step">
-                        <div class="demo-success">
-                            <div class="success-icon">✓</div>
-                            <div class="success-title">OPERATION SUCCESSFUL</div>
-                            
-                            <div class="success-stats">
-                                <div class="success-stat">
-                                    <div class="success-stat-label">Threats Neutralized</div>
-                                    <div class="success-stat-value">4/4</div>
-                                </div>
-                                <div class="success-stat">
-                                    <div class="success-stat-label">Resources Used</div>
-                                    <div class="success-stat-value">$1.0M</div>
-                                </div>
-                                <div class="success-stat">
-                                    <div class="success-stat-label">Reserves</div>
-                                    <div class="success-stat-value">68%</div>
-                                </div>
-                            </div>
-
-                            <div class="success-note">
-                                Strategy with highest coherence score (0.8021) ensured optimal balance between target protection and operational reserves. Omin forecast (88% success) confirmed by actual mission execution (100% intercept). Ammunition preserved for follow-on waves as predicted.
-                            </div>
-
-                            <button class="demo-cta" onclick="resetDemo()">
-                                Try Another Scenario
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="demo-note">
-                Interactive command interface using realistic counter-UAS scenario with NATO weapon systems. Threat parameters, coherence scores, and response times reflect operational constraints tested with Ukrainian air defense doctrine templates. Production system handles 150+ simultaneous threats across multiple command levels.
-            </div>
-        </div>
-    </section>
-
-    <!-- Technical Specs -->
-    <section class="specs">
-        <div class="container">
-            <div class="specs-grid">
-                <div class="spec-block">
-                    <div class="spec-block-title">System Architecture</div>
-                    <ul class="spec-list">
-                        <li class="spec-item">
-                            <span class="spec-key">Model Size</span>
-                            <span class="spec-value">26 MB</span>
-                        </li>
-                        <li class="spec-item">
-                            <span class="spec-key">Deployment</span>
-                            <span class="spec-value">Air-Gapped / Edge</span>
-                        </li>
-                        <li class="spec-item">
-                            <span class="spec-key">Decision Latency</span>
-                            <span class="spec-value">&lt;1 Second</span>
-                        </li>
-                        <li class="spec-item">
-                            <span class="spec-key">Cloud Dependency</span>
-                            <span class="spec-value">Zero</span>
-                        </li>
-                        <li class="spec-item">
-                            <span class="spec-key">Hardware Requirements</span>
-                            <span class="spec-value">8GB RAM, 4 cores</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="spec-block">
-                    <div class="spec-block-title">Operational Capability</div>
-                    <ul class="spec-list">
-                        <li class="spec-item">
-                            <span class="spec-key">Simultaneous Threats</span>
-                            <span class="spec-value">150+</span>
-                        </li>
-                        <li class="spec-item">
-                            <span class="spec-key">Coherence Range</span>
-                            <span class="spec-value">0.72-0.85</span>
-                        </li>
-                        <li class="spec-item">
-                            <span class="spec-key">Language Support</span>
-                            <span class="spec-value">EN, UK, PL, AR, ET</span>
-                        </li>
-                        <li class="spec-item">
-                            <span class="spec-key">Integration</span>
-                            <span class="spec-value">REST API / JSON</span>
-                        </li>
-                        <li class="spec-item">
-                            <span class="spec-key">Deployment Timeline</span>
-                            <span class="spec-value">14 Days</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact -->
-    <section class="contact">
-        <div class="container">
-            <div class="contact-box">
-                <div class="contact-label">EVALUATE WITH YOUR SCENARIO</div>
-                <h2 class="contact-title">Test decision quality before deployment</h2>
-                <a href="mailto:founder@traut.ai" class="contact-email">founder@traut.ai</a>
-                <div class="contact-info">
-                    Send your threat scenario, available weapon systems, and operational constraints.<br/>
-                    Receive ranked strategies with coherence scores in 24 hours.<br/>
-                    Validated pilots deploy in 14 days.
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <section class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div>OMIN © 2025 TRAUT</div>
-                <div>US-BASED // NATO-ALIGNED</div>
-            </div>
-        </div>
-    </section>
-
-    <script>
-        // Demo flow
-        function startDemo() {
-            showStep(2);
-            
-            let time = 0;
-            const interval = setInterval(() => {
-                time += 0.1;
-                document.querySelector('.processing-time').textContent = time.toFixed(1) + 's';
-                
-                if (time >= 0.8) {
-                    clearInterval(interval);
-                    showStep(3);
-                }
-            }, 100);
-        }
-
-        function selectStrategy() {
-            showStep(4);
-        }
-
-        function resetDemo() {
-            showStep(1);
-        }
-
-        function showStep(stepNum) {
-            document.querySelectorAll('.demo-step').forEach(el => {
-                el.classList.remove('active');
-            });
-            document.getElementById('demo-step-' + stepNum).classList.add('active');
-        }
-
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
+import React, { useState, useEffect } from 'react';
+
+export default function OminSite() {
+  const [currentRole, setCurrentRole] = useState('battery');
+  const [batteryStep, setBatteryStep] = useState(1);
+  const [theaterStep, setTheaterStep] = useState(1);
+  const [selectedBatteryRec, setSelectedBatteryRec] = useState(null);
+  const [selectedTheaterRec, setSelectedTheaterRec] = useState(null);
+  const [processingTime, setProcessingTime] = useState(0);
+  const [batteryTimer, setBatteryTimer] = useState(420); // 7 minutes in seconds
+  const [showTimer, setShowTimer] = useState(false);
+
+  // Battery processing animation
+  useEffect(() => {
+    if (batteryStep === 2) {
+      setProcessingTime(0);
+      const interval = setInterval(() => {
+        setProcessingTime(prev => {
+          if (prev >= 0.8) {
+            clearInterval(interval);
+            setBatteryStep(3);
+            return 0.8;
+          }
+          return prev + 0.1;
         });
-    </script>
-</body>
-</html>
+      }, 100);
+      return () => clearInterval(interval);
+    }
+  }, [batteryStep]);
+
+  // Battery timer countdown
+  useEffect(() => {
+    if (showTimer && batteryTimer > 0) {
+      const interval = setInterval(() => {
+        setBatteryTimer(prev => prev - 1);
+      }, 1000);
+      return () => clearInterval(interval);
+    }
+  }, [showTimer, batteryTimer]);
+
+  const startBatteryDemo = () => {
+    setBatteryStep(2);
+    setShowTimer(true);
+  };
+
+  const selectBatteryRec = (rec) => {
+    setSelectedBatteryRec(rec);
+    setBatteryStep(4);
+  };
+
+  const executeBattery = () => {
+    setBatteryStep(5);
+    setShowTimer(false);
+  };
+
+  const resetBattery = () => {
+    setBatteryStep(1);
+    setSelectedBatteryRec(null);
+    setBatteryTimer(420);
+    setShowTimer(false);
+  };
+
+  const startTheaterDemo = () => {
+    setTheaterStep(2);
+  };
+
+  const selectTheaterRec = (rec) => {
+    setSelectedTheaterRec(rec);
+  };
+
+  const approveTheater = () => {
+    setTheaterStep(3);
+  };
+
+  const resetTheater = () => {
+    setTheaterStep(1);
+    setSelectedTheaterRec(null);
+  };
+
+  const formatTime = (seconds) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  };
+
+  const batteryRecommendations = [
+    {
+      rank: 1,
+      coherence: 0.8021,
+      title: 'Wait 3 minutes for optimal range',
+      description: `• 2x IRIS-T missiles at 12km engagement range
+• 88% predicted success rate
+• Preserves 68% ammunition reserves for follow-on waves
+• If breakthrough: Buk-M1 ready as backup layer`,
+      cost: '$1.0M',
+      time: '3min',
+      reserve: '68%'
+    },
+    {
+      rank: 2,
+      coherence: 0.7654,
+      title: 'Immediate long-range engagement',
+      description: `• 4x IRIS-T missiles at 22km current range
+• 82% predicted success rate at extended range
+• Maximum time for reattack if needed`,
+      cost: '$2.0M',
+      time: '2min',
+      reserve: '40%'
+    },
+    {
+      rank: 3,
+      coherence: 0.7234,
+      title: 'Layered defense (economical)',
+      description: `• Level 1: 4x Stinger at 5km (first attempt)
+• Level 2: 2x Buk-M1 at 12km (if breakthrough)
+• Level 3: 2x IRIS-T at 20km (final layer)`,
+      cost: '$0.6M',
+      time: 'Variable',
+      reserve: '75%'
+    }
+  ];
+
+  const theaterRecommendations = [
+    {
+      name: 'Smart resource allocation',
+      score: 0.8367,
+      summary: 'Wave 1: 2x IRIS-T (minimal). Preserve 45+ missiles for waves 2-5. Balance protection and capability preservation.',
+      cost: '$4-6M',
+      reserve: '68%'
+    },
+    {
+      name: 'Prioritize critical assets',
+      score: 0.7891,
+      summary: 'Priority: Odesa (energy) + Kherson (command). Mykolaiv moderate defense. Accept risk on secondary targets.',
+      cost: '$3-5M',
+      reserve: '72%'
+    },
+    {
+      name: 'Regional coordination',
+      score: 0.7234,
+      summary: 'Request support from Zaporizhzhia Air Defense. Load distribution. Joint defense of southern direction.',
+      cost: '$2-4M',
+      reserve: '80%'
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-black text-white" style={{
+      fontFamily: '-apple-system, BlinkMacSystemFont, "Helvetica Neue", system-ui, sans-serif'
+    }}>
+      {/* Tactical grid overlay */}
+      <div className="fixed inset-0 pointer-events-none opacity-[0.02]" style={{
+        backgroundImage: 'linear-gradient(rgba(200, 168, 130, 1) 1px, transparent 1px), linear-gradient(90deg, rgba(200, 168, 130, 1) 1px, transparent 1px)',
+        backgroundSize: '40px 40px'
+      }} />
+
+      {/* Header */}
+      <header className="sticky top-0 z-50 border-b border-zinc-900 bg-black/98 backdrop-blur-xl">
+        <div className="max-w-[1400px] mx-auto px-10 py-8 flex justify-between items-center">
+          <div className="relative pl-5">
+            <span className="absolute left-0 text-[#c8a882] opacity-50 font-mono text-xs">//</span>
+            <span className="text-sm font-medium tracking-[0.1em]">OMIN</span>
+          </div>
+          <div className="flex items-center gap-2 font-mono text-[9px] tracking-[0.15em] text-[#7a9b76]">
+            <div className="w-2 h-2 bg-[#7a9b76] rounded-full animate-pulse" />
+            OPERATIONAL
+          </div>
+        </div>
+      </header>
+
+      {/* Hero */}
+      <section className="border-b-2 border-zinc-900 py-32 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(200,168,130,0.03)_0%,transparent_70%)] pointer-events-none" />
+        <div className="max-w-[1400px] mx-auto px-10 relative">
+          <div className="font-mono text-[9px] tracking-[0.2em] text-[#c8a882] mb-10">
+            COUNTER-UAS DECISION INTELLIGENCE
+          </div>
+          <h1 className="text-[82px] font-light tracking-[-0.04em] leading-none mb-10 max-w-[1000px]">
+            Real-time tactical<br/>decision intelligence.<br/>Deployed in 14 days.
+          </h1>
+          <p className="text-lg text-zinc-400 max-w-[680px] leading-relaxed mb-14 tracking-[-0.01em]">
+            Built by Pentagon operators deployed to theater during active conflict.
+            Air-gapped decision support for NATO and allied forces.
+            Compatible with all existing sensor and weapon systems.
+          </p>
+          <a href="#demo" className="inline-block px-14 py-5 border border-[#8a7560] text-[#c8a882] text-[11px] font-semibold tracking-[0.15em] font-mono hover:bg-[#c8a882] hover:text-black transition-all duration-300">
+            VIEW SYSTEM DEMO
+          </a>
+        </div>
+      </section>
+
+      {/* Stats */}
+      <section className="grid grid-cols-4 gap-px bg-zinc-900 border-t border-b border-zinc-900">
+        {[
+          { value: '26MB', label: 'Runs on tactical hardware' },
+          { value: '<1s', label: 'Multi-domain decisions' },
+          { value: '100%', label: 'Air-gapped deployment' },
+          { value: '14d', label: 'Pilot to operational' }
+        ].map((stat, i) => (
+          <div key={i} className="bg-black px-8 py-16 text-center relative overflow-hidden">
+            <div className="absolute top-6 left-1/2 -translate-x-1/2 font-mono text-[10px] text-[#c8a882] opacity-20">//</div>
+            <div className="font-mono text-[42px] font-light tracking-tight text-[#c8a882] mb-4">
+              {stat.value}
+            </div>
+            <div className="text-[10px] text-zinc-500 uppercase tracking-[0.12em] font-medium">
+              {stat.label}
+            </div>
+            <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#c8a882] to-transparent opacity-10" 
+                 style={{ animation: `pulse ${4 + i}s ease-in-out infinite` }} />
+          </div>
+        ))}
+      </section>
+
+      {/* Founder */}
+      <section className="py-32 bg-gradient-to-b from-black via-[#0a0a0a] to-black border-t border-b border-[#c8a882] relative overflow-hidden">
+        <div className="absolute top-10 left-10 font-mono text-[9px] tracking-[0.25em] text-[#c8a882] opacity-40">
+          01.00 / OPERATIONAL BACKGROUND
+        </div>
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#c8a882] to-transparent opacity-30" 
+             style={{ animation: 'scan 12s ease-in-out infinite' }} />
+        <div className="max-w-[1100px] mx-auto px-10 relative">
+          <div className="absolute top-[-20px] left-0 w-10 h-10 border-t border-l border-[#c8a882] opacity-20" />
+          <div className="absolute bottom-[-20px] right-0 w-10 h-10 border-b border-r border-[#c8a882] opacity-20" />
+          
+          <div className="text-[32px] leading-relaxed mb-12 font-light tracking-tight max-w-[1000px] pl-10 border-l-[3px] border-[#c8a882]">
+            Pentagon DDS Product Manager deployed to IDCC (Germany) during Ukraine conflict operations.
+          </div>
+          <div className="text-[17px] leading-loose text-zinc-400 max-w-[900px] tracking-[-0.01em]">
+            Led five-person technical team conducting live operational assessments of SKYBLUE - the allied weapons coordination platform publicly referenced by Pentagon AI Chief Craig Martell (C4ISRNET, Nov 2023).
+            <br/><br/>
+            Conducted assessments with operational commanders on active duty floor, produced technical recommendations under conflict conditions.
+            <br/><br/>
+            Identified critical capability gap during theater operations: logistics coordination solved, tactical decision intelligence still manual.
+            <br/><br/>
+            Built Omin to address that operational gap.
+            <br/><br/>
+            Creator of Regolith Rails (4,000+ downloads) and Linkism Protocol.
+          </div>
+        </div>
+      </section>
+
+      {/* Demo Section */}
+      <section id="demo" className="py-32 border-b border-zinc-900 relative">
+        <div className="absolute top-10 left-10 font-mono text-[9px] tracking-[0.25em] text-[#c8a882] opacity-40">
+          02.00 / SYSTEM DEMONSTRATION
+        </div>
+        <div className="max-w-[1600px] mx-auto px-10">
+          <div className="mb-16">
+            <div className="font-mono text-[9px] tracking-[0.2em] text-[#7a9b76] mb-6">
+              INTERACTIVE DEMO
+            </div>
+            <h2 className="text-5xl font-light tracking-tight mb-5">
+              Operational Command Interface
+            </h2>
+            <p className="text-base text-zinc-400 max-w-[800px]">
+              Experience battery-level tactical decisions and theater-level strategic command.
+              Full working system with realistic multi-domain counter-UAS scenarios.
+            </p>
+          </div>
+
+          {/* Demo Frame */}
+          <div className="border border-zinc-900 bg-black relative">
+            {/* Corner markers */}
+            <div className="absolute top-2.5 left-2.5 w-5 h-5 border-t border-l border-[#c8a882] opacity-30 z-10" />
+            <div className="absolute bottom-2.5 right-2.5 w-5 h-5 border-b border-r border-[#c8a882] opacity-30 z-10" />
+            
+            {/* Classification bar */}
+            <div className="bg-[#0a0a0a] border-b-2 border-[#7a9b76] py-2 px-5 text-center font-mono text-[11px] tracking-[0.1em] text-[#7a9b76] font-bold">
+              SIMULATED COMBAT SCENARIOS // OMIN COMMAND SYSTEM
+            </div>
+
+            {/* Role header */}
+            <div className="bg-[#0a0a0a] border-b border-zinc-900 px-5 py-4 flex justify-between items-center sticky top-0 z-40">
+              <div className="flex items-center gap-6">
+                <div className="text-lg font-bold tracking-tight">Omin</div>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setCurrentRole('battery')}
+                    className={`px-4 py-2 text-xs font-semibold uppercase tracking-wider border transition-all ${
+                      currentRole === 'battery'
+                        ? 'bg-[#c8a882] text-black border-[#c8a882]'
+                        : 'bg-transparent text-zinc-400 border-zinc-800 hover:border-[#c8a882] hover:text-[#c8a882]'
+                    }`}
+                  >
+                    Battery Commander
+                  </button>
+                  <button
+                    onClick={() => setCurrentRole('theater')}
+                    className={`px-4 py-2 text-xs font-semibold uppercase tracking-wider border transition-all ${
+                      currentRole === 'theater'
+                        ? 'bg-[#c8a882] text-black border-[#c8a882]'
+                        : 'bg-transparent text-zinc-400 border-zinc-800 hover:border-[#c8a882] hover:text-[#c8a882]'
+                    }`}
+                  >
+                    Theater Operations
+                  </button>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 text-xs text-[#7a9b76] font-semibold">
+                <div className="w-2 h-2 bg-[#7a9b76] rounded-full animate-pulse" />
+                System Ready
+              </div>
+            </div>
+
+            {/* Demo content */}
+            <div className="min-h-[800px] relative">
+              {/* Battery Commander View */}
+              {currentRole === 'battery' && (
+                <div className="p-10">
+                  {/* Step indicators */}
+                  <div className="flex justify-center gap-3 py-6 mb-8 border-b border-zinc-900">
+                    {[1, 2, 3, 4, 5].map(step => (
+                      <div
+                        key={step}
+                        className={`w-3 h-3 rounded-full transition-all ${
+                          batteryStep === step
+                            ? 'bg-[#c8a882] shadow-[0_0_12px_rgba(200,168,130,0.5)]'
+                            : 'bg-zinc-800'
+                        }`}
+                      />
+                    ))}
+                  </div>
+
+                  {/* Timer */}
+                  {showTimer && batteryStep < 5 && (
+                    <div className="fixed top-32 right-10 bg-[#0a0a0a] border-2 border-[#c26d5f] p-5 text-center min-w-[120px] z-50">
+                      <div className="text-[11px] text-zinc-400 uppercase tracking-wider mb-2">
+                        Time to impact
+                      </div>
+                      <div className="font-mono text-[32px] font-bold text-[#c26d5f]">
+                        {formatTime(batteryTimer)}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Step 1: Input */}
+                  {batteryStep === 1 && (
+                    <div className="max-w-[800px] mx-auto animate-fadeIn">
+                      <div className="font-mono text-[11px] tracking-wider text-[#c8a882] mb-8 pb-3 border-b border-zinc-800">
+                        DETECTED THREAT
+                      </div>
+                      <div className="space-y-6 mb-12">
+                        {[
+                          { label: 'Type:', value: '4x Shahed-136' },
+                          { label: 'Range:', value: '22km' },
+                          { label: 'Target:', value: 'Ammunition Depot (CRITICAL)' },
+                          { label: 'Time to Impact:', value: '7 minutes' }
+                        ].map((item, i) => (
+                          <div key={i} className="flex justify-between items-center py-4 border-b border-zinc-900">
+                            <span className="text-zinc-400 font-medium">{item.label}</span>
+                            <span className="font-mono text-sm">{item.value}</span>
+                          </div>
+                        ))}
+                      </div>
+                      <button
+                        onClick={startBatteryDemo}
+                        className="w-full px-5 py-5 bg-transparent text-[#c8a882] text-[11px] font-semibold uppercase tracking-[0.15em] border border-[#8a7560] hover:bg-[#c8a882] hover:text-black transition-all font-mono"
+                      >
+                        Calculate Recommendations
+                      </button>
+                    </div>
+                  )}
+
+                  {/* Step 2: Processing */}
+                  {batteryStep === 2 && (
+                    <div className="text-center py-32 animate-fadeIn">
+                      <div className="w-12 h-12 border-2 border-zinc-800 border-t-[#c8a882] rounded-full animate-spin mx-auto mb-8" />
+                      <div className="text-sm text-zinc-400 mb-4">Analyzing threat parameters...</div>
+                      <div className="font-mono text-[32px] text-[#c8a882] font-light">
+                        {processingTime.toFixed(1)}s
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Step 3: Results */}
+                  {batteryStep === 3 && (
+                    <div className="max-w-[900px] mx-auto animate-fadeIn">
+                      <div className="flex justify-between items-center px-5 py-4 bg-black border border-zinc-800 font-mono text-xs mb-6">
+                        <span className="text-zinc-400">Generated 3 strategies</span>
+                        <span className="text-[#7a9b76]">Processing: 0.8s</span>
+                      </div>
+                      <div className="space-y-4">
+                        {batteryRecommendations.map((rec, i) => (
+                          <div
+                            key={i}
+                            onClick={() => selectBatteryRec(rec)}
+                            className={`border bg-black p-7 cursor-pointer transition-all ${
+                              i === 0
+                                ? 'border-[#c8a882] bg-[rgba(200,168,130,0.03)] relative'
+                                : 'border-zinc-800 hover:border-[#c8a882]'
+                            }`}
+                          >
+                            {i === 0 && (
+                              <div className="absolute top-0 left-0 right-0 h-[2px] bg-[#c8a882]" />
+                            )}
+                            <div className="flex justify-between items-center mb-4">
+                              <span className={`font-mono text-[10px] uppercase tracking-wider ${
+                                i === 0 ? 'text-[#c8a882] font-semibold' : 'text-zinc-400'
+                              }`}>
+                                Recommendation #{rec.rank} {i === 0 && '(OPTIMAL)'}
+                              </span>
+                              <span className="font-mono text-2xl font-light text-[#c8a882]">
+                                {rec.coherence.toFixed(4)}
+                              </span>
+                            </div>
+                            <div className="text-lg font-medium mb-4">{rec.title}</div>
+                            <div className="text-sm text-zinc-400 leading-relaxed mb-4 whitespace-pre-line">
+                              {rec.description}
+                            </div>
+                            <div className="font-mono text-[11px] text-zinc-600 pt-4 border-t border-zinc-900">
+                              Cost: {rec.cost}  |  Execution: {rec.time}  |  Reserve: {rec.reserve}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Step 4: Execute */}
+                  {batteryStep === 4 && selectedBatteryRec && (
+                    <div className="max-w-[800px] mx-auto animate-fadeIn">
+                      <div className="text-base font-semibold uppercase tracking-wider mb-5">
+                        Step 3: Execute Command
+                      </div>
+                      <div className="bg-black border border-zinc-800 p-5 font-mono text-sm leading-relaxed text-[#7a9b76] mb-6 whitespace-pre-line">
+                        {`Callsign Falcon-1, Falcon-2:
+• Selected strategy: ${selectedBatteryRec.title}
+• 4x Shahed-136, azimuth 015
+• 2x IRIS-T missiles at 12km range
+• Reserve maintained for follow-on waves
+
+Confirm execution.`}
+                      </div>
+                      <div className="flex gap-3">
+                        <button
+                          onClick={() => setBatteryStep(3)}
+                          className="flex-1 px-5 py-4 bg-transparent text-white text-sm font-bold uppercase tracking-wider border border-zinc-800 hover:border-[#c8a882] hover:text-[#c8a882] transition-all"
+                        >
+                          Back
+                        </button>
+                        <button
+                          onClick={executeBattery}
+                          className="flex-[2] px-5 py-4 bg-[#c8a882] text-black text-sm font-bold uppercase tracking-wider border-none hover:bg-[#d9b993] transition-all"
+                        >
+                          Execute
+                        </button>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Step 5: Success */}
+                  {batteryStep === 5 && (
+                    <div className="max-w-[800px] mx-auto animate-fadeIn">
+                      <div className="text-center mb-12">
+                        <div className="text-6xl text-[#7a9b76] mb-6">✓</div>
+                        <div className="text-2xl font-medium mb-2 tracking-wide">OPERATION SUCCESSFUL</div>
+                        <div className="text-sm text-zinc-400">Strategy executed according to Omin recommendation</div>
+                      </div>
+
+                      <div className="grid grid-cols-3 gap-4 mb-8">
+                        {[
+                          { label: 'Threats Neutralized', value: '4/4' },
+                          { label: 'Resources Used', value: '$1.0M' },
+                          { label: 'Reserves', value: '68%' }
+                        ].map((stat, i) => (
+                          <div key={i} className="bg-black border border-zinc-800 p-5 text-center">
+                            <div className="text-[10px] text-zinc-400 uppercase tracking-wider mb-3">
+                              {stat.label}
+                            </div>
+                            <div className="font-mono text-xl text-[#c8a882] font-light">
+                              {stat.value}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+
+                      <div className="bg-[rgba(200,168,130,0.03)] border-l-2 border-[#8a7560] p-6 text-sm text-zinc-400 leading-relaxed mb-8">
+                        <strong className="text-white">Conclusion:</strong> Strategy with highest coherence score (0.8021) ensured optimal balance between target protection and operational reserves. Omin forecast (88% success) confirmed by actual mission execution (100% intercept).
+                      </div>
+
+                      <button
+                        onClick={resetBattery}
+                        className="w-full px-5 py-5 bg-[#c8a882] text-black text-[11px] font-semibold uppercase tracking-[0.15em] hover:bg-[#d9b993] transition-all"
+                      >
+                        Try Another Scenario
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Theater Commander View */}
+              {currentRole === 'theater' && (
+                <div>
+                  {theaterStep === 1 && (
+                    <div className="grid grid-cols-[280px_1fr_320px] min-h-[800px]">
+                      {/* Left sidebar */}
+                      <div className="bg-[#0a0a0a] border-r border-zinc-900 p-6">
+                        <div className="text-xs font-semibold uppercase tracking-wider text-[#c8a882] mb-5">
+                          Air Defense Resources
+                        </div>
+                        {[
+                          { region: 'Mykolaiv Region', systems: [{ name: 'IRIS-T', count: '16/16' }, { name: 'Buk-M1', count: '12/18' }], status: 'READY' },
+                          { region: 'Odesa Region', systems: [{ name: 'Patriot', count: '16/16' }, { name: 'IRIS-T', count: '24/32' }], status: 'READY' }
+                        ].map((item, i) => (
+                          <div key={i} className="bg-[rgba(255,255,255,0.02)] border border-zinc-800 p-4 mb-3">
+                            <div className="text-xs font-semibold mb-3">{item.region}</div>
+                            {item.systems.map((sys, j) => (
+                              <div key={j} className="flex justify-between py-1.5 text-xs">
+                                <span className="text-zinc-400">{sys.name}</span>
+                                <span className="font-mono font-semibold">{sys.count}</span>
+                              </div>
+                            ))}
+                            <div className="flex justify-between py-1.5 text-xs mt-2 pt-2 border-t border-zinc-900">
+                              <span className="text-zinc-400">Status</span>
+                              <span className="text-[#7a9b76] font-semibold">{item.status}</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Center */}
+                      <div className="p-6">
+                        <div className="bg-[#0a0a0a] border border-zinc-800 p-6 mb-6">
+                          <div className="text-sm font-semibold uppercase tracking-wider mb-5">
+                            Operational Situation
+                          </div>
+                          <div className="bg-[rgba(239,68,68,0.1)] border-l-[3px] border-[#c26d5f] p-4 mb-4">
+                            <div className="flex justify-between mb-3">
+                              <div className="font-mono text-[11px] font-bold text-[#c26d5f] tracking-wider">
+                                WAVE 1 • ACTIVE
+                              </div>
+                              <div className="font-mono text-[11px] text-zinc-400">23:15 UTC</div>
+                            </div>
+                            <div className="text-sm text-zinc-400 leading-relaxed">
+                              <strong className="text-white">Mykolaiv:</strong> 4x Shahed-136, 22km, target: ammunition depot<br/>
+                              <strong className="text-white">Priority:</strong> CRITICAL
+                            </div>
+                          </div>
+                          <div className="bg-[rgba(239,68,68,0.1)] border-l-[3px] border-[#c26d5f] p-4 opacity-60">
+                            <div className="flex justify-between mb-3">
+                              <div className="font-mono text-[11px] font-bold text-[#c26d5f] tracking-wider">
+                                WAVE 2 • EXPECTED
+                              </div>
+                              <div className="font-mono text-[11px] text-zinc-400">~00:30 UTC</div>
+                            </div>
+                            <div className="text-sm text-zinc-400 leading-relaxed">
+                              <strong className="text-white">Intelligence:</strong> 20-30 targets, multiple directions<br/>
+                              <strong className="text-white">Time:</strong> 1-1.5 hours
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="bg-[#0a0a0a] border border-zinc-800 p-6">
+                          <div className="text-sm font-semibold uppercase tracking-wider mb-5">
+                            Strategic Request to Omin
+                          </div>
+                          <div className="mb-5">
+                            <label className="block text-[11px] font-semibold uppercase tracking-wider text-zinc-400 mb-2">
+                              Planning Horizon
+                            </label>
+                            <select className="w-full px-3 py-2.5 bg-black border border-zinc-800 text-sm focus:outline-none focus:border-[#c8a882]">
+                              <option>All night (6 hours)</option>
+                              <option>3 hours</option>
+                            </select>
+                          </div>
+                          <button
+                            onClick={startTheaterDemo}
+                            className="w-full px-5 py-3.5 bg-[#c8a882] text-black text-sm font-bold uppercase tracking-wider hover:bg-[#d9b993] transition-all"
+                          >
+                            Calculate Strategy
+                          </button>
+                        </div>
+                      </div>
+
+                      {/* Right sidebar */}
+                      <div className="bg-[#0a0a0a] border-l border-zinc-900 p-6">
+                        <div className="text-xs font-semibold uppercase tracking-wider text-[#c8a882] mb-5">
+                          Strategic Recommendations
+                        </div>
+                        <div className="text-center py-10 text-xs text-zinc-400">
+                          Click "Calculate Strategy"
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {theaterStep === 2 && (
+                    <div className="grid grid-cols-[280px_1fr_320px] min-h-[800px] animate-fadeIn">
+                      {/* Left sidebar - same as before */}
+                      <div className="bg-[#0a0a0a] border-r border-zinc-900 p-6">
+                        <div className="text-xs font-semibold uppercase tracking-wider text-[#c8a882] mb-5">
+                          Air Defense Resources
+                        </div>
+                        {[
+                          { region: 'Mykolaiv Region', systems: [{ name: 'IRIS-T', count: '16/16' }, { name: 'Buk-M1', count: '12/18' }], status: 'READY' },
+                          { region: 'Odesa Region', systems: [{ name: 'Patriot', count: '16/16' }, { name: 'IRIS-T', count: '24/32' }], status: 'READY' }
+                        ].map((item, i) => (
+                          <div key={i} className="bg-[rgba(255,255,255,0.02)] border border-zinc-800 p-4 mb-3">
+                            <div className="text-xs font-semibold mb-3">{item.region}</div>
+                            {item.systems.map((sys, j) => (
+                              <div key={j} className="flex justify-between py-1.5 text-xs">
+                                <span className="text-zinc-400">{sys.name}</span>
+                                <span className="font-mono font-semibold">{sys.count}</span>
+                              </div>
+                            ))}
+                            <div className="flex justify-between py-1.5 text-xs mt-2 pt-2 border-t border-zinc-900">
+                              <span className="text-zinc-400">Status</span>
+                              <span className="text-[#7a9b76] font-semibold">{item.status}</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Center - map stays visible */}
+                      <div className="p-6">
+                        <div className="bg-[#0a0a0a] border border-zinc-800 p-6 mb-6">
+                          <div className="text-sm font-semibold uppercase tracking-wider mb-5">
+                            Operational Situation
+                          </div>
+                          <div className="bg-[rgba(239,68,68,0.1)] border-l-[3px] border-[#c26d5f] p-4 mb-4">
+                            <div className="flex justify-between mb-3">
+                              <div className="font-mono text-[11px] font-bold text-[#c26d5f] tracking-wider">
+                                WAVE 1 • ACTIVE
+                              </div>
+                              <div className="font-mono text-[11px] text-zinc-400">23:15 UTC</div>
+                            </div>
+                            <div className="text-sm text-zinc-400 leading-relaxed">
+                              <strong className="text-white">Mykolaiv:</strong> 4x Shahed-136, 22km, target: ammunition depot<br/>
+                              <strong className="text-white">Priority:</strong> CRITICAL
+                            </div>
+                          </div>
+                          <div className="bg-[rgba(239,68,68,0.1)] border-l-[3px] border-[#c26d5f] p-4 opacity-60">
+                            <div className="flex justify-between mb-3">
+                              <div className="font-mono text-[11px] font-bold text-[#c26d5f] tracking-wider">
+                                WAVE 2 • EXPECTED
+                              </div>
+                              <div className="font-mono text-[11px] text-zinc-400">~00:30 UTC</div>
+                            </div>
+                            <div className="text-sm text-zinc-400 leading-relaxed">
+                              <strong className="text-white">Intelligence:</strong> 20-30 targets, multiple directions<br/>
+                              <strong className="text-white">Time:</strong> 1-1.5 hours
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Right sidebar - now with recommendations */}
+                      <div className="bg-[#0a0a0a] border-l border-zinc-900 p-6 overflow-y-auto">
+                        <div className="text-xs font-semibold uppercase tracking-wider text-[#c8a882] mb-5">
+                          Strategic Recommendations
+                        </div>
+                        <div className="space-y-3">
+                          {theaterRecommendations.map((rec, i) => (
+                            <div
+                              key={i}
+                              onClick={() => selectTheaterRec(rec)}
+                              className={`bg-[rgba(255,255,255,0.02)] border p-4 cursor-pointer transition-all ${
+                                selectedTheaterRec?.name === rec.name
+                                  ? 'border-[#c8a882] bg-[rgba(200,168,130,0.05)]'
+                                  : 'border-zinc-800 hover:border-[#c8a882]'
+                              }`}
+                            >
+                              <div className="flex justify-between mb-3">
+                                <div className="text-sm font-semibold">{rec.name}</div>
+                                <div className="font-mono text-sm font-bold text-[#7a9b76]">
+                                  {rec.score.toFixed(4)}
+                                </div>
+                              </div>
+                              <div className="text-xs text-zinc-400 leading-relaxed mb-3">
+                                {rec.summary}
+                              </div>
+                              <div className="flex gap-4 text-[11px] pt-3 border-t border-zinc-900">
+                                <div>
+                                  <div className="text-zinc-400">Cost</div>
+                                  <div className="font-semibold mt-1">{rec.cost}</div>
+                                </div>
+                                <div>
+                                  <div className="text-zinc-400">Reserve</div>
+                                  <div className="font-semibold mt-1">{rec.reserve}</div>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {theaterStep === 3 && (
+                    <div className="p-10 text-center max-w-[900px] mx-auto animate-fadeIn">
+                      <div className="mb-8">
+                        <div className="text-6xl text-[#7a9b76] mb-6">✓</div>
+                        <div className="text-2xl font-medium mb-2">Directive approved and executed</div>
+                        <div className="text-sm text-zinc-400">Theater strategy implemented across all regions</div>
+                      </div>
+
+                      <div className="grid grid-cols-3 gap-4 mb-8">
+                        {[
+                          { label: 'Night Defense', value: '4/5 waves' },
+                          { label: 'Total Cost', value: '$4.2M' },
+                          { label: 'Reserve', value: '65%' }
+                        ].map((stat, i) => (
+                          <div key={i} className="bg-black border border-zinc-800 p-5">
+                            <div className="text-[10px] text-zinc-400 uppercase tracking-wider mb-3">
+                              {stat.label}
+                            </div>
+                            <div className="font-mono text-xl text-[#c8a882] font-light">
+                              {stat.value}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+
+                      <div className="bg-[rgba(200,168,130,0.03)] border-l-2 border-[#8a7560] p-6 text-sm text-zinc-400 leading-relaxed text-left mb-8">
+                        <strong className="text-white">Conclusion:</strong> Theater strategy with coherence 0.83+ ensured optimal balance between protecting critical assets and preserving operational reserves. Omin forecast confirmed by night defense results.
+                      </div>
+
+                      <button
+                        onClick={resetTheater}
+                        className="px-5 py-5 bg-[#c8a882] text-black text-[11px] font-semibold uppercase tracking-[0.15em] hover:bg-[#d9b993] transition-all"
+                      >
+                        New Strategy
+                      </button>
+                    </div>
+                  )}
+
+                  {/* Action panel for theater */}
+                  {theaterStep === 2 && selectedTheaterRec && (
+                    <div className="fixed bottom-0 left-0 right-0 bg-[#0a0a0a] border-t-2 border-[#c8a882] p-5 z-50">
+                      <div className="max-w-[1200px] mx-auto flex justify-between items-center">
+                        <div className="text-sm">
+                          Selected: <span className="text-[#c8a882] font-semibold">{selectedTheaterRec.name}</span>
+                        </div>
+                        <button
+                          onClick={approveTheater}
+                          className="px-6 py-3 bg-[#c8a882] text-black text-sm font-bold uppercase tracking-wider hover:bg-[#d9b993] transition-all"
+                        >
+                          Approve Directive
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+
+          <div className="mt-8 p-6 bg-[rgba(200,168,130,0.03)] border-l-2 border-[#8a7560] text-sm text-zinc-400 leading-loose max-w-[900px]">
+            <strong className="text-white">Interactive Demo:</strong> Command interface using realistic counter-UAS scenarios with NATO and Soviet-era weapon systems. All threat scenarios, weapon systems, and coherence scores reflect operational constraints. Response times (&lt;1s) and decision quality (0.72-0.85 coherence) match production performance.
+          </div>
+        </div>
+      </section>
+
+      {/* Specs */}
+      <section className="py-32 border-b border-zinc-900 relative">
+        <div className="absolute top-10 left-10 font-mono text-[9px] tracking-[0.25em] text-[#c8a882] opacity-40">
+          03.00 / TECHNICAL SPECIFICATIONS
+        </div>
+        <div className="max-w-[1400px] mx-auto px-10">
+          <div className="grid grid-cols-2 gap-20 relative">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-px h-[60%] bg-gradient-to-b from-transparent via-[#8a7560] to-transparent opacity-30" />
+            
+            {[
+              {
+                title: 'System Architecture',
+                specs: [
+                  { key: 'Model Size', value: '26 MB' },
+                  { key: 'Deployment', value: 'Air-Gapped / Edge' },
+                  { key: 'Decision Latency', value: '<1 Second' },
+                  { key: 'Cloud Dependency', value: 'Zero' },
+                  { key: 'Hardware Requirements', value: '8GB RAM, 4 cores' }
+                ]
+              },
+              {
+                title: 'Operational Capability',
+                specs: [
+                  { key: 'Simultaneous Threats', value: '150+' },
+                  { key: 'Coherence Range', value: '0.72-0.85' },
+                  { key: 'Language Support', value: 'EN, UK, PL, AR, ET' },
+                  { key: 'Integration', value: 'REST API / JSON' },
+                  { key: 'Deployment Timeline', value: '14 Days' }
+                ]
+              }
+            ].map((block, i) => (
+              <div key={i} className="border border-zinc-900 bg-[#0a0a0a] p-14 relative">
+                <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-[#8a7560] to-transparent opacity-20" />
+                <div className="text-xs font-medium uppercase tracking-wider mb-10 pb-4 relative">
+                  {block.title}
+                  <div className="absolute bottom-0 left-0 w-[60px] h-px bg-[#c8a882]" />
+                </div>
+                <div className="space-y-4">
+                  {block.specs.map((spec, j) => (
+                    <div key={j} className="flex justify-between items-center py-4 border-b border-zinc-900 text-sm relative pl-5">
+                      <span className="absolute left-0 text-[#c8a882] opacity-30">—</span>
+                      <span className="text-zinc-400">{spec.key}</span>
+                      <span className="font-mono text-[#c8a882] font-medium text-sm">{spec.value}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact */}
+      <section className="py-32 relative">
+        <div className="absolute top-10 left-10 font-mono text-[9px] tracking-[0.25em] text-[#c8a882] opacity-40">
+          04.00 / DEPLOYMENT
+        </div>
+        <div className="max-w-[1000px] mx-auto px-10">
+          <div className="border border-zinc-900 bg-[#0a0a0a] p-20 text-center relative">
+            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#8a7560] to-transparent opacity-30" />
+            <div className="font-mono text-[9px] tracking-[0.2em] text-[#c8a882] mb-8">
+              EVALUATE WITH YOUR SCENARIO
+            </div>
+            <h2 className="text-4xl font-light tracking-tight mb-12">
+              Test decision quality before deployment
+            </h2>
+            <a
+              href="mailto:founder@traut.ai?subject=Omin%20Evaluation%20Request&body=Scenario:%0D%0A%0D%0AAvailable%20weapon%20systems:%0D%0A%0D%0AOperational%20constraints:%0D%0A"
+              className="inline-block font-mono text-lg text-[#c8a882] px-12 py-5 border border-[#8a7560] mb-8 hover:bg-[#c8a882] hover:text-black transition-all"
+            >
+              founder@traut.ai
+            </a>
+            <div className="text-sm text-zinc-400 leading-loose tracking-[-0.01em]">
+              Send your threat scenario, available weapon systems, and operational constraints.<br/>
+              Receive ranked strategies with coherence scores in 24 hours.<br/>
+              Validated pilots deploy in 14 days.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-zinc-900 py-12">
+        <div className="max-w-[1400px] mx-auto px-10 flex justify-between items-center font-mono text-[10px] text-zinc-600 tracking-wider">
+          <div>OMIN © 2025 TRAUT</div>
+          <div>US-BASED // NATO-ALIGNED</div>
+        </div>
+      </footer>
+
+      <style>{`
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes scan {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(600px); }
+        }
+
+        .animate-fadeIn {
+          animation: fadeIn 0.4s ease;
+        }
+      `}</style>
+    </div>
+  );
+}
