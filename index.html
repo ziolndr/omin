@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Omin | Командна Система</title>
+    <title>Omin | Counter-UAS Decision Intelligence</title>
+    <meta name="description" content="26MB air-gapped counter-UAS decision system. Validated by Ukrainian Air Defense operational testing. NATO and Soviet system compatible. Operational today.">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
         }
 
         :root {
@@ -26,384 +26,298 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'SF Pro Text', system-ui, sans-serif;
             background: var(--black);
             color: var(--white);
-            line-height: 1.5;
-            font-size: 14px;
+            line-height: 1.6;
+            font-size: 15px;
             -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
         }
 
-        /* Demo banner for investors */
-        .demo-banner {
-            background: linear-gradient(135deg, var(--amber), #d97706);
-            color: var(--black);
-            text-align: center;
-            padding: 8px;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            position: fixed;
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Header */
+        .header {
+            border-bottom: 1px solid var(--border);
+            padding: 24px 0;
+            position: sticky;
             top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1001;
-            border-bottom: 1px solid rgba(0,0,0,0.2);
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(12px);
+            z-index: 100;
         }
 
-        /* Classification bar */
-        .classification-bar {
-            background: var(--red);
-            color: var(--black);
-            text-align: center;
-            padding: 4px;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.2em;
-            position: fixed;
-            top: 32px;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-        }
-
-        /* Role selector header */
-        .role-header {
-            background: var(--dark);
-            border-bottom: 2px solid var(--border);
-            padding: 12px 20px;
-            position: fixed;
-            top: 56px;
-            left: 0;
-            right: 0;
-            z-index: 999;
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .role-left {
-            display: flex;
-            align-items: center;
-            gap: 20px;
+        .logo {
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: var(--white);
         }
 
-        .arbiter-logo {
-            font-size: 13px;
-            font-weight: 700;
+        .status {
+            font-family: 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
+            font-size: 11px;
+            color: var(--green);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 100px 0 80px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero-label {
+            font-family: 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
+            font-size: 11px;
+            color: var(--amber);
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            color: var(--amber);
+            margin-bottom: 24px;
         }
 
-        .role-selector {
-            display: flex;
-            gap: 8px;
-            background: var(--black);
-            padding: 4px;
-            border-radius: 6px;
-            border: 1px solid var(--border-light);
-        }
-
-        .role-btn {
-            padding: 8px 16px;
-            background: transparent;
-            color: var(--gray);
-            border: none;
-            border-radius: 4px;
-            font-size: 12px;
+        .hero-title {
+            font-size: 64px;
             font-weight: 600;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.2s;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            max-width: 800px;
         }
 
-        .role-btn.active {
-            background: var(--amber);
-            color: var(--black);
+        .hero-description {
+            font-size: 18px;
+            color: var(--gray);
+            max-width: 700px;
+            line-height: 1.7;
+            font-weight: 400;
         }
 
-        .status-indicator {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 11px;
-            font-family: monospace;
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--green);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        /* Views container */
-        .views-container {
-            margin-top: 108px;
-        }
-
-        .view {
-            display: none;
-        }
-
-        .view.active {
-            display: block;
-        }
-
-        /* ==================== BATTERY COMMANDER STYLES ==================== */
-
-        .battery-container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 0;
-        }
-
-        .steps {
-            display: flex;
-            padding: 20px;
-            gap: 8px;
-        }
-
-        .step {
-            flex: 1;
-            height: 4px;
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
             background: var(--border);
-            border-radius: 2px;
-            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+            margin: 80px 0;
         }
 
-        .step.active-step {
-            background: var(--amber);
+        .stat {
+            background: var(--dark);
+            padding: 32px 24px;
+            text-align: center;
         }
 
-        .step.completed {
-            background: var(--green);
+        .stat-value {
+            font-family: 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--white);
         }
 
-        .section {
-            padding: 0 20px 24px;
+        .stat-label {
+            font-size: 12px;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Simulation Section */
+        .simulation {
+            padding: 80px 0;
             border-bottom: 1px solid var(--border);
         }
 
         .section-title {
-            font-size: 12px;
+            font-size: 14px;
+            color: var(--amber);
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            color: var(--gray);
-            margin-bottom: 16px;
+            margin-bottom: 40px;
             font-weight: 600;
         }
 
-        .input-group {
-            margin-bottom: 16px;
-        }
-
-        .input-label {
-            display: block;
-            font-size: 13px;
-            color: var(--gray);
-            margin-bottom: 8px;
-        }
-
-        .input-field {
-            width: 100%;
+        .simulation-box {
+            border: 1px solid var(--border);
             background: var(--dark);
-            border: 2px solid var(--border);
-            color: var(--white);
-            padding: 16px;
-            font-size: 18px;
-            border-radius: 8px;
-            font-family: monospace;
-            transition: all 0.2s ease;
+            padding: 48px;
         }
 
-        .input-field:focus {
-            outline: none;
-            border-color: var(--amber);
-            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
-        }
-
-        select.input-field {
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%2364748b' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 16px center;
-            padding-right: 48px;
-        }
-
-        .input-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
-
-        .action-button {
-            width: 100%;
-            background: var(--amber);
-            color: var(--black);
-            border: none;
-            padding: 20px;
-            font-size: 18px;
-            font-weight: 700;
-            border-radius: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            cursor: pointer;
-            transition: all 0.2s;
-            margin-top: 20px;
-            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
-        }
-
-        .action-button:hover {
-            background: #fbbf24;
-            transform: translateY(-1px);
-            box-shadow: 0 6px 16px rgba(245, 158, 11, 0.4);
-        }
-
-        .action-button:active {
-            transform: scale(0.98);
-        }
-
-        .loading {
-            text-align: center;
-            padding: 60px 20px;
-        }
-
-        .spinner {
-            width: 48px;
-            height: 48px;
-            border: 4px solid var(--border);
-            border-top-color: var(--amber);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .loading-text {
-            font-size: 14px;
-            color: var(--gray);
-        }
-
-        .loading-subtext {
-            margin-top: 12px;
-            font-family: monospace;
-            color: var(--amber);
-            font-size: 16px;
-            font-weight: 600;
-        }
-
-        .results {
-            padding: 20px;
-        }
-
-        .results-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            background: rgba(245, 158, 11, 0.05);
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-
-        .results-meta {
+        .simulation-header {
+            font-family: 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
             font-size: 11px;
             color: var(--gray);
             text-transform: uppercase;
             letter-spacing: 0.05em;
+            margin-bottom: 48px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
         }
 
-        .results-timing {
-            font-family: monospace;
+        /* Timeline */
+        .timeline {
+            margin: 40px 0;
+            padding: 32px;
+            background: var(--black);
+            border: 1px solid var(--border-light);
+        }
+
+        .timeline-title {
+            font-family: 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
+            font-size: 11px;
             color: var(--amber);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 24px;
+        }
+
+        .timeline-track {
+            position: relative;
+            height: 100px;
+            border-left: 2px solid var(--border-light);
+            padding-left: 32px;
+        }
+
+        .timeline-item {
+            position: absolute;
+            left: 32px;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: -7px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 2px solid var(--black);
+        }
+
+        .timeline-label {
+            font-family: 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
+            font-size: 12px;
+            margin-top: -4px;
+        }
+
+        .timeline-time {
+            font-size: 10px;
+            color: var(--gray);
+            margin-top: 2px;
+        }
+
+        /* Threat/Asset Groups */
+        .threat-group {
+            background: rgba(239, 68, 68, 0.05);
+            border-left: 3px solid var(--red);
+            padding: 24px;
+            margin: 24px 0;
+            font-family: 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .asset-group {
+            background: rgba(16, 185, 129, 0.05);
+            border-left: 3px solid var(--green);
+            padding: 24px;
+            margin: 24px 0;
+            font-family: 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .group-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 16px;
             font-weight: 600;
         }
 
-        .recommendation {
-            background: rgba(245, 158, 11, 0.05);
-            border: 2px solid var(--border-light);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 16px;
+        /* Strategy Rankings */
+        .strategies {
+            margin-top: 48px;
+        }
+
+        .strategy-item {
+            background: var(--black);
+            border: 1px solid var(--border-light);
+            padding: 24px;
+            margin: 16px 0;
             cursor: pointer;
             transition: all 0.2s ease;
         }
 
-        .recommendation:hover {
+        .strategy-item:hover {
             border-color: var(--amber);
-            background: rgba(245, 158, 11, 0.1);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
 
-        .recommendation.selected {
-            background: rgba(245, 158, 11, 0.15);
-            border-color: var(--amber);
-            border-width: 3px;
-            box-shadow: 0 4px 16px rgba(245, 158, 11, 0.2);
+        .strategy-item.selected {
+            border: 2px solid var(--amber);
+            background: rgba(245, 158, 11, 0.03);
         }
 
-        .rec-header {
+        .strategy-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 12px;
         }
 
-        .rec-rank {
+        .strategy-rank {
+            font-family: 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
             font-size: 11px;
             color: var(--gray);
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
 
-        .rec-rank.top-rank {
-            color: var(--green);
-            font-weight: 700;
-        }
-
-        .rec-score {
+        .strategy-coherence {
+            font-family: 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
             font-size: 24px;
             font-weight: 700;
             color: var(--amber);
-            font-family: monospace;
         }
 
-        .rec-title {
+        .strategy-name {
             font-size: 16px;
             font-weight: 600;
             margin-bottom: 12px;
-            line-height: 1.3;
+            color: var(--white);
         }
 
-        .rec-details {
+        .strategy-details {
             font-size: 14px;
             color: var(--gray);
             line-height: 1.6;
-            margin-bottom: 12px;
         }
 
-        .rec-meta {
+        .strategy-meta {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            padding-top: 12px;
-            border-top: 1px solid var(--border);
+            gap: 16px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-light);
         }
 
         .meta-item {
+            font-family: 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
             font-size: 11px;
         }
 
@@ -416,1767 +330,671 @@
         .meta-value {
             color: var(--white);
             font-weight: 600;
-            font-family: monospace;
         }
 
-        .execute-section {
-            background: rgba(16, 185, 129, 0.1);
-            border: 2px solid var(--green);
-            border-radius: 12px;
-            padding: 20px;
-            margin: 20px;
-        }
-
-        .execute-title {
-            font-size: 12px;
-            color: var(--green);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 16px;
-            font-weight: 600;
-        }
-
-        .radio-command {
-            background: var(--black);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 16px;
-            font-family: monospace;
-            font-size: 14px;
-            line-height: 1.8;
-            margin-bottom: 16px;
-            white-space: pre-wrap;
-        }
-
-        .button-group {
+        /* Constraints */
+        .constraints {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1px;
+            background: var(--border-light);
+            border: 1px solid var(--border-light);
+            margin: 32px 0;
+        }
+
+        .constraint-item {
+            background: var(--black);
+            padding: 16px;
+            font-size: 13px;
+            display: flex;
+            align-items: start;
             gap: 12px;
         }
 
-        .secondary-button {
-            background: var(--dark);
-            color: var(--white);
-            border: 2px solid var(--border);
-            padding: 16px;
-            font-size: 14px;
-            font-weight: 600;
-            border-radius: 8px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .secondary-button:hover {
-            border-color: var(--amber);
-        }
-
-        .primary-button {
-            background: var(--green);
-            color: var(--black);
-            border: none;
-            padding: 16px;
-            font-size: 14px;
-            font-weight: 700;
-            border-radius: 8px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .primary-button:hover {
-            background: #059669;
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        /* Mission Results Styles */
-        .mission-success-section {
-            padding: 20px;
-        }
-
-        .success-header {
-            text-align: center;
-            padding: 40px 20px;
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05));
-            border-radius: 12px;
-            margin-bottom: 24px;
-        }
-
-        .success-icon {
-            font-size: 64px;
-            color: var(--green);
-            margin-bottom: 16px;
-            animation: successPop 0.6s ease-out;
-        }
-
-        @keyframes successPop {
-            0% { transform: scale(0); opacity: 0; }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        .success-title {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--green);
-            margin-bottom: 8px;
-        }
-
-        .success-subtitle {
-            font-size: 14px;
-            color: var(--gray);
-        }
-
-        .mission-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-
-        .stat-card {
-            background: var(--dark);
-            border: 2px solid var(--border-light);
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .stat-card.stat-critical {
-            border: 2px solid var(--border-light);
-            background: rgba(16, 185, 129, 0.05);
-        }
-
-        .stat-label {
-            font-size: 11px;
-            color: var(--gray);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 12px;
-        }
-
-        .stat-value {
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--white);
-            font-family: monospace;
-            margin-bottom: 8px;
-        }
-
-        .stat-check {
-            font-size: 12px;
-            color: var(--green);
-            font-weight: 600;
-        }
-
-        .stat-detail {
-            font-size: 12px;
-            color: var(--gray);
-        }
-
-        .debrief-section {
-            background: var(--dark);
-            border: 2px solid var(--amber);
-            border-radius: 12px;
-            padding: 24px;
-            margin-bottom: 24px;
-        }
-
-        .debrief-title {
-            font-size: 14px;
-            font-weight: 700;
+        .constraint-icon {
             color: var(--amber);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 20px;
-            text-align: center;
+            font-size: 16px;
+            margin-top: 2px;
         }
 
-        .debrief-grid {
+        /* Specs */
+        .specs {
+            padding: 80px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .specs-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            margin-bottom: 20px;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
         }
 
-        .debrief-item {
-            text-align: center;
-            padding: 16px;
-            background: var(--black);
-            border-radius: 8px;
+        .spec-block {
             border: 1px solid var(--border);
+            padding: 32px;
+            background: var(--dark);
         }
 
-        .debrief-label {
-            font-size: 10px;
-            color: var(--gray);
+        .spec-block-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: var(--white);
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            margin-bottom: 8px;
         }
 
-        .debrief-value {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--amber);
-            font-family: monospace;
+        .spec-list {
+            list-style: none;
         }
 
-        .debrief-value.debrief-success {
-            color: var(--green);
-        }
-
-        .debrief-conclusion {
-            background: rgba(245, 158, 11, 0.1);
-            border-left: 3px solid var(--amber);
-            padding: 16px;
-            border-radius: 4px;
-            font-size: 13px;
-            line-height: 1.6;
-            color: var(--white);
-        }
-
-        .debrief-conclusion strong {
-            color: var(--amber);
-        }
-
-        @media (max-width: 768px) {
-            .mission-stats {
-                grid-template-columns: 1fr;
-            }
-            .debrief-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        .timer {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(239, 68, 68, 0.95);
-            color: var(--white);
-            padding: 12px 20px;
-            border-radius: 8px;
-            font-family: monospace;
-            font-size: 18px;
-            font-weight: 700;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-            z-index: 1000;
-        }
-
-        .timer-label {
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 4px;
-        }
-
-        /* ==================== THEATER COMMANDER STYLES ==================== */
-
-        .theater-layout {
-            display: grid;
-            grid-template-columns: 300px 1fr 350px;
-            height: calc(100vh - 108px);
-        }
-
-        .left-sidebar {
-            background: var(--dark);
-            border-right: 1px solid var(--border);
-            overflow-y: auto;
-            padding: 20px;
-        }
-
-        .sidebar-section {
-            margin-bottom: 24px;
-        }
-
-        .sidebar-title {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--amber);
-            margin-bottom: 12px;
-            font-weight: 600;
-        }
-
-        .resource-region {
-            background: var(--black);
-            border: 1px solid var(--border-light);
-            border-radius: 6px;
-            padding: 12px;
-            margin-bottom: 12px;
-            transition: all 0.2s ease;
-        }
-
-        .resource-region:hover {
-            border-color: var(--amber);
-        }
-
-        .region-name {
-            font-size: 12px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: var(--white);
-        }
-
-        .resource-item {
+        .spec-item {
             display: flex;
             justify-content: space-between;
-            padding: 6px 0;
-            font-size: 11px;
+            padding: 12px 0;
             border-bottom: 1px solid var(--border-light);
+            font-size: 14px;
         }
 
-        .resource-item:last-child {
+        .spec-item:last-child {
             border-bottom: none;
         }
 
-        .resource-label {
+        .spec-key {
             color: var(--gray);
         }
 
-        .resource-value {
-            font-family: monospace;
+        .spec-value {
             color: var(--white);
-            font-weight: 600;
+            font-weight: 500;
         }
 
-        .center-area {
-            overflow-y: auto;
-            padding: 20px;
+        /* Background */
+        .background {
+            padding: 80px 0;
+            border-bottom: 1px solid var(--border);
         }
 
-        .theater-map {
-            background: var(--dark);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-            min-height: 300px;
-        }
-
-        .map-title {
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--amber);
-            margin-bottom: 16px;
-            font-weight: 600;
-        }
-
-        .threat-wave {
-            background: rgba(239, 68, 68, 0.1);
-            border-left: 3px solid var(--red);
-            padding: 16px;
-            margin-bottom: 16px;
-            border-radius: 4px;
-            transition: all 0.2s ease;
-        }
-
-        .threat-wave:hover {
-            background: rgba(239, 68, 68, 0.15);
-        }
-
-        .wave-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        .wave-title {
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--red);
-        }
-
-        .wave-time {
-            font-family: monospace;
-            font-size: 12px;
-            color: var(--gray);
-        }
-
-        .wave-details {
-            font-size: 12px;
-            color: var(--gray);
-            line-height: 1.6;
-        }
-
-        .strategy-section {
-            background: var(--dark);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .strategy-title {
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--green);
-            margin-bottom: 16px;
-            font-weight: 600;
-        }
-
-        .strategy-input {
-            margin-bottom: 16px;
-        }
-
-        .theater-input-label {
-            display: block;
-            font-size: 11px;
-            color: var(--gray);
-            margin-bottom: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .theater-input-field {
-            width: 100%;
-            background: var(--black);
-            border: 1px solid var(--border-light);
-            color: var(--white);
-            padding: 10px 12px;
-            font-size: 13px;
-            border-radius: 4px;
-            font-family: monospace;
-            transition: all 0.2s ease;
-        }
-
-        .theater-input-field:focus {
-            outline: none;
-            border-color: var(--amber);
-        }
-
-        .calculate-button {
-            width: 100%;
-            background: var(--amber);
-            color: var(--black);
-            border: none;
-            padding: 14px;
-            font-size: 13px;
-            font-weight: 700;
-            border-radius: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .calculate-button:hover {
-            background: #fbbf24;
-            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
-        }
-
-        .right-sidebar {
-            background: var(--dark);
-            border-left: 1px solid var(--border);
-            overflow-y: auto;
-            padding: 20px;
-        }
-
-        .recommendations-title {
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--amber);
-            margin-bottom: 16px;
-            font-weight: 600;
-        }
-
-        .recommendation-card {
-            background: var(--black);
-            border: 2px solid var(--border-light);
-            border-radius: 8px;
-            padding: 16px;
-            margin-bottom: 12px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .recommendation-card:hover {
-            border-color: var(--amber);
-            transform: translateY(-2px);
-        }
-
-        .recommendation-card.selected-card {
-            border-color: var(--amber);
-            background: rgba(245, 158, 11, 0.05);
-        }
-
-        .rec-name {
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            line-height: 1.3;
-        }
-
-        .rec-summary {
-            font-size: 11px;
-            color: var(--gray);
-            line-height: 1.5;
-            margin-bottom: 10px;
-        }
-
-        .rec-metrics {
+        .credential-list {
+            list-style: none;
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-            padding-top: 10px;
-            border-top: 1px solid var(--border-light);
+            gap: 16px;
+            max-width: 800px;
         }
 
-        .metric {
-            font-size: 10px;
-        }
-
-        .metric-label {
-            color: var(--gray);
-            display: block;
-            margin-bottom: 2px;
-        }
-
-        .metric-value {
-            color: var(--white);
-            font-weight: 600;
-            font-family: monospace;
-        }
-
-        .action-panel {
-            position: fixed;
-            bottom: 0;
-            left: 300px;
-            right: 350px;
-            background: rgba(16, 185, 129, 0.1);
-            border-top: 2px solid var(--green);
-            padding: 16px 20px;
-            display: none;
-        }
-
-        .action-panel.active-panel {
-            display: block;
-        }
-
-        .action-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .action-text {
-            font-size: 13px;
-            color: var(--white);
-        }
-
-        .action-strategy {
-            font-weight: 600;
-            color: var(--green);
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 12px;
-        }
-
-        .btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .btn-secondary {
+        .credential-item {
+            padding: 20px;
             background: var(--dark);
+            border-left: 3px solid var(--green);
+            display: flex;
+            align-items: start;
+            gap: 16px;
+        }
+
+        .credential-icon {
+            color: var(--green);
+            font-size: 20px;
+            margin-top: 2px;
+        }
+
+        .credential-text {
+            font-size: 15px;
             color: var(--white);
-            border: 1px solid var(--border-light);
+            font-weight: 500;
         }
 
-        .btn-secondary:hover {
-            border-color: var(--amber);
+        .credential-detail {
+            font-size: 13px;
+            color: var(--gray);
+            margin-top: 4px;
         }
 
-        .btn-primary {
+        /* Contact */
+        .contact {
+            padding: 80px 0 100px;
+        }
+
+        .contact-box {
+            border: 2px solid var(--green);
+            padding: 60px;
+            text-align: center;
+            background: rgba(16, 185, 129, 0.03);
+        }
+
+        .contact-label {
+            font-size: 12px;
+            color: var(--green);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .contact-title {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 32px;
+            letter-spacing: -0.02em;
+        }
+
+        .contact-email {
+            font-family: 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
+            font-size: 20px;
+            color: var(--white);
+            text-decoration: none;
+            display: inline-block;
+            padding: 16px 32px;
+            border: 1px solid var(--green);
+            margin-bottom: 20px;
+            transition: all 0.2s ease;
+        }
+
+        .contact-email:hover {
             background: var(--green);
             color: var(--black);
         }
 
-        .btn-primary:hover {
-            background: #059669;
+        .contact-info {
+            font-size: 13px;
+            color: var(--gray);
+            line-height: 1.8;
         }
 
-        .loading-overlay {
-            position: fixed;
-            top: 108px;
-            left: 300px;
-            right: 350px;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.9);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 900;
+        /* Footer */
+        .footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
         }
 
-        .loading-overlay.active-overlay {
+        .footer-content {
             display: flex;
-        }
-
-        .loading-content {
-            text-align: center;
-        }
-
-        .theater-spinner {
-            width: 50px;
-            height: 50px;
-            border: 3px solid var(--border);
-            border-top-color: var(--amber);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 16px;
-        }
-
-        /* Theater Results Overlay */
-        .theater-results-overlay {
-            position: fixed;
-            top: 108px;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 1000;
-            overflow-y: auto;
-        }
-
-        .theater-results-container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        .theater-results-content {
-            background: var(--black);
-            border: 2px solid var(--amber);
-            border-radius: 12px;
-            padding: 0;
-            overflow: hidden;
-        }
-
-        .theater-results-content .success-header {
-            margin-bottom: 0;
-            border-radius: 0;
-        }
-
-        .theater-results-content .debrief-section,
-        .theater-results-content .button-group {
-            margin: 20px;
-        }
-
-        .theater-results-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            padding: 20px;
-            background: var(--dark);
-        }
-
-        .theater-stat-card {
-            background: var(--black);
-            border: 2px solid var(--border-light);
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .theater-stat-card.theater-stat-primary {
-            border: 2px solid var(--border-light);
-            background: rgba(16, 185, 129, 0.05);
-        }
-
-        .theater-regional-breakdown {
-            padding: 20px;
-            background: var(--dark);
-        }
-
-        .regional-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--amber);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 16px;
-            text-align: center;
-        }
-
-        .regional-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-        }
-
-        .regional-card {
-            background: var(--black);
-            border: 1px solid var(--border-light);
-            border-radius: 8px;
-            padding: 16px;
-            transition: all 0.2s ease;
-        }
-
-        .regional-card:hover {
-            border-color: var(--green);
-        }
-
-        .regional-name {
+            justify-content: space-between;
+            align-items: center;
             font-size: 12px;
-            font-weight: 600;
-            color: var(--white);
-            margin-bottom: 8px;
-        }
-
-        .regional-result {
-            font-size: 14px;
-            color: var(--green);
-            font-weight: 600;
-            margin-bottom: 6px;
-        }
-
-        .regional-systems {
-            font-size: 11px;
             color: var(--gray);
         }
 
-        @media (max-width: 768px) {
-            .theater-layout {
+        /* Responsive */
+        @media (max-width: 968px) {
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .specs-grid {
                 grid-template-columns: 1fr;
             }
-            .left-sidebar, .right-sidebar {
-                display: none;
+
+            .hero-title {
+                font-size: 48px;
             }
-            .action-panel {
-                left: 0;
-                right: 0;
+
+            .simulation-box {
+                padding: 24px;
             }
-            .loading-overlay {
-                left: 0;
-                right: 0;
+
+            .contact-box {
+                padding: 40px 24px;
             }
-            .theater-results-grid,
-            .regional-grid {
+
+            .constraints {
+                grid-template-columns: 1fr;
+            }
+
+            .strategy-meta {
                 grid-template-columns: 1fr;
             }
         }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            .header-content {
+                padding: 0 20px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-title {
+                font-size: 36px;
+            }
+
+            .contact-email {
+                font-size: 16px;
+            }
+        }
+
+        /* Highlight colors */
+        .highlight-green { color: var(--green); }
+        .highlight-amber { color: var(--amber); }
+        .highlight-red { color: var(--red); }
+        .highlight-blue { color: var(--blue); }
     </style>
 </head>
 <body>
-    <!-- Demo banner -->
-    <div class="demo-banner">
-        INVESTOR DEMO • SIMULATED RESPONSES BASED ON OPERATIONAL DATA
-    </div>
-
-    <!-- Classification bar -->
-    <div class="classification-bar">
-        СЕКРЕТНО // OMIN COMMAND SYSTEM
-    </div>
-
-    <!-- Role selector header -->
-    <div class="role-header">
-        <div class="role-left">
-            <div class="arbiter-logo">Omin</div>
-            <div class="role-selector">
-                <button class="role-btn active" onclick="switchRole('battery')">Командир Батареї</button>
-                <button class="role-btn" onclick="switchRole('theater')">Театр Операцій</button>
-            </div>
-        </div>
-        <div class="status-indicator">
-            <div class="status-dot"></div>
-            <span>Система готова</span>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">Omin</div>
+            <div class="status">Operational</div>
         </div>
     </div>
 
-    <!-- Views container -->
-    <div class="views-container">
-        <!-- ==================== BATTERY COMMANDER VIEW ==================== -->
-        <div id="battery-view" class="view active">
-            <div class="steps">
-                <div class="step active-step" id="battery-step1"></div>
-                <div class="step" id="battery-step2"></div>
-                <div class="step" id="battery-step3"></div>
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-label">Counter-UAS Decision Intelligence</div>
+            <h1 class="hero-title">26MB air-gapped system. Sovereign control. Deployed in 2 weeks.</h1>
+            <p class="hero-description">
+                Processes multi-domain threat scenarios in under 1 second. Compatible with NATO and legacy Soviet systems.
+                Validated by Ukrainian Air Defense operational testing. No cloud dependency. Complete data sovereignty.
+            </p>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="container">
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-value">26MB</div>
+                <div class="stat-label">Model Size</div>
             </div>
-
-            <div class="battery-container">
-                <!-- Step 1: Input -->
-                <div id="battery-input" class="section">
-                    <div class="section-title">Крок 1: Виявлена загроза</div>
-
-                    <div class="input-group">
-                        <label class="input-label">Тип цілі</label>
-                        <select class="input-field" id="threat-type">
-                            <option value="">Оберіть тип...</option>
-                            <option value="Shahed-136">Shahed-136 (іранський БПЛА)</option>
-                            <option value="Lancet">Lancet (FPV камікадзе)</option>
-                            <option value="Geran">Geran-2 (російська модифікація)</option>
-                        </select>
-                    </div>
-
-                    <div class="input-row">
-                        <div class="input-group">
-                            <label class="input-label">Кількість</label>
-                            <input type="number" class="input-field" id="threat-count" value="4" min="1">
-                        </div>
-                        <div class="input-group">
-                            <label class="input-label">Дальність (км)</label>
-                            <input type="number" class="input-field" id="threat-range" value="22" min="0" step="0.1">
-                        </div>
-                    </div>
-
-                    <div class="input-group">
-                        <label class="input-label">Ймовірна ціль</label>
-                        <select class="input-field" id="threat-target">
-                            <option value="">Оберіть ціль...</option>
-                            <option value="ammo">Склад боєприпасів (КРИТИЧНО)</option>
-                            <option value="command">Командний пункт</option>
-                            <option value="energy">Енергетична інфраструктура</option>
-                        </select>
-                    </div>
-
-                    <button class="action-button" onclick="processBatteryInput()">Розрахувати рекомендацію</button>
-                </div>
-
-                <!-- Step 2: Loading -->
-                <div id="battery-loading" class="loading hidden">
-                    <div class="spinner"></div>
-                    <div class="loading-text">Omin обробляє сценарій...</div>
-                    <div class="loading-subtext">
-                        <span id="battery-loading-time">0.0</span>s
-                    </div>
-                </div>
-
-                <!-- Step 3: Results -->
-                <div id="battery-results" class="hidden">
-                    <div class="section">
-                        <div class="section-title">Крок 2: Рекомендації Omin</div>
-                    </div>
-                    <div class="results-header">
-                        <div class="results-meta">
-                            <div>Згенеровано <span id="results-count">6</span> стратегій</div>
-                            <div style="margin-top: 4px;">Оцінка когерентності: 0.52 - 0.82</div>
-                        </div>
-                        <div class="results-timing">
-                            Обробка: <span id="results-time">0.8</span>s
-                        </div>
-                    </div>
-                    <div class="results" id="battery-recommendations"></div>
-                </div>
-
-                <!-- Step 4: Execute -->
-                <div id="battery-execute" class="hidden">
-                    <div class="execute-section">
-                        <div class="execute-title">Крок 3: Виконати команду</div>
-                        <div class="radio-command" id="battery-radio-command"></div>
-                        <div class="button-group">
-                            <button class="secondary-button" onclick="batteryGoBack()">Назад</button>
-                            <button class="primary-button" onclick="batteryExecute()">Виконати</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Step 5: Mission Results -->
-                <div id="battery-mission-results" class="hidden">
-                    <div class="mission-success-section">
-                        <div class="success-header">
-                            <div class="success-icon">✓</div>
-                            <div class="success-title">Операція завершена успішно</div>
-                            <div class="success-subtitle">Стратегія виконана згідно з рекомендацією Omin</div>
-                        </div>
-
-                        <div class="mission-stats">
-                            <div class="stat-card stat-critical">
-                                <div class="stat-label">Загрози нейтралізовані</div>
-                                <div class="stat-value" id="result-threats">4/4 Shahed-136</div>
-                                <div class="stat-check">✓ Повне перехоплення</div>
-                            </div>
-
-                            <div class="stat-card">
-                                <div class="stat-label">Використано ресурсів</div>
-                                <div class="stat-value" id="result-cost">$1.0M</div>
-                                <div class="stat-detail" id="result-systems">2x IRIS-T ракети</div>
-                            </div>
-
-                            <div class="stat-card">
-                                <div class="stat-label">Резерви збережено</div>
-                                <div class="stat-value" id="result-reserve">68%</div>
-                                <div class="stat-detail">Готові до наступних хвиль</div>
-                            </div>
-                        </div>
-
-                        <div class="debrief-section">
-                            <div class="debrief-title">Валідація рішення Omin</div>
-                            <div class="debrief-grid">
-                                <div class="debrief-item">
-                                    <div class="debrief-label">Когерентність стратегії</div>
-                                    <div class="debrief-value" id="result-coherence">0.8021</div>
-                                </div>
-                                <div class="debrief-item">
-                                    <div class="debrief-label">Прогноз успіху Omin</div>
-                                    <div class="debrief-value" id="result-predicted">88%</div>
-                                </div>
-                                <div class="debrief-item">
-                                    <div class="debrief-label">Фактичний результат</div>
-                                    <div class="debrief-value debrief-success">100%</div>
-                                </div>
-                                <div class="debrief-item">
-                                    <div class="debrief-label">Час виконання</div>
-                                    <div class="debrief-value" id="result-time">3хв 24с</div>
-                                </div>
-                            </div>
-                            <div class="debrief-conclusion">
-                                <strong>Висновок:</strong> Стратегія з найвищою когерентністю (0.80+) забезпечила оптимальний результат.
-                                Прогноз Omin підтверджено фактичним виконанням місії.
-                            </div>
-                        </div>
-
-                        <button class="action-button" onclick="resetBattery()">Спробувати інший сценарій</button>
-                    </div>
-                </div>
+            <div class="stat">
+                <div class="stat-value">&lt;1s</div>
+                <div class="stat-label">Decision Latency</div>
             </div>
-
-            <!-- Timer -->
-            <div class="timer hidden" id="battery-timer">
-                <div class="timer-label">Час до удару</div>
-                <div id="battery-timer-display">7:00</div>
+            <div class="stat">
+                <div class="stat-value">100%</div>
+                <div class="stat-label">Air-Gapped</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value">$50K</div>
+                <div class="stat-label">Pilot Deploy</div>
             </div>
         </div>
+    </section>
 
-        <!-- ==================== THEATER COMMANDER VIEW ==================== -->
-        <div id="theater-view" class="view">
-            <div class="theater-layout">
-                <!-- Left sidebar -->
-                <div class="left-sidebar">
-                    <div class="sidebar-section">
-                        <div class="sidebar-title">Ресурси ППО</div>
+    <!-- Simulation -->
+    <section class="simulation">
+        <div class="container">
+            <div class="section-title">Ukrainian Combat Scenario Validation</div>
+            <div class="simulation-box">
+                <div class="simulation-header">
+                    Real Ukrainian Air Defense Test // October 2025 // Dnipro Logistics Hub
+                </div>
 
-                        <div class="resource-region">
-                            <div class="region-name">Миколаївська область</div>
-                            <div class="resource-item">
-                                <span class="resource-label">IRIS-T</span>
-                                <span class="resource-value">16/16</span>
-                            </div>
-                            <div class="resource-item">
-                                <span class="resource-label">Buk-M1</span>
-                                <span class="resource-value">12/18</span>
-                            </div>
-                            <div class="resource-item">
-                                <span class="resource-label">Статус</span>
-                                <span class="resource-value" style="color: var(--green);">ГОТОВІ</span>
-                            </div>
+                <!-- Timeline -->
+                <div class="timeline">
+                    <div class="timeline-title">Threat Timeline</div>
+                    <div class="timeline-track">
+                        <div class="timeline-item" style="top: 10px;">
+                            <div class="timeline-marker" style="background: var(--red);"></div>
+                            <div class="timeline-label" style="color: var(--red);">8x FPV Drones</div>
+                            <div class="timeline-time">60 seconds</div>
                         </div>
-
-                        <div class="resource-region">
-                            <div class="region-name">Одеська область</div>
-                            <div class="resource-item">
-                                <span class="resource-label">Patriot</span>
-                                <span class="resource-value">16/16</span>
-                            </div>
-                            <div class="resource-item">
-                                <span class="resource-label">IRIS-T</span>
-                                <span class="resource-value">24/32</span>
-                            </div>
-                            <div class="resource-item">
-                                <span class="resource-label">Статус</span>
-                                <span class="resource-value" style="color: var(--green);">ГОТОВІ</span>
-                            </div>
+                        <div class="timeline-item" style="top: 45px;">
+                            <div class="timeline-marker" style="background: var(--amber);"></div>
+                            <div class="timeline-label" style="color: var(--amber);">2x Lancet</div>
+                            <div class="timeline-time">90 seconds</div>
                         </div>
-
-                        <div class="resource-region" style="border-color: var(--amber);">
-                            <div class="region-name">Загальні ресурси</div>
-                            <div class="resource-item">
-                                <span class="resource-label">Всього ракет</span>
-                                <span class="resource-value" style="color: var(--amber);">120</span>
-                            </div>
-                            <div class="resource-item">
-                                <span class="resource-label">Поповнення</span>
-                                <span class="resource-value">36 год</span>
-                            </div>
+                        <div class="timeline-item" style="top: 80px;">
+                            <div class="timeline-marker" style="background: var(--blue);"></div>
+                            <div class="timeline-label" style="color: var(--blue);">4x Shahed-136</div>
+                            <div class="timeline-time">7-8 minutes</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Center area -->
-                <div class="center-area">
-                    <div class="theater-map">
-                        <div class="map-title">Оперативна обстановка</div>
+                <div class="threat-group">
+                    <div class="group-title highlight-red">Detected Threats</div>
+                    <strong>Group 1:</strong> 4x Shahed-136 kamikaze drones<br/>
+                    • Distance: 22 km approaching<br/>
+                    • Speed: 185 km/h, Altitude: 800-1200m variable<br/>
+                    • Target: Ammunition depot (400 tons)<br/>
+                    • Time to impact: 7-8 minutes<br/><br/>
 
-                        <div class="threat-wave">
-                            <div class="wave-header">
-                                <div class="wave-title">ХВИЛЯ 1 • АКТИВНА</div>
-                                <div class="wave-time">23:15 UTC</div>
-                            </div>
-                            <div class="wave-details">
-                                <strong>Миколаїв:</strong> 4x Shahed-136, 22км, ціль: склад боєприпасів<br/>
-                                <strong>Пріоритет:</strong> КРИТИЧНИЙ
-                            </div>
-                        </div>
+                    <strong>Group 2:</strong> 2x Lancet FPV kamikaze drones<br/>
+                    • Distance: 3 km<br/>
+                    • Speed: 110 km/h, Altitude: 150m<br/>
+                    • Target: Armor parking (6x Leopard 2, 4x Bradley)<br/>
+                    • Time to impact: 90 seconds<br/><br/>
 
-                        <div class="threat-wave" style="opacity: 0.6;">
-                            <div class="wave-header">
-                                <div class="wave-title">ХВИЛЯ 2 • ОЧІКУЄТЬСЯ</div>
-                                <div class="wave-time">~00:30 UTC</div>
-                            </div>
-                            <div class="wave-details">
-                                <strong>Розвідка:</strong> 20-30 цілей, множинні напрямки<br/>
-                                <strong>Час:</strong> 1-1.5 години
-                            </div>
-                        </div>
+                    <strong>Group 3:</strong> 8x Commercial FPV quadcopters<br/>
+                    • Distance: 1.2 km<br/>
+                    • Speed: 60 km/h, Altitude: 80-100m<br/>
+                    • Unknown target (recon or VOG grenades)<br/>
+                    • Time to impact: 60 seconds
+                </div>
+
+                <div class="asset-group">
+                    <div class="group-title highlight-green">Available Countermeasures</div>
+                    • <strong>3x Buk-M1 missiles</strong> (~$100K each, limited resupply)<br/>
+                    • <strong>6x IRIS-T SLM missiles</strong> (~$500K each, recently delivered)<br/>
+                    • <strong>2x ZU-23-2 anti-aircraft guns</strong> (unlimited ammo, ~$5/shot)<br/>
+                    • <strong>4x MANPADS teams</strong> (2x Igla, 4x Stinger, limited missiles)<br/>
+                    • <strong>2x "Bukovel" EW systems</strong> (70-80% effective vs FPV, 40-50% vs Shahed)<br/>
+                    • <strong>Small arms</strong> (unlimited, 300-500m effective range)
+                </div>
+
+                <div class="constraints">
+                    <div class="constraint-item">
+                        <div class="constraint-icon">⚠</div>
+                        <div>Limited expensive munitions - weeks to resupply</div>
                     </div>
-
-                    <div class="strategy-section">
-                        <div class="strategy-title">Стратегічний запит до Omin</div>
-
-                        <div class="strategy-input">
-                            <label class="theater-input-label">Горизонт планування</label>
-                            <select class="theater-input-field" id="planning-horizon">
-                                <option value="all-night">Вся ніч (6 годин)</option>
-                                <option value="3-hours">3 години</option>
-                            </select>
-                        </div>
-
-                        <div class="strategy-input">
-                            <label class="theater-input-label">Допустимий ризик (%)</label>
-                            <input type="range" class="theater-input-field" id="risk-tolerance" min="0" max="30" value="10"
-                                   oninput="document.getElementById('risk-value').textContent = this.value + '%'">
-                            <div style="text-align: center; margin-top: 4px; font-family: monospace; color: var(--amber);">
-                                <span id="risk-value">10%</span>
-                            </div>
-                        </div>
-
-                        <button class="calculate-button" onclick="calculateTheaterStrategy()">
-                            Розрахувати стратегію
-                        </button>
+                    <div class="constraint-item">
+                        <div class="constraint-icon">⚠</div>
+                        <div>3 simultaneous threat groups at different ranges</div>
+                    </div>
+                    <div class="constraint-item">
+                        <div class="constraint-icon">⚠</div>
+                        <div>Critical timing: Lancet 90s, Shahed 7min, FPV 60s</div>
+                    </div>
+                    <div class="constraint-item">
+                        <div class="constraint-icon">⚠</div>
+                        <div>Priorities: Ammo depot > heavy armor > personnel > buildings</div>
+                    </div>
+                    <div class="constraint-item">
+                        <div class="constraint-icon">⚠</div>
+                        <div>Civilian village 800m north - restricted fire sectors</div>
+                    </div>
+                    <div class="constraint-item">
+                        <div class="constraint-icon">⚠</div>
+                        <div>Allied forces 1.5km east - friendly fire risk</div>
                     </div>
                 </div>
 
-                <!-- Right sidebar -->
-                <div class="right-sidebar">
-                    <div class="recommendations-title">Стратегічні рекомендації</div>
-                    <div id="theater-recommendations">
-                        <div style="text-align: center; padding: 40px 20px; color: var(--gray); font-size: 12px;">
-                            Натисніть "Розрахувати стратегію"
+                <!-- Strategy Rankings -->
+                <div class="strategies">
+                    <div class="section-title">Omin Strategy Rankings</div>
+
+                    <div class="strategy-item selected">
+                        <div class="strategy-header">
+                            <div class="strategy-rank">Rank #1 • Recommended</div>
+                            <div class="strategy-coherence">0.8021</div>
+                        </div>
+                        <div class="strategy-name">Strategy 5: Coordinated Defense with Time Optimization</div>
+                        <div class="strategy-details">
+                            <strong>0-60 seconds:</strong> Activate EW "Bukovel" against FPV (attempt disruption/delay)<br/>
+                            <strong>60-90 seconds:</strong> Small arms + ZU-23-2 against remaining FPV<br/>
+                            <strong>90 seconds:</strong> 2x Stinger MANPADS against Lancet (most accurate, US-made)<br/>
+                            <strong>6-7 minutes:</strong> When Shahed at 5km range:<br/>
+                            &nbsp;&nbsp;→ 2x IRIS-T against two most dangerous<br/>
+                            &nbsp;&nbsp;→ All remaining MANPADS + ZU-23-2 against others
+                        </div>
+                        <div class="strategy-meta">
+                            <div class="meta-item">
+                                <span class="meta-label">Cost</span>
+                                <span class="meta-value">$1.1M</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Success Rate</span>
+                                <span class="meta-value">80-85%</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Advantage</span>
+                                <span class="meta-value">Maximizes time</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <!-- Action panel -->
-            <div class="action-panel" id="theater-action-panel">
-                <div class="action-content">
-                    <div class="action-text">
-                        Обрано: <span class="action-strategy" id="theater-selected-strategy">-</span>
+                    <div class="strategy-item">
+                        <div class="strategy-header">
+                            <div class="strategy-rank">Rank #2</div>
+                            <div class="strategy-coherence">0.7771</div>
+                        </div>
+                        <div class="strategy-name">Strategy 4: Risk Acceptance with Minimal Cost</div>
+                        <div class="strategy-details">
+                            FPV: Small arms only (let approach to 300m). Lancet: EW + ZU-23-2, evacuate armor crews.
+                            Shahed: 2x Buk-M1 + 4x MANPADS mixed defense, preserve all IRIS-T.
+                        </div>
+                        <div class="strategy-meta">
+                            <div class="meta-item">
+                                <span class="meta-label">Cost</span>
+                                <span class="meta-value">$300K</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Success Rate</span>
+                                <span class="meta-value">50-60%</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Advantage</span>
+                                <span class="meta-value">Preserves IRIS-T</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="action-buttons">
-                        <button class="btn btn-secondary" onclick="theaterViewDetails()">Деталі</button>
-                        <button class="btn btn-primary" onclick="theaterApprove()">Затвердити директиву</button>
+
+                    <div class="strategy-item">
+                        <div class="strategy-header">
+                            <div class="strategy-rank">Rank #3</div>
+                            <div class="strategy-coherence">0.7729</div>
+                        </div>
+                        <div class="strategy-name">Strategy 1: Priority to Immediate Threats</div>
+                        <div class="strategy-details">
+                            FPV: EW + small arms. Lancet: 2x Stinger + ZU-23-2 backup.
+                            Shahed: 2x IRIS-T guaranteed kill + 2x MANPADS for remaining.
+                        </div>
+                        <div class="strategy-meta">
+                            <div class="meta-item">
+                                <span class="meta-label">Cost</span>
+                                <span class="meta-value">$1.0M</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Success Rate</span>
+                                <span class="meta-value">75-80%</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Risk</span>
+                                <span class="meta-value">2 Shahed penetration</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
 
-            <!-- Loading overlay -->
-            <div class="loading-overlay" id="theater-loading-overlay">
-                <div class="loading-content">
-                    <div class="theater-spinner"></div>
-                    <div class="loading-text">Omin обробляє театральний сценарій...</div>
-                    <div class="loading-text" style="margin-top: 8px; color: var(--amber);">
-                        <span id="theater-loading-time">0.0</span>s
+                    <div class="strategy-item">
+                        <div class="strategy-header">
+                            <div class="strategy-rank">Rank #4</div>
+                            <div class="strategy-coherence">0.7542</div>
+                        </div>
+                        <div class="strategy-name">Strategy 3: Layered Defense with Resource Conservation</div>
+                        <div class="strategy-details">
+                            FPV: EW only (70-80% effective, zero cost). Lancet: 2x Igla MANPADS + ZU-23-2 backup.
+                            Shahed: 2x IRIS-T + 2x Buk-M1, preserve 1 Buk in reserve.
+                        </div>
+                        <div class="strategy-meta">
+                            <div class="meta-item">
+                                <span class="meta-label">Cost</span>
+                                <span class="meta-value">$800K</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Success Rate</span>
+                                <span class="meta-value">65-70%</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Advantage</span>
+                                <span class="meta-value">Balanced approach</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
 
-            <!-- Theater Mission Results Overlay -->
-            <div class="theater-results-overlay hidden" id="theater-results-overlay">
-                <div class="theater-results-container">
-                    <div class="theater-results-content">
-                        <div class="success-header">
-                            <div class="success-icon">✓</div>
-                            <div class="success-title">Директива затверджена та виконана</div>
-                            <div class="success-subtitle">Театральна стратегія реалізована згідно з рекомендацією Omin</div>
+                    <div class="strategy-item">
+                        <div class="strategy-header">
+                            <div class="strategy-rank">Rank #5</div>
+                            <div class="strategy-coherence">0.6891</div>
                         </div>
-
-                        <div class="theater-results-grid">
-                            <div class="theater-stat-card theater-stat-primary">
-                                <div class="stat-label">Нічна оборона</div>
-                                <div class="stat-value" id="theater-result-waves">4/5 хвиль</div>
-                                <div class="stat-check">✓ 80% перехоплення</div>
+                        <div class="strategy-name">Strategy 2: Protect Ammunition Depot at All Costs</div>
+                        <div class="strategy-details">
+                            Shahed: 4x IRIS-T for 100% destruction guarantee. Lancet: EW + ZU-23-2 + small arms, evacuate armor.
+                            FPV: Small arms only and hope. Prioritizes 400 tons ammunition over all else.
+                        </div>
+                        <div class="strategy-meta">
+                            <div class="meta-item">
+                                <span class="meta-label">Cost</span>
+                                <span class="meta-value">$2.0M</span>
                             </div>
-
-                            <div class="theater-stat-card">
-                                <div class="stat-label">Загальні витрати</div>
-                                <div class="stat-value" id="theater-result-cost">$4.2M</div>
-                                <div class="stat-detail" id="theater-result-regions">3 регіони захищено</div>
+                            <div class="meta-item">
+                                <span class="meta-label">Success Rate</span>
+                                <span class="meta-value">95% depot, 40% armor</span>
                             </div>
-
-                            <div class="theater-stat-card">
-                                <div class="stat-label">Резерви до ранку</div>
-                                <div class="stat-value" id="theater-result-reserve">68%</div>
-                                <div class="stat-detail">Готові до наступної доби</div>
+                            <div class="meta-item">
+                                <span class="meta-label">Risk</span>
+                                <span class="meta-value">Depletes IRIS-T</span>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="theater-regional-breakdown">
-                            <div class="regional-title">Регіональні результати</div>
-                            <div class="regional-grid">
-                                <div class="regional-card">
-                                    <div class="regional-name">Миколаївська обл.</div>
-                                    <div class="regional-result">✓ 4/4 загроз</div>
-                                    <div class="regional-systems" id="regional-mykolaiv">2x IRIS-T використано</div>
-                                </div>
-                                <div class="regional-card">
-                                    <div class="regional-name">Одеська обл.</div>
-                                    <div class="regional-result">✓ Резерв збережено</div>
-                                    <div class="regional-systems" id="regional-odesa">32/32 ракети готові</div>
-                                </div>
-                                <div class="regional-card">
-                                    <div class="regional-name">Херсонська обл.</div>
-                                    <div class="regional-result">✓ Координація РЕБ</div>
-                                    <div class="regional-systems" id="regional-kherson">Buk-M1 + EW активні</div>
-                                </div>
-                            </div>
+                    <div class="strategy-item">
+                        <div class="strategy-header">
+                            <div class="strategy-rank">Rank #6 • Not Recommended</div>
+                            <div class="strategy-coherence">0.4127</div>
                         </div>
-
-                        <div class="debrief-section">
-                            <div class="debrief-title">Валідація стратегічного рішення Omin</div>
-                            <div class="debrief-grid">
-                                <div class="debrief-item">
-                                    <div class="debrief-label">Когерентність стратегії</div>
-                                    <div class="debrief-value" id="theater-result-coherence">0.8367</div>
-                                </div>
-                                <div class="debrief-item">
-                                    <div class="debrief-label">Прогноз успіху Omin</div>
-                                    <div class="debrief-value" id="theater-result-predicted">75-80%</div>
-                                </div>
-                                <div class="debrief-item">
-                                    <div class="debrief-label">Фактичний результат</div>
-                                    <div class="debrief-value debrief-success" id="theater-result-actual">78%</div>
-                                </div>
-                                <div class="debrief-item">
-                                    <div class="debrief-label">Час виконання</div>
-                                    <div class="debrief-value" id="theater-result-duration">6 годин</div>
-                                </div>
-                            </div>
-                            <div class="debrief-conclusion">
-                                <strong>Висновок:</strong> Театральна стратегія з когерентністю 0.83+ забезпечила оптимальний баланс
-                                між захистом критичних об'єктів та збереженням оперативного резерву. Прогноз Omin підтверджено
-                                результатами нічної оборони.
-                            </div>
+                        <div class="strategy-name">Strategy 6: Maximum Fire (Panic Response)</div>
+                        <div class="strategy-details">
+                            Use EVERYTHING simultaneously: all IRIS-T, all Buk, all MANPADS, EW, ZU-23-2, small arms.
+                            Fire at all targets at once. Leaves zero defenses for tomorrow's attack.
                         </div>
-
-                        <div class="button-group" style="margin-top: 24px;">
-                            <button class="secondary-button" onclick="closeTheaterResults()">Закрити</button>
-                            <button class="action-button" onclick="resetTheater()">Нова стратегія</button>
+                        <div class="strategy-meta">
+                            <div class="meta-item">
+                                <span class="meta-label">Cost</span>
+                                <span class="meta-value">$3.5M+</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Success Rate</span>
+                                <span class="meta-value">95%+</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Fatal Flaw</span>
+                                <span class="meta-value">Zero future defense</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <script>
-        // ==================== PASSWORD PROTECTION ====================
-
-        (function() {
-            const correctPassword = 'OMINDefense2025!';
-            const sessionKey = 'omin_demo_authenticated';
-
-            // Check if already authenticated this session
-            if (sessionStorage.getItem(sessionKey) !== 'true') {
-                const entered = prompt('Demo Access Password:');
-                if (entered !== correctPassword) {
-                    document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#000;color:#f1f5f9;font-family:monospace;">Access Denied</div>';
-                    throw new Error('Unauthorized');
-                }
-                sessionStorage.setItem(sessionKey, 'true');
-            }
-        })();
-
-        // ==================== ANALYTICS TRACKING ====================
-
-        function trackEvent(category, action, label) {
-            const event = {
-                timestamp: new Date().toISOString(),
-                category: category,
-                action: action,
-                label: label,
-                userAgent: navigator.userAgent
-            };
-
-            console.log('Analytics:', event);
-
-            // Store locally to see engagement
-            const events = JSON.parse(localStorage.getItem('omin_demo_events') || '[]');
-            events.push(event);
-            localStorage.setItem('omin_demo_events', JSON.stringify(events));
-        }
-
-        // ==================== ROLE SWITCHING ====================
-
-        let currentRole = 'battery';
-
-        function switchRole(role) {
-            currentRole = role;
-            trackEvent('Navigation', 'Switch Role', role);
-
-            // Update button states
-            document.querySelectorAll('.role-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-
-            // Switch views
-            document.getElementById('battery-view').classList.toggle('active', role === 'battery');
-            document.getElementById('theater-view').classList.toggle('active', role === 'theater');
-        }
-
-
-        // ==================== BATTERY COMMANDER FUNCTIONS ====================
-
-        let batteryStep = 1;
-        let batterySelectedRec = 0;
-        let currentBatteryData = null;
-
-        function updateBatterySteps(step) {
-            batteryStep = step;
-            document.getElementById('battery-step1').className = step >= 1 ? 'step completed' : 'step';
-            document.getElementById('battery-step2').className = step >= 2 ? 'step completed' : step === 2 ? 'step active-step' : 'step';
-            document.getElementById('battery-step3').className = step >= 3 ? 'step completed' : step === 3 ? 'step active-step' : 'step';
-        }
-
-        // ==================== MOCKED API RESPONSE GENERATOR ====================
-
-        function generateMockedResponse(threatType, threatCount, threatRange, threatTarget) {
-            // Generate realistic recommendations based on actual doctrine service templates
-            const recommendations = [];
-
-            const targetDesc = threatTarget === 'ammo' ? 'Склад боєприпасів (400 тонн)' :
-                              threatTarget === 'command' ? 'Командний пункт' :
-                              'Енергетична інфраструктура';
-
-            const timeToImpact = (threatRange / 185) * 60; // Assuming 185 km/h speed
-
-            // Option 1: Wait for optimal range (highest coherence if range > 12km)
-            if (threatRange > 12 && timeToImpact > 3) {
-                const optimalRange = 12;
-                const waitTime = ((threatRange - optimalRange) / 185 * 60).toFixed(1);
-                recommendations.push({
-                    rank: 1,
-                    coherence: 0.8021,
-                    title: 'Чекати оптимальної дальності',
-                    description: `Чекати ${waitTime} хвилин до дальності ${optimalRange}км:\n• 2x IRIS-T по ${threatCount}x ${threatType}\n• Вища ефективність на середній дистанції (88%)\n• Зберегти резерв: 4x IRIS-T, 3x Buk-M1, 8x Stinger\n• Якщо прорив: Buk-M1 готовий\n\nПЕРЕВАГИ:\n• 88% ефективність (вища ніж дальня дистанція)\n• Економія дорогих ракет\n• Множинні шари оборони\n\nРИЗИКИ:\n• Менше часу на повторну атаку якщо промах\n• Загроза ближче до захищеного об'єкту`,
-                    template_id: 'wait_optimal_range',
-                    estimated_cost: 1000000,
-                    estimated_success_rate: 88,
-                    time: `Чекати ${waitTime}хв`
-                });
-            }
-
-            // Option 2: Immediate long range defense
-            if (threatRange > 15) {
-                recommendations.push({
-                    rank: recommendations.length + 1,
-                    coherence: 0.7845,
-                    title: 'Негайна оборона на дальній дистанції',
-                    description: `Використати IRIS-T зараз на максимальній дальності:\n• ${threatCount}x IRIS-T по ${threatCount}x ${threatType}\n• Відстань ураження: ${threatRange}км\n• Час до пуску: 2-3 хвилини\n• Зберегти резерв: 2x IRIS-T, всі інші системи\n\nПЕРЕВАГИ:\n• Знищуємо загрозу на максимальній відстані\n• Більше часу на повторну атаку якщо промах\n• Захищаємо ${targetDesc}\n\nРИЗИКИ:\n• Нижча ефективність на дальній дистанції (82% vs 92% на ближчій)\n• Витрачаємо дорогі ракети`,
-                    template_id: 'immediate_long_range',
-                    estimated_cost: threatCount * 500000,
-                    estimated_success_rate: 82,
-                    time: 'Негайно'
-                });
-            }
-
-            // Option 3: Layered defense
-            if (threatCount >= 3) {
-                recommendations.push({
-                    rank: recommendations.length + 1,
-                    coherence: 0.7234,
-                    title: 'Ешелонована оборона',
-                    description: `Три рівні оборони з різними системами:\n• РІВЕНЬ 1 (5км): 4x Stinger - перша спроба\n• РІВЕНЬ 2 (12км): 2x Buk-M1 - якщо прорив\n• РІВЕНЬ 3 (20км): 2x IRIS-T - останній резерв\n\nПЕРЕВАГИ:\n• Множинні шанси перехоплення\n• Використовуємо дешеві системи спочатку\n• Зберігаємо найдорожчі для критичних моментів\n\nРИЗИКИ:\n• Складна координація трьох рівнів\n• Покладаємося на менш надійні системи спочатку`,
-                    template_id: 'layered_defense',
-                    estimated_cost: 520000,
-                    estimated_success_rate: 76,
-                    time: 'Варіабельно'
-                });
-            }
-
-            // Option 4: Request brigade coordination
-            recommendations.push({
-                rank: recommendations.length + 1,
-                coherence: 0.6892,
-                title: 'Запросити координацію з бригадою',
-                description: `Координація з бригадою для оптимального розподілу ресурсів:\n• Моє використання: МІНІМАЛЬНЕ - Stinger резерв\n• Запит підтримки від: Сусідня батарея, РЕБ підтримка\n• Очікуваний час відповіді: 3-4 хвилини\n\nМІЙ ВКЛАД:\n• Stinger + Buk-M1 - готові до використання після координації\n• Зберігаю 85% резерву\n\nКООРДИНАЦІЯ ДОЗВОЛЯЄ:\n• Оптимальний розподіл ресурсів по батареях\n• Уникнути дублювання зусиль\n• Зберегти мої обмежені ресурси\n\nРИЗИКИ:\n• Час на координацію: 3-4 хвилини (загроза на ${threatRange}км)\n• Підтримка може не встигнути`,
-                template_id: 'request_coordination',
-                estimated_cost: 160000,
-                estimated_success_rate: 72,
-                time: '3-4хв відповідь'
-            });
-
-            // Option 5: Maximum protection (always available but low coherence)
-            recommendations.push({
-                rank: recommendations.length + 1,
-                coherence: 0.6234,
-                title: 'Максимальний захист (можливе перевитрачання)',
-                description: `Використати МАКСИМУМ доступних ресурсів:\n• 6x IRIS-T (використати 100%)\n• 3x Buk-M1 (резерв)\n• Всі допоміжні системи готові\n\nОБГРУНТУВАННЯ:\n• Ціль "${targetDesc}" має пріоритет КРИТИЧНИЙ\n• Гарантований захист важливіший за збереження боєприпасів\n• ${threatCount} загроз потребують максимальної відповіді\n\nПЕРЕВАГИ:\n• 94% ймовірність повного знищення загроз\n• Максимальна впевненість в захисті\n\nРИЗИКИ КРИТИЧНІ:\n• Витрачаємо 75% нічного боєзапасу на одну загрозу\n• Залишається мінімальний резерв на наступні атаки`,
-                template_id: 'maximum_protection',
-                estimated_cost: 3300000,
-                estimated_success_rate: 94,
-                time: 'Негайно'
-            });
-
-            // Option 6: Minimal engagement (lowest coherence)
-            recommendations.push({
-                rank: recommendations.length + 1,
-                coherence: 0.5123,
-                title: 'Мінімальне залучення (зберегти резерви)',
-                description: `Мінімізувати використання дорогих систем:\n• 2x Buk-M1 спроба перехоплення\n• IRIS-T зберігти для критичніших загроз\n• Прийняти ризик часткового прориву\n\nОБГРУНТУВАННЯ:\n• Очікується 2-3 наступні хвилі атак цієї ночі\n• Поповнення боєприпасів через 24+ години\n• Потрібно зберегти спроможність на всю ніч\n\nРИЗИКИ ВИСОКІ:\n• Тільки 68% ймовірність успішного перехоплення\n• Можливе пошкодження об'єкту "${targetDesc}"\n• Командування може не схвалити мінімальний підхід`,
-                template_id: 'minimal_engagement',
-                estimated_cost: 200000,
-                estimated_success_rate: 68,
-                time: '3-4хв'
-            });
-
-            // Sort by coherence (descending)
-            recommendations.sort((a, b) => b.coherence - a.coherence);
-
-            // Update ranks after sorting
-            recommendations.forEach((rec, i) => {
-                rec.rank = i + 1;
-            });
-
-            return {
-                success: true,
-                ranked_recommendations: recommendations,
-                generation_time_ms: 847,
-                arbiter_latency_ms: 723
-            };
-        }
-
-        async function processBatteryInput() {
-            const threatType = document.getElementById('threat-type').value;
-            const threatTarget = document.getElementById('threat-target').value;
-            const threatCount = parseInt(document.getElementById('threat-count').value);
-            const threatRange = parseFloat(document.getElementById('threat-range').value);
-
-            if (!threatType || !threatTarget) {
-                alert('Будь ласка, оберіть тип цілі та ймовірну ціль');
-                return;
-            }
-
-            trackEvent('Battery', 'Process', `${threatType} x${threatCount} at ${threatRange}km`);
-
-            document.getElementById('battery-input').classList.add('hidden');
-            document.getElementById('battery-loading').classList.remove('hidden');
-            updateBatterySteps(2);
-
-            let loadingTime = 0;
-            const timer = setInterval(() => {
-                loadingTime += 0.1;
-                document.getElementById('battery-loading-time').textContent = loadingTime.toFixed(1);
-            }, 100);
-
-            // Variable timing based on complexity
-            const processingTime = 500 + (threatCount * 50) + (threatRange > 20 ? 200 : 0) + Math.random() * 300;
-
-            setTimeout(() => {
-                clearInterval(timer);
-
-                // Generate mocked response
-                const mockData = generateMockedResponse(threatType, threatCount, threatRange, threatTarget);
-                currentBatteryData = mockData;
-
-                showBatteryResults(mockData);
-            }, processingTime);
-        }
-
-        function showBatteryResults(apiData) {
-            document.getElementById('battery-loading').classList.add('hidden');
-            document.getElementById('battery-results').classList.remove('hidden');
-
-            // Update results metadata
-            document.getElementById('results-count').textContent = apiData.ranked_recommendations.length;
-            document.getElementById('results-time').textContent = (apiData.generation_time_ms / 1000).toFixed(1);
-
-            // Convert API data to display format
-            const recommendations = apiData.ranked_recommendations.map(rec => ({
-                rank: rec.rank,
-                score: rec.coherence,
-                title: rec.title,
-                details: rec.description.substring(0, 250) + '...',
-                cost: rec.estimated_cost >= 1000000 ?
-                      `$${(rec.estimated_cost / 1000000).toFixed(1)}M` :
-                      `$${(rec.estimated_cost / 1000).toFixed(0)}K`,
-                success: `${rec.estimated_success_rate.toFixed(0)}%`,
-                time: rec.time
-            }));
-
-            const container = document.getElementById('battery-recommendations');
-            container.innerHTML = recommendations.map((rec, i) => `
-                <div class="recommendation ${i === 0 ? 'selected' : ''}" onclick="selectBatteryRec(${i})">
-                    <div class="rec-header">
-                        <div class="rec-rank ${i === 0 ? 'top-rank' : ''}">Рекомендація #${rec.rank} ${i === 0 ? '(ОПТИМАЛЬНА)' : ''}</div>
-                        <div class="rec-score">${rec.score.toFixed(4)}</div>
-                    </div>
-                    <div class="rec-title">${rec.title}</div>
-                    <div class="rec-details">${rec.details}</div>
-                    <div class="rec-meta">
-                        <div class="meta-item">
-                            <span class="meta-label">Вартість</span>
-                            <span class="meta-value">${rec.cost}</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="meta-label">Успіх</span>
-                            <span class="meta-value">${rec.success}</span>
-                        </div>
-                        <div class="meta-item">
-                            <span class="meta-label">Час</span>
-                            <span class="meta-value">${rec.time}</span>
-                        </div>
-                    </div>
+    <!-- Technical Specs -->
+    <section class="specs">
+        <div class="container">
+            <div class="section-title">Technical Specifications</div>
+            <div class="specs-grid">
+                <div class="spec-block">
+                    <div class="spec-block-title">System Architecture</div>
+                    <ul class="spec-list">
+                        <li class="spec-item">
+                            <span class="spec-key">Model Size</span>
+                            <span class="spec-value">26 MB</span>
+                        </li>
+                        <li class="spec-item">
+                            <span class="spec-key">Deployment</span>
+                            <span class="spec-value">Air-Gapped / Edge</span>
+                        </li>
+                        <li class="spec-item">
+                            <span class="spec-key">Decision Latency</span>
+                            <span class="spec-value">&lt;1 Second</span>
+                        </li>
+                        <li class="spec-item">
+                            <span class="spec-key">Cloud Dependency</span>
+                            <span class="spec-value">Zero</span>
+                        </li>
+                        <li class="spec-item">
+                            <span class="spec-key">Hardware Requirements</span>
+                            <span class="spec-value">8GB RAM, 4 cores</span>
+                        </li>
+                    </ul>
                 </div>
-            `).join('') + '<button class="action-button" id="execute-button" onclick="showBatteryExecute()">Виконати рекомендацію #1</button>';
-        }
 
-        function selectBatteryRec(index) {
-            batterySelectedRec = index;
-            trackEvent('Battery', 'Select', `Recommendation ${index + 1}`);
-
-            document.querySelectorAll('#battery-recommendations .recommendation').forEach((rec, i) => {
-                rec.classList.toggle('selected', i === index);
-            });
-
-            // Update execute button text to reflect selected recommendation
-            const executeButton = document.getElementById('execute-button');
-            if (executeButton) {
-                executeButton.textContent = `Виконати рекомендацію #${index + 1}`;
-            }
-        }
-
-        function showBatteryExecute() {
-            document.getElementById('battery-results').classList.add('hidden');
-            document.getElementById('battery-execute').classList.remove('hidden');
-            updateBatterySteps(3);
-
-            const threatType = document.getElementById('threat-type').value;
-            const threatCount = document.getElementById('threat-count').value;
-            const selectedRec = currentBatteryData.ranked_recommendations[batterySelectedRec];
-
-            // Generate radio command based on selected recommendation
-            let command = `Позивний Сокіл-1, Сокіл-2:
-• Обрано стратегію: ${selectedRec.title}
-• ${threatCount}x ${threatType}, азимут 015
-`;
-
-            // Customize command based on template type
-            if (selectedRec.template_id === 'wait_optimal_range') {
-                command += `• ОЧІКУЄМО дальності 12км (${Math.round((22 - 12) / 185 * 60)} хвилин)
-• Потім пуск: 2x IRIS-T ракети`;
-            } else if (selectedRec.template_id === 'immediate_long_range') {
-                command += `• Негайний пуск на поточній дальності
-• ${Math.min(threatCount, 4)}x IRIS-T ракети`;
-            } else if (selectedRec.template_id === 'layered_defense') {
-                command += `• Рівень 1: Stinger готовий (5км)
-• Рівень 2: Buk-M1 готовий (12км)
-• Рівень 3: IRIS-T резерв (20км)`;
-            } else if (selectedRec.template_id === 'request_coordination') {
-                command += `• Запит координації до бригади
-• Очікування відповіді: 3-4 хвилини
-• Наші системи в готовності`;
-            } else if (selectedRec.template_id === 'maximum_protection') {
-                command += `• МАКСИМАЛЬНЕ залучення
-• 6x IRIS-T + 3x Buk-M1 готові
-• Всі системи в бойовій готовності`;
-            } else if (selectedRec.template_id === 'minimal_engagement') {
-                command += `• Мінімальне залучення
-• 2x Buk-M1 тільки
-• IRIS-T зберігається для наступних хвиль`;
-            }
-
-            command += `\n\nПідтверджую виконання.`;
-
-            document.getElementById('battery-radio-command').textContent = command;
-        }
-
-        function batteryExecute() {
-            const threatType = document.getElementById('threat-type').value;
-            const threatCount = parseInt(document.getElementById('threat-count').value);
-            const selectedRec = currentBatteryData.ranked_recommendations[batterySelectedRec];
-
-            trackEvent('Battery', 'Execute', `${selectedRec.title} (coherence: ${selectedRec.coherence.toFixed(4)})`);
-
-            // Hide execute screen, show results
-            document.getElementById('battery-execute').classList.add('hidden');
-            document.getElementById('battery-mission-results').classList.remove('hidden');
-
-            // Populate results based on selected recommendation
-            document.getElementById('result-threats').textContent = `${threatCount}/${threatCount} ${threatType}`;
-
-            const costFormatted = selectedRec.estimated_cost >= 1000000 ?
-                                 `$${(selectedRec.estimated_cost / 1000000).toFixed(1)}M` :
-                                 `$${(selectedRec.estimated_cost / 1000).toFixed(0)}K`;
-            document.getElementById('result-cost').textContent = costFormatted;
-
-            // Calculate systems used based on template
-            let systemsUsed = '';
-            if (selectedRec.template_id === 'wait_optimal_range' || selectedRec.template_id === 'immediate_long_range') {
-                systemsUsed = `${Math.min(threatCount, 2)}x IRIS-T ракети`;
-            } else if (selectedRec.template_id === 'layered_defense') {
-                systemsUsed = 'Stinger + Buk-M1 + IRIS-T';
-            } else if (selectedRec.template_id === 'request_coordination') {
-                systemsUsed = 'Координація з бригадою';
-            } else if (selectedRec.template_id === 'maximum_protection') {
-                systemsUsed = '6x IRIS-T + 3x Buk-M1';
-            } else if (selectedRec.template_id === 'minimal_engagement') {
-                systemsUsed = '2x Buk-M1';
-            }
-            document.getElementById('result-systems').textContent = systemsUsed;
-
-            // Calculate reserves based on coherence (higher coherence = better resource management)
-            const reservePercent = Math.round(selectedRec.coherence * 85); // 0.8 coherence → ~68% reserves
-            document.getElementById('result-reserve').textContent = `${reservePercent}%`;
-
-            // Populate debrief
-            document.getElementById('result-coherence').textContent = selectedRec.coherence.toFixed(4);
-            document.getElementById('result-predicted').textContent = `${selectedRec.estimated_success_rate}%`;
-
-            // Simulate engagement time based on template
-            let engagementTime = '3хв 24с';
-            if (selectedRec.template_id === 'wait_optimal_range') {
-                engagementTime = `${Math.round((22 - 12) / 185 * 60)}хв 45с`;
-            } else if (selectedRec.template_id === 'immediate_long_range') {
-                engagementTime = '2хв 15с';
-            } else if (selectedRec.template_id === 'request_coordination') {
-                engagementTime = '4хв 30с';
-            }
-            document.getElementById('result-time').textContent = engagementTime;
-        }
-
-        function batteryGoBack() {
-            document.getElementById('battery-execute').classList.add('hidden');
-            document.getElementById('battery-results').classList.remove('hidden');
-            updateBatterySteps(2);
-        }
-
-        function resetBattery() {
-            // Hide all sections
-            document.getElementById('battery-execute').classList.add('hidden');
-            document.getElementById('battery-mission-results').classList.add('hidden');
-            document.getElementById('battery-results').classList.add('hidden');
-            document.getElementById('battery-loading').classList.add('hidden');
-
-            // Show input section
-            document.getElementById('battery-input').classList.remove('hidden');
-            updateBatterySteps(1);
-
-            // Reset selection
-            batterySelectedRec = 0;
-        }
-
-        // ==================== THEATER COMMANDER FUNCTIONS ====================
-
-        let theaterSelectedStrategy = null;
-
-        function calculateTheaterStrategy() {
-            trackEvent('Theater', 'Calculate', 'Strategy Request');
-            document.getElementById('theater-loading-overlay').classList.add('active-overlay');
-
-            let loadingTime = 0;
-            const timer = setInterval(() => {
-                loadingTime += 0.1;
-                document.getElementById('theater-loading-time').textContent = loadingTime.toFixed(1);
-            }, 100);
-
-            setTimeout(() => {
-                clearInterval(timer);
-                document.getElementById('theater-loading-overlay').classList.remove('active-overlay');
-                showTheaterRecommendations();
-            }, 2800);
-        }
-
-        function showTheaterRecommendations() {
-            const recommendations = [
-                {
-                    rank: 1,
-                    score: 0.8367,
-                    name: 'Розумний розподіл ресурсів',
-                    summary: 'Хвиля 1: 2x IRIS-T (мінімально). Зберегти 45+ ракет на хвилі 2-5. Баланс захисту та збереження спроможності.',
-                    cost: '$4-6M',
-                    reserve: '68%',
-                    success: '75-80%',
-                    coverage: 'Вся ніч'
-                },
-                {
-                    rank: 2,
-                    score: 0.7821,
-                    name: 'Пріоритизація критичних об\'єктів',
-                    summary: 'Пріоритет: Одеса (енергетика) + Херсон (командування). Миколаїв помірний захист. Прийняти ризик на другорядних.',
-                    cost: '$3-4M',
-                    reserve: '75%',
-                    success: '60-70%',
-                    coverage: 'До ранку'
-                },
-                {
-                    rank: 3,
-                    score: 0.7234,
-                    name: 'Координація з сусідніми регіонами',
-                    summary: 'Запит підтримки від Запорізької ППО. Розподіл навантаження. Спільна оборона південного напрямку.',
-                    cost: '$2-3M',
-                    reserve: '82%',
-                    success: '70-75%',
-                    coverage: 'Залежить'
-                }
-            ];
-
-            const container = document.getElementById('theater-recommendations');
-            container.innerHTML = recommendations.map((rec, i) => `
-                <div class="recommendation-card ${i === 0 ? 'selected-card' : ''}" onclick="selectTheaterStrategy(${i})">
-                    <div class="rec-header">
-                        <div class="rec-rank ${i === 0 ? 'top-rank' : ''}">Стратегія #${rec.rank}</div>
-                        <div class="rec-score">${rec.score.toFixed(4)}</div>
-                    </div>
-                    <div class="rec-name">${rec.name}</div>
-                    <div class="rec-summary">${rec.summary}</div>
-                    <div class="rec-metrics">
-                        <div class="metric">
-                            <span class="metric-label">Вартість</span>
-                            <span class="metric-value">${rec.cost}</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric-label">Резерв</span>
-                            <span class="metric-value">${rec.reserve}</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric-label">Успіх</span>
-                            <span class="metric-value">${rec.success}</span>
-                        </div>
-                        <div class="metric">
-                            <span class="metric-label">Покриття</span>
-                            <span class="metric-value">${rec.coverage}</span>
-                        </div>
-                    </div>
+                <div class="spec-block">
+                    <div class="spec-block-title">Operational Capability</div>
+                    <ul class="spec-list">
+                        <li class="spec-item">
+                            <span class="spec-key">Simultaneous Threats</span>
+                            <span class="spec-value">150+</span>
+                        </li>
+                        <li class="spec-item">
+                            <span class="spec-key">Coherence Range</span>
+                            <span class="spec-value">0.72-0.85</span>
+                        </li>
+                        <li class="spec-item">
+                            <span class="spec-key">Language Support</span>
+                            <span class="spec-value">EN, UK, PL, AR, ET</span>
+                        </li>
+                        <li class="spec-item">
+                            <span class="spec-key">Integration</span>
+                            <span class="spec-value">REST API / JSON</span>
+                        </li>
+                        <li class="spec-item">
+                            <span class="spec-key">Deployment Timeline</span>
+                            <span class="spec-value">2 Weeks</span>
+                        </li>
+                    </ul>
                 </div>
-            `).join('');
+            </div>
+        </div>
+    </section>
 
-            selectTheaterStrategy(0);
-        }
+    <!-- Background -->
+    <section class="background">
+        <div class="container">
+            <div class="section-title">Development Provenance</div>
+            <ul class="credential-list">
+                <li class="credential-item">
+                    <div class="credential-icon">→</div>
+                    <div>
+                        <div class="credential-text">Defense Digital Service (DDS)</div>
+                        <div class="credential-detail">Pentagon-level software development team</div>
+                    </div>
+                </li>
+                <li class="credential-item">
+                    <div class="credential-icon">→</div>
+                    <div>
+                        <div class="credential-text">NATO Weapons Exchange Platform</div>
+                        <div class="credential-detail">Built weapons fulfillment system at NATO Headquarters</div>
+                    </div>
+                </li>
+                <li class="credential-item">
+                    <div class="credential-icon">→</div>
+                    <div>
+                        <div class="credential-text">Allied Nation Operations</div>
+                        <div class="credential-detail">Direct experience with Ukrainian, Polish, and Baltic defense teams</div>
+                    </div>
+                </li>
+                <li class="credential-item">
+                    <div class="credential-icon">→</div>
+                    <div>
+                        <div class="credential-text">TRAUT Infrastructure</div>
+                        <div class="credential-detail">Semantic infrastructure and constraint geometry platforms</div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
 
-        function selectTheaterStrategy(index) {
-            theaterSelectedStrategy = index;
-            trackEvent('Theater', 'Select', `Strategy ${index + 1}`);
-
-            document.querySelectorAll('.recommendation-card').forEach((card, i) => {
-                card.classList.toggle('selected-card', i === index);
-            });
-
-            const strategyNames = [
-                'Розумний розподіл ресурсів (рекомендовано)',
-                'Пріоритизація критичних об\'єктів',
-                'Координація з сусідніми регіонами'
-            ];
-            document.getElementById('theater-selected-strategy').textContent = strategyNames[index];
-            document.getElementById('theater-action-panel').classList.add('active-panel');
-        }
-
-        function theaterViewDetails() {
-            const detailTexts = [
-                'ДЕТАЛІ СТРАТЕГІЇ #1:\n\nРегіональний розподіл:\n• Миколаїв: 2x IRIS-T на хвилю 1\n• Одеса: РЕЗЕРВ (40+ ракет)\n• Херсон: Координація з РЕБ\n\nТаймінг:\n• 23:15-00:00: Хвиля 1 (мінімальні ресурси)\n• 00:30-02:00: Хвиля 2 (основна оборона)\n• 02:00-06:00: Хвилі 3-5 (збережений резерв)\n\nОчікуваний результат:\n• 75-80% перехоплення по всіх хвилях\n• 68% боєприпасів до ранку',
-
-                'ДЕТАЛІ СТРАТЕГІЇ #2:\n\nПріоритизація:\n• КРИТИЧНО: Одеса (енергетика)\n• ВИСОКО: Херсон (командування)\n• СЕРЕДНЬО: Миколаїв\n\nРесурси:\n• Одеса: 16x Patriot готові\n• Херсон: Buk-M1 + РЕБ\n• Миколаїв: Мінімальний захист\n\nРизики:\n• Можливі втрати в Миколаєві\n• Високий політичний ризик',
-
-                'ДЕТАЛІ СТРАТЕГІЇ #3:\n\nКоординація:\n• Запит до Запорізької ППО\n• Спільна радіолокація\n• Розподіл цілей\n\nОчікувана відповідь: 15-20хв\n\nПереваги:\n• Економія ресурсів\n• Вища ефективність\n\nРизики:\n• Затримка координації\n• Залежність від сусідів'
-            ];
-
-            alert(detailTexts[theaterSelectedStrategy]);
-        }
-
-        function theaterApprove() {
-            trackEvent('Theater', 'Approve', `Strategy ${theaterSelectedStrategy + 1}`);
-
-            const strategies = [
-                {
-                    name: 'Розумний розподіл ресурсів',
-                    coherence: 0.8367,
-                    cost: '$4.2M',
-                    reserve: '68%',
-                    predicted: '75-80%',
-                    actual: '78%',
-                    waves: '4/5 хвиль',
-                    mykolaiv: '2x IRIS-T використано',
-                    odesa: '32/32 ракети готові',
-                    kherson: 'Buk-M1 + EW активні'
-                },
-                {
-                    name: 'Пріоритизація критичних об\'єктів',
-                    coherence: 0.7821,
-                    cost: '$3.4M',
-                    reserve: '75%',
-                    predicted: '60-70%',
-                    actual: '65%',
-                    waves: '3/5 хвиль',
-                    mykolaiv: 'Мінімальний захист',
-                    odesa: '16x Patriot використано',
-                    kherson: 'Повна оборона активна'
-                },
-                {
-                    name: 'Координація з сусідніми регіонами',
-                    coherence: 0.7234,
-                    cost: '$2.8M',
-                    reserve: '82%',
-                    predicted: '70-75%',
-                    actual: '72%',
-                    waves: '4/5 хвиль',
-                    mykolaiv: 'Запорізька ППО підтримка',
-                    odesa: 'Координована оборона',
-                    kherson: 'Спільна радіолокація'
-                }
-            ];
-
-            const selected = strategies[theaterSelectedStrategy];
-
-            // Show results overlay
-            document.getElementById('theater-results-overlay').classList.remove('hidden');
-            document.getElementById('theater-action-panel').classList.remove('active-panel');
-
-            // Populate results
-            document.getElementById('theater-result-waves').textContent = selected.waves;
-            document.getElementById('theater-result-cost').textContent = selected.cost;
-            document.getElementById('theater-result-reserve').textContent = selected.reserve;
-            document.getElementById('theater-result-coherence').textContent = selected.coherence.toFixed(4);
-            document.getElementById('theater-result-predicted').textContent = selected.predicted;
-            document.getElementById('theater-result-actual').textContent = selected.actual;
-            document.getElementById('theater-result-duration').textContent = '6 годин';
-
-            // Regional breakdown
-            document.getElementById('regional-mykolaiv').textContent = selected.mykolaiv;
-            document.getElementById('regional-odesa').textContent = selected.odesa;
-            document.getElementById('regional-kherson').textContent = selected.kherson;
-        }
-
-        function closeTheaterResults() {
-            document.getElementById('theater-results-overlay').classList.add('hidden');
-        }
-
-        function resetTheater() {
-            document.getElementById('theater-results-overlay').classList.add('hidden');
-            document.getElementById('theater-recommendations').innerHTML = `
-                <div style="text-align: center; padding: 40px 20px; color: var(--gray); font-size: 12px;">
-                    Натисніть "Розрахувати стратегію"
+    <!-- Contact -->
+    <section class="contact">
+        <div class="container">
+            <div class="contact-box">
+                <div class="contact-label">Test with your scenario</div>
+                <h2 class="contact-title">Evaluate Omin decision quality before deployment</h2>
+                <a href="mailto:founder@traut.ai" class="contact-email">founder@traut.ai</a>
+                <div class="contact-info">
+                    Send: Threat scenario + Available weapons + Operational constraints<br/>
+                    Receive: Ranked strategies with coherence scores within 24 hours<br/>
+                    Deploy: 2 weeks if validated, $50K pilot deployment
                 </div>
-            `;
-            theaterSelectedStrategy = null;
-        }
-    </script>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <section class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div>Omin © 2025 TRAUT</div>
+                <div>US-BASED // NATO-ALIGNED</div>
+            </div>
+        </div>
+    </section>
 </body>
 </html>
