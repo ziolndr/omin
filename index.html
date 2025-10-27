@@ -155,10 +155,17 @@
             font-weight: bold;
             font-variant-numeric: tabular-nums;
             margin: 20px 0;
+            display: flex;
+            align-items: baseline;
         }
 
         .cell-timer.faded {
             opacity: 0.2;
+        }
+
+        .timer-min, .timer-sec {
+            min-width: 1.2ch;
+            text-align: right;
         }
 
         .cell-steps {
@@ -530,13 +537,17 @@
                         <div class="comparison-cell">
                             <div class="cell-label">Standard Process</div>
                             <div class="cell-input" id="input-1">4× Shahed-136 / 22km / Ammunition depot (critical)</div>
-                            <div class="cell-timer" id="timer-1">7:00</div>
+                            <div class="cell-timer" id="timer-1">
+                                <span class="timer-min" id="timer-1-min">7</span>:<span class="timer-sec" id="timer-1-sec">00</span>
+                            </div>
                             <div class="cell-steps" id="steps-1"></div>
                         </div>
                         <div class="comparison-cell">
                             <div class="cell-label">OMIN Process</div>
                             <div class="cell-input" id="input-2">4× Shahed-136 / 22km / Ammunition depot (critical)</div>
-                            <div class="cell-timer" id="timer-2">7:00</div>
+                            <div class="cell-timer" id="timer-2">
+                                <span class="timer-min" id="timer-2-min">7</span>:<span class="timer-sec" id="timer-2-sec">00</span>
+                            </div>
                             <div class="cell-steps" id="steps-2"></div>
                             <div class="cell-result" id="result">
                                 <div class="coherence-label">Coherence</div>
@@ -746,13 +757,30 @@
             let t1 = 420, t2 = 420;
             const timer1 = document.getElementById('timer-1');
             const timer2 = document.getElementById('timer-2');
+            const timer1Min = document.getElementById('timer-1-min');
+            const timer1Sec = document.getElementById('timer-1-sec');
+            const timer2Min = document.getElementById('timer-2-min');
+            const timer2Sec = document.getElementById('timer-2-sec');
             
             timer1.classList.remove('faded');
             timer2.classList.remove('faded');
             
+            timer1Min.textContent = '7';
+            timer1Sec.textContent = '00';
+            timer2Min.textContent = '7';
+            timer2Sec.textContent = '00';
+            
             const int = setInterval(() => {
-                timer1.textContent = `${Math.floor(t1/60)}:${(t1%60).toString().padStart(2,'0')}`;
-                timer2.textContent = `${Math.floor(t2/60)}:${(t2%60).toString().padStart(2,'0')}`;
+                const min1 = Math.floor(t1/60);
+                const sec1 = t1 % 60;
+                const min2 = Math.floor(t2/60);
+                const sec2 = t2 % 60;
+                
+                timer1Min.textContent = min1;
+                timer1Sec.textContent = sec1.toString().padStart(2,'0');
+                timer2Min.textContent = min2;
+                timer2Sec.textContent = sec2.toString().padStart(2,'0');
+                
                 t1--; t2--;
                 if (t1 < 0) {
                     clearInterval(int);
