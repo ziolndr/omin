@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OMIN</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -12,7 +15,7 @@
         }
 
         body {
-            font-family: 'Courier New', Courier, monospace;
+            font-family: 'IBM Plex Mono', monospace;
             background: #000;
             color: #fff;
             line-height: 1.6;
@@ -25,7 +28,6 @@
             padding: 60px 30px;
         }
 
-        /* Header */
         .header {
             border-bottom: 2px solid #fff;
             padding-bottom: 20px;
@@ -45,7 +47,6 @@
             font-size: 12px;
         }
 
-        /* Document style headings */
         .doc-number {
             font-size: 11px;
             letter-spacing: 1px;
@@ -67,7 +68,6 @@
             line-height: 1.7;
         }
 
-        /* Section headers */
         .section {
             margin-bottom: 60px;
         }
@@ -82,7 +82,6 @@
             padding-bottom: 8px;
         }
 
-        /* Comparison grid */
         .comparison-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -195,7 +194,6 @@
             line-height: 1.6;
         }
 
-        /* Pricing table */
         .pricing-table {
             border: 2px solid #fff;
             margin-bottom: 60px;
@@ -234,7 +232,6 @@
             line-height: 1.6;
         }
 
-        /* Deployment table */
         .deployment-table {
             border: 2px solid #fff;
             margin-bottom: 60px;
@@ -266,7 +263,6 @@
             line-height: 1.6;
         }
 
-        /* Specification list */
         .spec-list {
             list-style: none;
             margin-bottom: 60px;
@@ -292,7 +288,6 @@
             font-weight: bold;
         }
 
-        /* Text blocks */
         .text-block {
             margin-bottom: 40px;
             font-size: 13px;
@@ -303,7 +298,6 @@
             font-weight: bold;
         }
 
-        /* Operational image */
         .operational-image {
             width: 100%;
             height: auto;
@@ -321,7 +315,6 @@
             margin-bottom: 40px;
         }
 
-        /* Platform vision grid */
         .platform-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -357,7 +350,6 @@
             opacity: 0.8;
         }
 
-        /* Contact section */
         .contact-section {
             margin-top: 80px;
             padding-top: 40px;
@@ -384,7 +376,6 @@
             line-height: 1.7;
         }
 
-        /* Footer */
         .footer {
             margin-top: 80px;
             padding-top: 40px;
@@ -432,22 +423,19 @@
 </head>
 <body>
     <div class="page">
-        <!-- Header -->
         <div class="header">
             <div class="header-title">OMIN</div>
             <div class="header-contact">619-971-9551</div>
         </div>
 
-        <!-- Document -->
         <div class="doc-number">OMIN-001 / DECISION INFRASTRUCTURE</div>
 
         <h1>26MB decision infrastructure for air defense operations</h1>
 
         <div class="subtitle">
-            Processes tactical scenarios in one second. Air-gapped deployment. NATO and Soviet system compatibility. Validating with Ukrainian Armed Forces Q4 2025.
+            Built by former Pentagon DDS PM deployed to IDCC Germany. Created ARBITER for Ukrainian air defense operations. 26MB decision infrastructure. Processes tactical scenarios in one second. Air-gapped. NATO + Soviet system compatibility. Validating with Ukrainian Armed Forces Q4 2025.
         </div>
 
-        <!-- Pricing -->
         <div class="section">
             <div class="section-header">Pricing</div>
             <div class="pricing-table">
@@ -469,19 +457,18 @@
             </div>
         </div>
 
-        <!-- Comparison -->
         <div class="section">
             <div class="section-header">Processing Time</div>
             <div class="comparison-grid">
                 <div class="comparison-cell">
                     <div class="cell-label">Standard Process</div>
-                    <div class="cell-input">4× Shahed-136 / 22km / Ammunition depot (critical)</div>
+                    <div class="cell-input" id="input-1">4× Shahed-136 / 22km / Ammunition depot (critical)</div>
                     <div class="cell-timer" id="timer-1">7:00</div>
                     <div class="cell-steps" id="steps-1"></div>
                 </div>
                 <div class="comparison-cell">
                     <div class="cell-label">OMIN Process</div>
-                    <div class="cell-input">4× Shahed-136 / 22km / Ammunition depot (critical)</div>
+                    <div class="cell-input" id="input-2">4× Shahed-136 / 22km / Ammunition depot (critical)</div>
                     <div class="cell-timer" id="timer-2">7:00</div>
                     <div class="cell-steps" id="steps-2"></div>
                     <div class="cell-result" id="result">
@@ -497,7 +484,6 @@
             </div>
         </div>
 
-        <!-- Platform -->
         <div class="section">
             <div class="section-header">Roadmap</div>
             <div class="platform-grid">
@@ -534,7 +520,6 @@
             </div>
         </div>
 
-        <!-- Deployment -->
         <div class="section">
             <div class="section-header">Deployment</div>
             <div class="deployment-table">
@@ -557,7 +542,6 @@
             </div>
         </div>
 
-        <!-- Technical -->
         <div class="section">
             <div class="section-header">Technical Specification</div>
             <ul class="spec-list">
@@ -572,7 +556,6 @@
             </ul>
         </div>
 
-        <!-- Operational context -->
         <div class="section">
             <div class="section-header">Operational Context</div>
             
@@ -584,7 +567,6 @@
             </div>
         </div>
 
-        <!-- Architecture -->
         <div class="section">
             <div class="section-header">Architecture</div>
             <div class="text-block">
@@ -598,13 +580,38 @@
             </div>
         </div>
 
-        <!-- Footer -->
         <div class="footer">
             Pentagon Defense Digital Service (2022-2024). IDCC Germany deployment. Built ARBITER for tactical decision optimization. Validating with Ukrainian Armed Forces. TRAUT Applied Research.
         </div>
     </div>
 
     <script>
+        const scenarios = [
+            {
+                input: "4× Shahed-136 / 22km / Ammunition depot (critical)",
+                strategy: "Wait 3 minutes for optimal range (12km) → Deploy 2× IRIS-T missiles",
+                outcome: "88% success / $1.0M cost / 68% reserves preserved",
+                score: "0.80",
+                bar: "80%"
+            },
+            {
+                input: "2× Iskander-M / 85km / Command post (high value)",
+                strategy: "Immediate intercept at 45km → Deploy 3× Patriot PAC-3 missiles",
+                outcome: "94% success / $3.2M cost / 52% reserves preserved",
+                score: "0.87",
+                bar: "87%"
+            },
+            {
+                input: "6× Lancet drones / 8km / Artillery battery (medium)",
+                strategy: "Hold position → Deploy 1× Gepard system at 3km",
+                outcome: "91% success / $0.2M cost / 89% reserves preserved",
+                score: "0.92",
+                bar: "92%"
+            }
+        ];
+
+        let currentScenario = 0;
+
         const trad = [
             { t: "Radar confirms threat", time: "T+15s", d: 1000 },
             { t: "Verify classification", time: "T+45s", d: 2500 },
@@ -623,6 +630,10 @@
         ];
 
         function run() {
+            const scenario = scenarios[currentScenario];
+            
+            document.getElementById('input-1').textContent = scenario.input;
+            document.getElementById('input-2').textContent = scenario.input;
             document.getElementById('steps-1').innerHTML = '';
             document.getElementById('steps-2').innerHTML = '';
             document.getElementById('result').classList.remove('visible');
@@ -631,6 +642,9 @@
             let t1 = 420, t2 = 420;
             const timer1 = document.getElementById('timer-1');
             const timer2 = document.getElementById('timer-2');
+            
+            timer1.classList.remove('faded');
+            timer2.classList.remove('faded');
             
             const int = setInterval(() => {
                 timer1.textContent = `${Math.floor(t1/60)}:${(t1%60).toString().padStart(2,'0')}`;
@@ -666,14 +680,14 @@
             setTimeout(() => {
                 document.getElementById('result').classList.add('visible');
                 setTimeout(() => {
-                    document.getElementById('score').textContent = '0.80';
-                    document.getElementById('bar').style.width = '80%';
-                    document.getElementById('strategy').textContent = 
-                        'Wait 3 minutes for optimal range (12km) → Deploy 2× IRIS-T missiles';
-                    document.getElementById('outcome').textContent = 
-                        '88% success / $1.0M cost / 68% reserves preserved';
+                    document.getElementById('score').textContent = scenario.score;
+                    document.getElementById('bar').style.width = scenario.bar;
+                    document.getElementById('strategy').textContent = scenario.strategy;
+                    document.getElementById('outcome').textContent = scenario.outcome;
                 }, 100);
             }, 1800);
+
+            currentScenario = (currentScenario + 1) % scenarios.length;
         }
 
         setTimeout(run, 2000);
