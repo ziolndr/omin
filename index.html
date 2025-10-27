@@ -20,10 +20,11 @@
             color: #fff;
             line-height: 1.6;
             font-size: 14px;
+            -webkit-font-smoothing: antialiased;
         }
 
         .page {
-            max-width: 900px;
+            max-width: 1400px;
             margin: 0 auto;
             padding: 60px 30px;
         }
@@ -55,21 +56,23 @@
         }
 
         h1 {
-            font-size: 32px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            letter-spacing: -0.5px;
-            line-height: 1.2;
+            font-size: 120px;
+            font-weight: 700;
+            letter-spacing: -4px;
+            line-height: 0.9;
+            margin-bottom: 40px;
+            word-break: break-word;
         }
 
         .subtitle {
             font-size: 14px;
-            margin-bottom: 40px;
+            margin-bottom: 60px;
             line-height: 1.7;
+            max-width: 700px;
         }
 
         .section {
-            margin-bottom: 60px;
+            margin-bottom: 80px;
         }
 
         .section-header {
@@ -82,6 +85,37 @@
             padding-bottom: 8px;
         }
 
+        /* Asymmetric grid layout */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .main-content {
+            border-left: 2px solid #333;
+            padding-left: 30px;
+        }
+
+        .sidebar-content {
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .sidebar-section {
+            margin-bottom: 40px;
+        }
+
+        .sidebar-label {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.5;
+            margin-bottom: 20px;
+        }
+
+        /* Comparison grid */
         .comparison-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -94,6 +128,10 @@
             border: 1px solid #fff;
             padding: 30px;
             min-height: 400px;
+        }
+
+        .comparison-cell:nth-child(2) {
+            border-left: 2px solid #00ff00;
         }
 
         .cell-label {
@@ -194,6 +232,7 @@
             line-height: 1.6;
         }
 
+        /* Pricing table */
         .pricing-table {
             border: 2px solid #fff;
             margin-bottom: 60px;
@@ -232,6 +271,7 @@
             line-height: 1.6;
         }
 
+        /* Deployment table */
         .deployment-table {
             border: 2px solid #fff;
             margin-bottom: 60px;
@@ -263,9 +303,10 @@
             line-height: 1.6;
         }
 
+        /* Specification list */
         .spec-list {
             list-style: none;
-            margin-bottom: 60px;
+            margin-bottom: 30px;
         }
 
         .spec-list li {
@@ -288,6 +329,7 @@
             font-weight: bold;
         }
 
+        /* Text blocks */
         .text-block {
             margin-bottom: 40px;
             font-size: 13px;
@@ -298,6 +340,7 @@
             font-weight: bold;
         }
 
+        /* Operational image */
         .operational-image {
             width: 100%;
             height: auto;
@@ -315,6 +358,7 @@
             margin-bottom: 40px;
         }
 
+        /* Platform vision grid */
         .platform-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -350,6 +394,7 @@
             opacity: 0.8;
         }
 
+        /* Contact section */
         .contact-section {
             margin-top: 80px;
             padding-top: 40px;
@@ -376,6 +421,7 @@
             line-height: 1.7;
         }
 
+        /* Footer */
         .footer {
             margin-top: 80px;
             padding-top: 40px;
@@ -383,6 +429,23 @@
             font-size: 11px;
             line-height: 1.8;
             opacity: 0.6;
+        }
+
+        @media (max-width: 1024px) {
+            h1 {
+                font-size: 80px;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .main-content {
+                border-left: none;
+                padding-left: 0;
+                border-top: 2px solid #333;
+                padding-top: 30px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -412,7 +475,8 @@
             }
 
             h1 {
-                font-size: 24px;
+                font-size: 48px;
+                letter-spacing: -2px;
             }
 
             .cell-timer {
@@ -430,7 +494,7 @@
 
         <div class="doc-number">OMIN-001 / DECISION INFRASTRUCTURE</div>
 
-        <h1>26MB decision infrastructure for air defense operations</h1>
+        <h1>26MB DECISION INFRASTRUCTURE FOR AIR DEFENSE OPERATIONS</h1>
 
         <div class="subtitle">
             Built by former Pentagon DDS PM deployed to IDCC Germany. Created ARBITER for Ukrainian air defense operations. 26MB decision infrastructure. Processes tactical scenarios in one second. Air-gapped. NATO + Soviet system compatibility. Validating with Ukrainian Armed Forces Q4 2025.
@@ -459,26 +523,52 @@
 
         <div class="section">
             <div class="section-header">Processing Time</div>
-            <div class="comparison-grid">
-                <div class="comparison-cell">
-                    <div class="cell-label">Standard Process</div>
-                    <div class="cell-input" id="input-1">4× Shahed-136 / 22km / Ammunition depot (critical)</div>
-                    <div class="cell-timer" id="timer-1">7:00</div>
-                    <div class="cell-steps" id="steps-1"></div>
-                </div>
-                <div class="comparison-cell">
-                    <div class="cell-label">OMIN Process</div>
-                    <div class="cell-input" id="input-2">4× Shahed-136 / 22km / Ammunition depot (critical)</div>
-                    <div class="cell-timer" id="timer-2">7:00</div>
-                    <div class="cell-steps" id="steps-2"></div>
-                    <div class="cell-result" id="result">
-                        <div class="coherence-label">Coherence</div>
-                        <div class="result-coherence" id="score">0.00</div>
-                        <div class="coherence-bar">
-                            <div class="coherence-bar-fill" id="bar"></div>
+            
+            <div class="content-grid">
+                <div class="main-content">
+                    <div class="comparison-grid">
+                        <div class="comparison-cell">
+                            <div class="cell-label">Standard Process</div>
+                            <div class="cell-input" id="input-1">4× Shahed-136 / 22km / Ammunition depot (critical)</div>
+                            <div class="cell-timer" id="timer-1">7:00</div>
+                            <div class="cell-steps" id="steps-1"></div>
                         </div>
-                        <div class="result-text" id="strategy"></div>
-                        <div class="result-text" id="outcome" style="margin-top: 10px;"></div>
+                        <div class="comparison-cell">
+                            <div class="cell-label">OMIN Process</div>
+                            <div class="cell-input" id="input-2">4× Shahed-136 / 22km / Ammunition depot (critical)</div>
+                            <div class="cell-timer" id="timer-2">7:00</div>
+                            <div class="cell-steps" id="steps-2"></div>
+                            <div class="cell-result" id="result">
+                                <div class="coherence-label">Coherence</div>
+                                <div class="result-coherence" id="score">0.00</div>
+                                <div class="coherence-bar">
+                                    <div class="coherence-bar-fill" id="bar"></div>
+                                </div>
+                                <div class="result-text" id="strategy"></div>
+                                <div class="result-text" id="outcome" style="margin-top: 10px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar-content">
+                    <div class="sidebar-section">
+                        <div class="sidebar-label">Specifications</div>
+                        <ul class="spec-list">
+                            <li><span class="spec-label">Core engine</span> <span class="spec-value">26MB ARBITER</span></li>
+                            <li><span class="spec-label">Full image</span> <span class="spec-value">3.8GB Docker</span></li>
+                            <li><span class="spec-label">Processing</span> <span class="spec-value">&lt;1s air</span></li>
+                            <li><span class="spec-label">Network</span> <span class="spec-value">Air-gapped</span></li>
+                            <li><span class="spec-label">Systems</span> <span class="spec-value">NATO + Soviet</span></li>
+                            <li><span class="spec-label">Languages</span> <span class="spec-value">UK / EN / PL</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <div class="sidebar-label">Status</div>
+                        <p style="font-size: 12px; line-height: 1.7;">
+                            Validating with Ukrainian Armed Forces Q4 2025. NATO deployment Q1 2026. Two-week deployment cycle.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -610,7 +700,7 @@
             }
         ];
 
-        let currentScenario = 0;
+        let usedScenarios = [];
 
         const trad = [
             { t: "Radar confirms threat", time: "T+15s", d: 1000 },
@@ -629,8 +719,22 @@
             { t: "Decision ready", time: "T+1s", d: 1100 }
         ];
 
+        function getRandomScenario() {
+            if (usedScenarios.length === scenarios.length) {
+                usedScenarios = [];
+            }
+            
+            const available = scenarios.filter((_, idx) => !usedScenarios.includes(idx));
+            const randomIdx = Math.floor(Math.random() * available.length);
+            const scenario = available[randomIdx];
+            const originalIdx = scenarios.indexOf(scenario);
+            
+            usedScenarios.push(originalIdx);
+            return scenario;
+        }
+
         function run() {
-            const scenario = scenarios[currentScenario];
+            const scenario = getRandomScenario();
             
             document.getElementById('input-1').textContent = scenario.input;
             document.getElementById('input-2').textContent = scenario.input;
@@ -686,12 +790,10 @@
                     document.getElementById('outcome').textContent = scenario.outcome;
                 }, 100);
             }, 1800);
-
-            currentScenario = (currentScenario + 1) % scenarios.length;
         }
 
         setTimeout(run, 2000);
-        setInterval(run, 26000);
+        setInterval(run, Math.random() * 8000 + 22000);
     </script>
 </body>
 </html>
