@@ -49,13 +49,6 @@
             font-size: 12px;
         }
 
-        .doc-number {
-            font-size: 11px;
-            letter-spacing: 1px;
-            margin-bottom: 30px;
-            opacity: 0.6;
-        }
-
         h1 {
             font-size: 120px;
             font-weight: 700;
@@ -72,6 +65,29 @@
             max-width: 700px;
         }
 
+        /* Video Demo Section */
+        .demo-section {
+            margin: 80px 0;
+            border: 2px solid #fff;
+            background: #000;
+        }
+
+        .demo-video {
+            width: 100%;
+            height: auto;
+            display: block;
+            background: #000;
+        }
+
+        .demo-caption {
+            padding: 20px;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-top: 1px solid #fff;
+            background: #0a0a0a;
+        }
+
         .section {
             margin-bottom: 80px;
         }
@@ -86,7 +102,6 @@
             padding-bottom: 8px;
         }
 
-        /* Asymmetric grid layout */
         .content-grid {
             display: grid;
             grid-template-columns: 2fr 1fr;
@@ -116,7 +131,6 @@
             margin-bottom: 20px;
         }
 
-        /* Comparison grid */
         .comparison-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -231,7 +245,6 @@
             line-height: 1.6;
         }
 
-        /* Pricing table */
         .pricing-table {
             border: 2px solid #fff;
             margin-bottom: 60px;
@@ -270,7 +283,6 @@
             line-height: 1.6;
         }
 
-        /* Deployment table */
         .deployment-table {
             border: 2px solid #fff;
             margin-bottom: 60px;
@@ -302,7 +314,6 @@
             line-height: 1.6;
         }
 
-        /* Specification list */
         .spec-list {
             list-style: none;
             margin-bottom: 30px;
@@ -328,7 +339,6 @@
             font-weight: bold;
         }
 
-        /* Text blocks */
         .text-block {
             margin-bottom: 40px;
             font-size: 13px;
@@ -339,7 +349,6 @@
             font-weight: bold;
         }
 
-        /* Operational image */
         .operational-image {
             width: 100%;
             height: auto;
@@ -357,7 +366,6 @@
             margin-bottom: 40px;
         }
 
-        /* Platform vision grid */
         .platform-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -393,34 +401,6 @@
             opacity: 0.8;
         }
 
-        /* Contact section */
-        .contact-section {
-            margin-top: 80px;
-            padding-top: 40px;
-            border-top: 2px solid #fff;
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .contact-block h3 {
-            font-size: 11px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-        }
-
-        .contact-block p {
-            font-size: 13px;
-            line-height: 1.7;
-        }
-
-        /* Footer */
         .footer {
             margin-top: 80px;
             padding-top: 40px;
@@ -448,8 +428,7 @@
         }
 
         @media (max-width: 768px) {
-            .comparison-grid,
-            .contact-grid {
+            .comparison-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -493,21 +472,30 @@
 
         <h1>TACTICAL DOCTRINE<br>SUB-SECOND EXECUTION</h1>
 
-            <div class="subtitle">
-    Critical infrastructure: full commitment.<br>
-    Routine threats: economical engagement.<br>
-    68% overall preservation.
-</div>
+        <div class="subtitle">
+            Critical infrastructure: full commitment.<br>
+            Routine threats: economical engagement.<br>
+            68% overall preservation.
+        </div>
 
-<div class="subtitle" style="margin-top: 40px; font-size: 13px; opacity: 0.9;">
-    Validated: October 19, 2024, Odesa sector<br>
-    Pentagon DDS heritage / Air-gapped deployment<br>
-    NATO + Soviet system compatibility
-</div>
+        <!-- VIDEO DEMO -->
+        <div class="demo-section">
+            <video class="demo-video" autoplay loop muted playsinline>
+                <source src="omin_gif.mov" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="demo-caption">OMIN Interface — Live Decision Cycle</div>
+        </div>
 
-<div class="subtitle" style="margin-top: 30px; font-size: 13px; opacity: 0.7;">
-    Seeking field validation partners Q4 2025
-</div>
+        <div class="subtitle" style="margin-top: 40px; font-size: 13px; opacity: 0.9;">
+            Validated: October 19, 2024, Odesa sector<br>
+            Pentagon DDS heritage / Air-gapped deployment<br>
+            NATO + Soviet system compatibility
+        </div>
+
+        <div class="subtitle" style="margin-top: 30px; font-size: 13px; opacity: 0.7;">
+            Seeking field validation partners Q4 2025
+        </div>
 
         <img src="ukraine_bg.png" alt="Ukrainian air defense operations" class="operational-image" style="max-width: 800px; margin: 60px 0 80px 0;">
         <div class="image-caption">Ukrainian air defense operations</div>
