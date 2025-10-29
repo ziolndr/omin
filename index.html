@@ -65,62 +65,7 @@
             max-width: 700px;
         }
 
-        .operational-hero {
-            margin: 80px -30px;
-            position: relative;
-            height: 600px;
-            background-image: url('../ukraine_bg.png');
-            background-size: contain;
-            background-position: center;
-            background-repeat: no-repeat;
-            border-top: 2px solid #fff;
-            border-bottom: 2px solid #fff;
-            display: flex;
-            align-items: flex-end;
-            overflow: hidden;
-            filter: grayscale(100%);
-        }
-
-        .operational-hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to bottom,
-                rgba(0,0,0,0.7) 0%,
-                rgba(0,0,0,0.4) 50%,
-                rgba(0,0,0,0.95) 100%);
-        }
-
-        .operational-hero-content {
-            position: relative;
-            z-index: 1;
-            padding: 40px;
-            width: 100%;
-            max-width: 800px;
-        }
-
-        .operational-hero-label {
-            font-size: 10px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            opacity: 0.7;
-            margin-bottom: 15px;
-        }
-
-        .operational-hero-title {
-            font-size: 32px;
-            font-weight: bold;
-            line-height: 1.2;
-            margin-bottom: 15px;
-            letter-spacing: -1px;
-        }
-
-        .operational-hero-text {
-            font-size: 13px;
-            line-height: 1.7;
-            opacity: 0.9;
-        }
-
+        /* Video Demo Section */
         .demo-section {
             margin: 80px 0;
             border: 2px solid #fff;
@@ -155,16 +100,6 @@
             margin-bottom: 20px;
             border-bottom: 1px solid #fff;
             padding-bottom: 8px;
-        }
-
-        .text-block {
-            margin-bottom: 30px;
-            font-size: 13px;
-            line-height: 1.8;
-        }
-
-        .text-block strong {
-            font-weight: bold;
         }
 
         .content-grid {
@@ -239,7 +174,7 @@
             align-items: baseline;
         }
 
-        .timer-min {
+        .timer-min, .timer-sec {
             min-width: 1.2ch;
             text-align: right;
         }
@@ -404,6 +339,16 @@
             font-weight: bold;
         }
 
+        .text-block {
+            margin-bottom: 40px;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .text-block strong {
+            font-weight: bold;
+        }
+
         .operational-image {
             width: 100%;
             height: auto;
@@ -480,14 +425,6 @@
                 border-top: 2px solid #333;
                 padding-top: 30px;
             }
-
-            .operational-hero {
-                height: 400px;
-            }
-
-            .operational-hero-title {
-                font-size: 24px;
-            }
         }
 
         @media (max-width: 768px) {
@@ -523,19 +460,6 @@
             .cell-timer {
                 font-size: 36px;
             }
-
-            .operational-hero {
-                height: 300px;
-                margin: 60px -30px;
-            }
-
-            .operational-hero-content {
-                padding: 30px;
-            }
-
-            .operational-hero-title {
-                font-size: 20px;
-            }
         }
     </style>
 </head>
@@ -546,49 +470,12 @@
             <div class="header-contact">619-971-9551</div>
         </div>
 
-        <h1>GEOMETRIC COHERENCE<br>AS COMPUTATIONAL PRIMITIVE</h1>
+        <h1>TACTICAL DOCTRINE<br>REAL-TIME EXECUTION</h1>
 
         <div class="subtitle">
-            Ukraine air defense: First deployment.<br>
-            Proves the primitive works under existential constraint.<br>
-            Medical, strategic, discovery: Next.
-        </div>
-
-        <div class="subtitle" style="margin-top: 30px; font-size: 13px; opacity: 0.7;">
-            Bell Labs model. Not product company.<br>
-            Seeking mission-aligned capital Q4 2025.
-        </div>
-
-        <!-- INFRASTRUCTURE THESIS SECTION -->
-        <div class="section" style="margin-top: 80px;">
-            <div class="section-header">Infrastructure Thesis</div>
-
-            <div class="text-block">
-                <strong>ARBITER is not an air defense product.</strong> It's geometric coherence measurement in 72-dimensional semantic space. A computational primitive.
-            </div>
-
-            <div class="text-block">
-                <strong>Ukraine air defense proves the primitive works</strong> under existential constraint. 68% ammunition preservation. &lt;1s processing. Lives depend on it working. It works.
-            </div>
-
-            <div class="text-block">
-                <strong>Same engine enables:</strong> Medical resource allocation under scarcity. Presidential strategic decisions. Discovery of high-coherence pathways in unexplored constraint spaces. (Example: Scorpion venom compounds → naturopathic treatments, 0.83 coherence.)
-            </div>
-
-            <div class="text-block">
-                <strong>This is research infrastructure, not product company.</strong> Bell Labs model. Discover geometric principles. Spin out applications. Seeking mission-aligned capital from investors who understand: coherence measurement is foundational.
-            </div>
-        </div>
-
-        <!-- OPERATIONAL CONTEXT HERO -->
-        <div class="operational-hero">
-            <div class="operational-hero-content">
-                <div class="operational-hero-label">Operational Context</div>
-                <div class="operational-hero-title">Built for defenders under constraint</div>
-                <div class="operational-hero-text">
-                    OMIN deploys where ammunition scarcity meets existential threat. Ukrainian air defense validates the system under live combat conditions. Every interceptor preserved extends defensive capacity. Geometric coherence optimization at the edge of survival.
-                </div>
-            </div>
+            Critical infrastructure: full commitment.<br>
+            Routine threats: economical engagement.<br>
+            68% overall preservation.
         </div>
 
         <!-- VIDEO DEMO -->
@@ -606,9 +493,37 @@
             NATO + Soviet system compatibility
         </div>
 
+        <div class="subtitle" style="margin-top: 30px; font-size: 13px; opacity: 0.7;">
+            Seeking field validation partners Q4 2025
+        </div>
+
+        <img src="ukraine_bg.png" alt="Ukrainian air defense operations" class="operational-image" style="max-width: 800px; margin: 60px 0 80px 0;">
+        <div class="image-caption">Ukrainian air defense operations</div>
+
+        <div class="section">
+            <div class="section-header">Pricing</div>
+            <div class="pricing-table">
+                <div class="pricing-row">
+                    <div class="pricing-tier">Pilot</div>
+                    <div class="pricing-cost">$2,500,000</div>
+                    <div class="pricing-details">One battery / 90 days / Saves 5-8 interceptors per engagement / ROI in first major attack</div>
+                </div>
+                <div class="pricing-row">
+                    <div class="pricing-tier">Battalion</div>
+                    <div class="pricing-cost">$8,000,000/year</div>
+                    <div class="pricing-details">4-6 batteries / Full support / Saves $40-60M in preserved ammunition annually</div>
+                </div>
+                <div class="pricing-row">
+                    <div class="pricing-tier">Theatre</div>
+                    <div class="pricing-cost">$25,000,000+</div>
+                    <div class="pricing-details">Regional deployment / All domains / Multi-year / Saves $200M+ in interceptor preservation</div>
+                </div>
+            </div>
+        </div>
+
         <div class="section">
             <div class="section-header">Resource Preservation</div>
-
+            
             <div class="content-grid">
                 <div class="main-content">
                     <div class="comparison-grid">
@@ -659,27 +574,6 @@
                             Patriot PAC-3: $4M per interceptor. IRIS-T: $500K per missile. Average engagement saves 5-8 interceptors. System ROI in first major attack.
                         </p>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="section">
-            <div class="section-header">Pricing</div>
-            <div class="pricing-table">
-                <div class="pricing-row">
-                    <div class="pricing-tier">Pilot</div>
-                    <div class="pricing-cost">$2,500,000</div>
-                    <div class="pricing-details">One battery / 90 days / Saves 5-8 interceptors per engagement / ROI in first major attack</div>
-                </div>
-                <div class="pricing-row">
-                    <div class="pricing-tier">Battalion</div>
-                    <div class="pricing-cost">$8,000,000/year</div>
-                    <div class="pricing-details">4-6 batteries / Full support / Saves $40-60M in preserved ammunition annually</div>
-                </div>
-                <div class="pricing-row">
-                    <div class="pricing-tier">Theatre</div>
-                    <div class="pricing-cost">$25,000,000+</div>
-                    <div class="pricing-details">Regional deployment / All domains / Multi-year / Saves $200M+ in interceptor preservation</div>
                 </div>
             </div>
         </div>
@@ -742,8 +636,44 @@
             </div>
         </div>
 
+        <div class="section">
+            <div class="section-header">Technical Specification</div>
+            <ul class="spec-list">
+                <li><span class="spec-label">Preservation rate</span> <span class="spec-value">52-89% per engagement</span></li>
+                <li><span class="spec-label">Core engine</span> <span class="spec-value">26MB ARBITER</span></li>
+                <li><span class="spec-label">Full image</span> <span class="spec-value">3.8GB Docker</span></li>
+                <li><span class="spec-label">Processing</span> <span class="spec-value">&lt;1s air / ~8s medical</span></li>
+                <li><span class="spec-label">Network</span> <span class="spec-value">Air-gapped</span></li>
+                <li><span class="spec-label">Systems</span> <span class="spec-value">NATO + Soviet</span></li>
+                <li><span class="spec-label">Languages</span> <span class="spec-value">Ukrainian / English / Polish</span></li>
+                <li><span class="spec-label">Doctrine</span> <span class="spec-value">Sovereign configuration</span></li>
+                <li><span class="spec-label">Data</span> <span class="spec-value">Local only</span></li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <div class="section-header">Operational Context</div>
+            
+            <div class="text-block">
+                <strong>Economic impact of ammunition preservation.</strong> Odesa battalion scenario: Wave 1 at 22:00 uses 8 missiles on 4 targets, 95% success. Wave 2 at 23:30 brings 14 targets with only 8 missiles remaining. 50% defensive capability. With OMIN: Wave 1 uses 3 missiles, 13 available for Wave 2, 90% coverage maintained. Single-night savings: $35M in preserved interceptors.
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">Architecture</div>
+            <div class="text-block">
+                <strong>ARBITER:</strong> 26MB semantic reasoning engine. Domain-agnostic. Sub-second processing.
+            </div>
+            <div class="text-block">
+                <strong>OMIN:</strong> Domain applications. Air defense, medical, logistics, communications.
+            </div>
+            <div class="text-block">
+                <strong>DOCTRINE:</strong> Nation-specific rules. Custom priorities. Sovereign control.
+            </div>
+        </div>
+
         <div class="footer">
-            Founder background: Pentagon Defense Digital Service (2022-2024), IDCC Germany deployment. ARBITER built for tactical decision optimization. Currently validating with Ukrainian Armed Forces. <br>TRAUT Applied Research.</br>
+            Founder background: Pentagon Defense Digital Service (2022-2024), IDCC Germany deployment. ARBITER built for tactical decision optimization. Currently validating with Ukrainian Armed Forces. TRAUT Applied Research.
         </div>
     </div>
 
@@ -800,19 +730,19 @@
             if (usedScenarios.length === scenarios.length) {
                 usedScenarios = [];
             }
-
+            
             const available = scenarios.filter((_, idx) => !usedScenarios.includes(idx));
             const randomIdx = Math.floor(Math.random() * available.length);
             const scenario = available[randomIdx];
             const originalIdx = scenarios.indexOf(scenario);
-
+            
             usedScenarios.push(originalIdx);
             return scenario;
         }
 
         function run() {
             const scenario = getRandomScenario();
-
+            
             document.getElementById('input-1').textContent = scenario.input;
             document.getElementById('input-2').textContent = scenario.input;
             document.getElementById('steps-1').innerHTML = '';
@@ -822,7 +752,7 @@
 
             const timer1Min = document.getElementById('timer-1-min');
             const timer2Min = document.getElementById('timer-2-min');
-
+            
             timer1Min.textContent = scenario.standard;
             timer2Min.textContent = scenario.omin;
 
