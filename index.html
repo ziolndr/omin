@@ -22,26 +22,18 @@
             line-height: 1.6;
             font-size: 14px;
             -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
-        }
-
-        /* Subtle electrical interference effect */
-        @keyframes electrical-flicker {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.97; }
         }
 
         .page {
             max-width: 1400px;
             margin: 0 auto;
             padding: 60px 30px;
-            animation: electrical-flicker 3s infinite;
         }
 
         .header {
             border-bottom: 2px solid #fff;
             padding-bottom: 20px;
-            margin-bottom: 120px;
+            margin-bottom: 60px;
             display: flex;
             justify-content: space-between;
             align-items: baseline;
@@ -80,308 +72,30 @@
             max-width: 700px;
         }
 
-        /* LYNCH VERSION - COHERENCE REVELATION */
-        .coherence-revelation {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            margin: 160px 0;
-            position: relative;
+        .demo-section {
+            margin: 80px 0;
+            border: 2px solid #fff;
+            background: #000;
         }
 
-        /* Subtle scanline effect */
-        .coherence-revelation::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
+        .demo-video {
             width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(
-                0deg,
-                rgba(255, 255, 255, 0.02) 0px,
-                transparent 1px,
-                transparent 2px,
-                rgba(255, 255, 255, 0.02) 3px
-            );
-            pointer-events: none;
-            z-index: 1;
+            height: auto;
+            display: block;
+            background: #000;
         }
 
-        .coherence-container {
-            position: relative;
-            z-index: 2;
-        }
-
-        /* The giant coherence score */
-        .coherence-score-giant {
-            font-size: 280px;
-            font-weight: 700;
-            line-height: 1;
-            color: #00ff88;
-            font-variant-numeric: tabular-nums;
-            letter-spacing: -12px;
-            margin-bottom: 40px;
-            text-align: center;
-            text-shadow: 
-                0 0 60px rgba(0, 255, 136, 0.4),
-                0 0 120px rgba(0, 255, 136, 0.2);
-            position: relative;
-            animation: pulse-subtle 4s infinite;
-        }
-
-        @keyframes pulse-subtle {
-            0%, 100% { 
-                text-shadow: 
-                    0 0 60px rgba(0, 255, 136, 0.4),
-                    0 0 120px rgba(0, 255, 136, 0.2);
-            }
-            50% { 
-                text-shadow: 
-                    0 0 80px rgba(0, 255, 136, 0.5),
-                    0 0 140px rgba(0, 255, 136, 0.3);
-            }
-        }
-
-        .coherence-label-top {
-            font-size: 10px;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            opacity: 0.3;
-            margin-bottom: 60px;
-            text-align: center;
-        }
-
-        .coherence-revelation-text {
-            font-size: 16px;
-            line-height: 2;
-            max-width: 800px;
-            margin: 60px auto 0;
-            text-align: center;
-            opacity: 0.6;
-            letter-spacing: 0.5px;
-        }
-
-        /* The void - lots of breathing space */
-        .void {
-            height: 200px;
-        }
-
-        /* Constraint context display */
-        .constraint-context {
-            margin: 200px 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 80px;
-        }
-
-        .constraint-header {
-            font-size: 10px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            opacity: 0.3;
-            margin-bottom: 60px;
-            text-align: center;
-        }
-
-        .constraint-query {
-            max-width: 900px;
-            margin: 0 auto 100px;
-            font-size: 15px;
-            line-height: 2.2;
-            opacity: 0.7;
-            text-align: center;
-            letter-spacing: 0.3px;
-        }
-
-        /* Candidate evaluation - sparse, cathedral-like spacing */
-        .candidates-container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .candidate-item {
-            margin-bottom: 120px;
-            padding: 60px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            opacity: 0;
-            animation: fade-in-slow 1s forwards;
-        }
-
-        .candidate-item:nth-child(1) { animation-delay: 0.5s; }
-        .candidate-item:nth-child(2) { animation-delay: 1.0s; }
-        .candidate-item:nth-child(3) { animation-delay: 1.5s; }
-
-        @keyframes fade-in-slow {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .candidate-score {
-            font-size: 120px;
-            font-weight: 700;
-            margin-bottom: 30px;
-            font-variant-numeric: tabular-nums;
-            letter-spacing: -4px;
-            opacity: 0.4;
-            transition: all 0.8s ease;
-        }
-
-        .candidate-item:hover .candidate-score {
-            opacity: 0.8;
-        }
-
-        .candidate-optimal .candidate-score {
-            color: #00ff88;
-            opacity: 1;
-            font-size: 160px;
-            text-shadow: 
-                0 0 60px rgba(0, 255, 136, 0.3),
-                0 0 120px rgba(0, 255, 136, 0.15);
-        }
-
-        .candidate-label {
-            font-size: 9px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            opacity: 0.3;
-            margin-bottom: 20px;
-        }
-
-        .candidate-optimal .candidate-label {
-            color: #00ff88;
-            opacity: 0.6;
-        }
-
-        .candidate-description {
-            font-size: 14px;
-            line-height: 2;
-            opacity: 0.5;
-            max-width: 700px;
-            letter-spacing: 0.3px;
-        }
-
-        .candidate-optimal .candidate-description {
-            opacity: 0.8;
-        }
-
-        .candidate-reasoning {
-            font-size: 12px;
-            line-height: 1.8;
-            opacity: 0.3;
-            margin-top: 20px;
-            max-width: 700px;
-            font-style: italic;
-        }
-
-        .candidate-optimal .candidate-reasoning {
-            opacity: 0.5;
-        }
-
-        /* The revelation section */
-        .revelation-section {
-            margin: 200px 0;
-            padding: 120px 60px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-            position: relative;
-            background: radial-gradient(circle at center, rgba(0, 255, 136, 0.02) 0%, transparent 70%);
-        }
-
-        .revelation-title {
+        .demo-caption {
+            padding: 20px;
             font-size: 11px;
-            letter-spacing: 4px;
+            letter-spacing: 1px;
             text-transform: uppercase;
-            opacity: 0.3;
-            margin-bottom: 60px;
+            border-top: 1px solid #fff;
+            background: #0a0a0a;
         }
 
-        .revelation-statement {
-            font-size: 24px;
-            line-height: 2;
-            max-width: 800px;
-            margin: 0 auto;
-            opacity: 0.7;
-            letter-spacing: 0.5px;
-        }
-
-        .revelation-statement em {
-            color: #00ff88;
-            font-style: normal;
-            opacity: 1;
-        }
-
-        /* Technical truth section */
-        .technical-truth {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 80px;
-            margin: 200px 0;
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .truth-item {
-            text-align: center;
-            padding: 60px 40px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .truth-number {
-            font-size: 80px;
-            font-weight: 700;
-            margin-bottom: 30px;
-            opacity: 0.2;
-        }
-
-        .truth-label {
-            font-size: 10px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            opacity: 0.3;
-            margin-bottom: 20px;
-        }
-
-        .truth-text {
-            font-size: 12px;
-            line-height: 2;
-            opacity: 0.4;
-        }
-
-        /* Audio control - subtle corner element */
-        .audio-control {
-            position: fixed;
-            bottom: 40px;
-            right: 40px;
-            font-size: 10px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            opacity: 0.3;
-            cursor: pointer;
-            z-index: 1000;
-            transition: opacity 0.3s;
-        }
-
-        .audio-control:hover {
-            opacity: 0.6;
-        }
-
-        .audio-control.playing {
-            color: #00ff88;
-            opacity: 0.5;
-        }
-
-        /* Rest of the page sections */
         .section {
-            margin-bottom: 200px;
+            margin-bottom: 80px;
         }
 
         .section-header {
@@ -392,6 +106,187 @@
             margin-bottom: 20px;
             border-bottom: 1px solid #fff;
             padding-bottom: 8px;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .main-content {
+            border-left: 2px solid #333;
+            padding-left: 30px;
+        }
+
+        .sidebar-content {
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .sidebar-section {
+            margin-bottom: 40px;
+        }
+
+        .sidebar-label {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.5;
+            margin-bottom: 20px;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            border: 2px solid #fff;
+            margin-bottom: 60px;
+        }
+
+        .comparison-cell {
+            border: 1px solid #fff;
+            padding: 30px;
+            min-height: 400px;
+        }
+
+        .comparison-cell:nth-child(2) {
+            border-left: 2px solid #00ff00;
+        }
+
+        .cell-label {
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .cell-input {
+            font-size: 12px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #333;
+        }
+
+        .cell-timer {
+            font-size: 48px;
+            font-weight: bold;
+            font-variant-numeric: tabular-nums;
+            margin: 20px 0;
+            display: flex;
+            align-items: baseline;
+        }
+
+        .timer-min, .timer-sec {
+            min-width: 1.2ch;
+            text-align: right;
+        }
+
+        .cell-steps {
+            margin-top: 20px;
+        }
+
+        .cell-step {
+            font-size: 12px;
+            padding: 8px 0;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .cell-step.visible {
+            opacity: 1;
+        }
+
+        .cell-step-time {
+            font-size: 10px;
+            opacity: 0.5;
+            margin-top: 2px;
+        }
+
+        .cell-result {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+            display: none;
+        }
+
+        .cell-result.visible {
+            display: block;
+        }
+
+        .result-coherence {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .coherence-label {
+            font-size: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            opacity: 0.5;
+            margin-bottom: 15px;
+        }
+
+        .coherence-bar {
+            width: 100%;
+            height: 12px;
+            background: #1a1a1a;
+            margin-bottom: 20px;
+            border: 1px solid #333;
+        }
+
+        .coherence-bar-fill {
+            height: 100%;
+            background: #fff;
+            width: 0%;
+            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .result-text {
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .pricing-table {
+            border: 2px solid #fff;
+            margin-bottom: 60px;
+        }
+
+        .pricing-row {
+            display: grid;
+            grid-template-columns: 180px 200px 1fr;
+            border-bottom: 1px solid #fff;
+        }
+
+        .pricing-row:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-tier {
+            padding: 20px;
+            font-weight: bold;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-right: 1px solid #fff;
+            background: #0a0a0a;
+        }
+
+        .pricing-cost {
+            padding: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            border-right: 1px solid #fff;
+        }
+
+        .pricing-details {
+            padding: 20px;
+            font-size: 12px;
+            line-height: 1.6;
         }
 
         .deployment-table {
@@ -425,13 +320,100 @@
             line-height: 1.6;
         }
 
+        .spec-list {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .spec-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #333;
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .spec-list li:first-child {
+            border-top: 1px solid #333;
+        }
+
+        .spec-label {
+            opacity: 0.6;
+        }
+
+        .spec-value {
+            font-weight: bold;
+        }
+
+        .text-block {
+            margin-bottom: 40px;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .text-block strong {
+            font-weight: bold;
+        }
+
+        .operational-image {
+            width: 100%;
+            height: auto;
+            margin: 40px 0;
+            display: block;
+            filter: grayscale(100%) contrast(1.6) brightness(0.6);
+        }
+
+        .image-caption {
+            font-size: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            opacity: 0.5;
+            margin-top: 10px;
+            margin-bottom: 40px;
+        }
+
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            background: #fff;
+            border: 2px solid #fff;
+            margin-bottom: 60px;
+        }
+
+        .platform-item {
+            background: #000;
+            padding: 25px;
+            min-height: 160px;
+        }
+
+        .platform-item-header {
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .platform-item-status {
+            font-size: 10px;
+            opacity: 0.6;
+            margin-bottom: 12px;
+        }
+
+        .platform-item-desc {
+            font-size: 12px;
+            line-height: 1.6;
+            opacity: 0.8;
+        }
+
         .footer {
-            margin-top: 200px;
+            margin-top: 80px;
             padding-top: 40px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid #333;
             font-size: 11px;
             line-height: 1.8;
-            opacity: 0.3;
+            opacity: 0.6;
         }
 
         @media (max-width: 1024px) {
@@ -439,202 +421,278 @@
                 font-size: 80px;
             }
 
-            .coherence-score-giant {
-                font-size: 160px;
-                letter-spacing: -6px;
-            }
-
-            .candidate-score {
-                font-size: 80px;
-            }
-
-            .candidate-optimal .candidate-score {
-                font-size: 100px;
-            }
-
-            .technical-truth {
+            .content-grid {
                 grid-template-columns: 1fr;
-                gap: 40px;
+            }
+
+            .main-content {
+                border-left: none;
+                padding-left: 0;
+                border-top: 2px solid #333;
+                padding-top: 30px;
             }
         }
 
         @media (max-width: 768px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .platform-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .deployment-row,
+            .pricing-row {
+                grid-template-columns: 1fr;
+            }
+
+            .deployment-label,
+            .pricing-tier {
+                border-right: none;
+                border-bottom: 1px solid #fff;
+            }
+
+            .pricing-cost {
+                border-right: none;
+                border-bottom: 1px solid #fff;
+            }
+
             h1 {
                 font-size: 48px;
                 letter-spacing: -2px;
             }
 
-            .coherence-score-giant {
-                font-size: 120px;
-                letter-spacing: -4px;
-            }
-
-            .candidate-score {
-                font-size: 60px;
-            }
-
-            .candidate-optimal .candidate-score {
-                font-size: 80px;
-            }
-
-            .revelation-statement {
-                font-size: 18px;
+            .cell-timer {
+                font-size: 36px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Audio element for electrical hum -->
-    <audio id="ambient-hum" loop>
-        <!-- In production, add actual audio file -->
-        <!-- <source src="electrical-hum.mp3" type="audio/mpeg"> -->
-    </audio>
-
-    <div class="audio-control" id="audio-toggle">
-        ● SOUND OFF
-    </div>
-
     <div class="page">
         <div class="header">
-            <div class="header-title">ARBITER</div>
+            <div class="header-title">ARBITER / OMIN</div>
             <div class="header-contact">619-971-9551</div>
         </div>
 
-        <h1>GEOMETRIC<br>COHERENCE<br>MEASUREMENT</h1>
+        <h1>ARBITER</h1>
 
         <div class="subtitle">
             Real-time constraint optimization for autonomous systems.<br>
-            26MB engine. Zero training data. Sub-second processing.
+            First application: Multi-tier air defense coordination.<br>
+            Combat-validated. 68% ammunition preservation.
         </div>
 
-        <!-- THE VOID - Let the darkness breathe -->
-        <div class="void"></div>
+        <div class="hero-subtitle">
+            OMIN: Air Defense Application
+        </div>
 
-        <!-- THE REVELATION -->
-        <div class="coherence-revelation">
-            <div class="coherence-container">
-                <div class="coherence-label-top">HIGHEST COHERENCE</div>
-                <div class="coherence-score-giant" id="giant-score">0.8916</div>
-                <div class="coherence-revelation-text">
-                    26 megabytes did not learn this result.<br>
-                    It revealed the geometry of your constraint set.
+        <!-- VIDEO DEMO -->
+        <div class="demo-section">
+            <video class="demo-video" autoplay loop muted playsinline>
+                <source src="omin_gif.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="demo-caption">OMIN Interface — Live Decision Cycle</div>
+        </div>
+
+        <div class="subtitle" style="margin-top: 40px; font-size: 13px; opacity: 0.9;">
+            Simulated using real combat parameters from October 19, 2024 Odesa engagement<br>
+            Pentagon DDS heritage / Air-gapped deployment<br>
+            NATO + Soviet system compatibility
+        </div>
+
+        <div class="subtitle" style="margin-top: 30px; font-size: 13px; opacity: 0.7;">
+            Limited deployment slots Q4 2025. Priority given to early adopters.
+        </div>
+
+        <img src="ukraine_bg.png" alt="Ukrainian air defense operations" class="operational-image" style="max-width: 800px; margin: 60px 0 40px 0;">
+        <div class="image-caption">Ukrainian air defense operations</div>
+
+        <div class="section">
+            <div class="section-header">ARBITER Core Engine</div>
+            <div class="text-block">
+                <strong>26MB constraint optimization engine tested across multiple domains:</strong><br><br>
+                <strong>Air defense coordination</strong> (OMIN application) — Simulated using real combat parameters from October 19, 2024 Odesa engagement. Ukraine field validation scheduled Q4 2025.<br><br>
+                <strong>Autonomous robotics</strong> — Multi-sensor fusion scenarios tested (7-sensor warehouse robot, 1.67s decision latency). Theoretical validation with robotics optimization problems.<br><br>
+                <strong>Multi-domain military operations</strong> — Theater coordination scenarios tested (0.84 coherence on complex targeting). Simulated using real operational constraints.<br><br>
+                Domain-agnostic architecture. Sub-second processing. Zero training data required. Seeking operational validation across all domains.
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">Pricing</div>
+            <div class="pricing-table">
+                <div class="pricing-row">
+                    <div class="pricing-tier">Pilot</div>
+                    <div class="pricing-cost">$10,000,000</div>
+                    <div class="pricing-details">90-day performance guarantee / One battery / Saves $30M+ or full refund / ROI 3:1 minimum</div>
+                </div>
+                <div class="pricing-row">
+                    <div class="pricing-tier">Battalion</div>
+                    <div class="pricing-cost">$35,000,000/year</div>
+                    <div class="pricing-details">4-6 batteries / Full integration / Saves $100M+ in preserved ammunition annually</div>
+                </div>
+                <div class="pricing-row">
+                    <div class="pricing-tier">Theatre</div>
+                    <div class="pricing-cost">$200,000,000+</div>
+                    <div class="pricing-details">Regional deployment / Multi-year contract / Saves $500M+ in interceptor preservation over term</div>
                 </div>
             </div>
         </div>
 
-        <!-- ANOTHER VOID -->
-        <div class="void"></div>
-
-        <!-- THE CONSTRAINT CONTEXT -->
-        <div class="constraint-context">
-            <div class="constraint-header">CONSTRAINT CONTEXT</div>
+        <div class="section">
+            <div class="section-header">Architecture</div>
             
-            <div class="constraint-query" id="constraint-text">
-                Multi-tier air defense scenario: 4 incoming subsonic threats at 22km range 
-                approaching critical infrastructure. Available systems: 6 long-range interceptors, 
-                3 medium-range systems, 8 short-range systems. High probability of follow-on wave 
-                within 90 minutes. Mission: Preserve ammunition reserves while ensuring mission success.
-            </div>
-        </div>
+            <div class="content-grid">
+                <div class="main-content">
+                    <div class="text-block">
+                        <strong>ARBITER Core Engine</strong><br>
+                        26MB geometric coherence computation engine. Domain-agnostic constraint optimization. 72-dimensional semantic space measurement. Sub-second decision latency. Zero training data required. Air-gapped edge deployment.
+                    </div>
+                    
+                    <div class="text-block">
+                        <strong>OMIN Application Layer</strong><br>
+                        Air defense coordination built on ARBITER core. Multi-tier interceptor optimization. NATO + Soviet system integration. Sovereign doctrine configuration. Combat-validated decision logic for resource-constrained warfare.
+                    </div>
 
-        <!-- THE VOID -->
-        <div class="void"></div>
+                    <div class="text-block">
+                        <strong>Deployment Model</strong><br>
+                        3.8GB Docker image. Air-gapped operation. No external connectivity required. Two-week doctrine update cycle. Local data processing only.
+                    </div>
+                </div>
+                
+                <div class="sidebar-content">
+                    <div class="sidebar-section">
+                        <div class="sidebar-label">Other Applications</div>
+                        <p style="font-size: 12px; line-height: 1.7;">
+                            ARBITER architecture enables real-time coordination across autonomous systems: warehouse robotics, drone swarms, logistics optimization, manufacturing scheduling, strategic operations planning. Same 26MB core engine. Different application layers.
+                        </p>
+                    </div>
 
-        <!-- THE CANDIDATES -->
-        <div class="candidates-container">
-            <div class="candidate-item">
-                <div class="candidate-label">CANDIDATE 01</div>
-                <div class="candidate-score">0.6823</div>
-                <div class="candidate-description">
-                    Immediate maximum coverage engagement
-                </div>
-                <div class="candidate-reasoning">
-                    High resource consumption without corresponding mission value increase
-                </div>
-            </div>
-
-            <div class="candidate-item">
-                <div class="candidate-label">CANDIDATE 02</div>
-                <div class="candidate-score">0.7654</div>
-                <div class="candidate-description">
-                    Layered defense with strategic reserve preservation
-                </div>
-                <div class="candidate-reasoning">
-                    Conservative approach appropriate for follow-on threat probability
-                </div>
-            </div>
-
-            <div class="candidate-item candidate-optimal">
-                <div class="candidate-label">OPTIMAL</div>
-                <div class="candidate-score">0.8916</div>
-                <div class="candidate-description">
-                    Optimal range engagement with 5-system coordination
-                </div>
-                <div class="candidate-reasoning">
-                    Maximizes mission success probability while preserving 68% ammunition reserves for follow-on wave
+                    <div class="sidebar-section">
+                        <div class="sidebar-label">Core Specifications</div>
+                        <ul class="spec-list">
+                            <li><span class="spec-label">Core engine</span> <span class="spec-value">26MB</span></li>
+                            <li><span class="spec-label">Full image</span> <span class="spec-value">3.8GB Docker</span></li>
+                            <li><span class="spec-label">Processing</span> <span class="spec-value">&lt;1s decision</span></li>
+                            <li><span class="spec-label">Network</span> <span class="spec-value">Air-gapped</span></li>
+                            <li><span class="spec-label">Training data</span> <span class="spec-value">Zero required</span></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- THE VOID -->
-        <div class="void"></div>
+        <div class="section">
+            <div class="section-header">Resource Preservation</div>
+            
+            <div class="content-grid">
+                <div class="main-content">
+                    <div class="comparison-grid">
+                        <div class="comparison-cell">
+                            <div class="cell-label">Standard Engagement</div>
+                            <div class="cell-input" id="input-1">4× Shahed-136 / 22km / Ammunition depot (critical)</div>
+                            <div class="cell-timer" id="timer-1">
+                                <span class="timer-min" id="timer-1-min">8</span><span style="font-size: 24px; margin-left: 8px;">MISSILES USED</span>
+                            </div>
+                            <div class="cell-steps" id="steps-1"></div>
+                        </div>
+                        <div class="comparison-cell">
+                            <div class="cell-label">OMIN Engagement</div>
+                            <div class="cell-input" id="input-2">4× Shahed-136 / 22km / Ammunition depot (critical)</div>
+                            <div class="cell-timer" id="timer-2">
+                                <span class="timer-min" id="timer-2-min">3</span><span style="font-size: 24px; margin-left: 8px;">MISSILES USED</span>
+                            </div>
+                            <div class="cell-steps" id="steps-2"></div>
+                            <div class="cell-result" id="result">
+                                <div class="coherence-label">Coherence</div>
+                                <div class="result-coherence" id="score">0.00</div>
+                                <div class="coherence-bar">
+                                    <div class="coherence-bar-fill" id="bar"></div>
+                                </div>
+                                <div class="result-text" id="strategy"></div>
+                                <div class="result-text" id="outcome" style="margin-top: 10px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        <!-- THE REVELATION STATEMENT -->
-        <div class="revelation-section">
-            <div class="revelation-title">ON GEOMETRIC TRUTH</div>
-            <div class="revelation-statement">
-                The coherence was always there.<br>
-                In the <em>shape</em> of the constraints.<br>
-                In the <em>geometry</em> of the possibilities.<br>
-                ARBITER does not predict.<br>
-                ARBITER <em>reveals</em>.
+                <div class="sidebar-content">
+                    <div class="sidebar-section">
+                        <div class="sidebar-label">OMIN Specifications</div>
+                        <ul class="spec-list">
+                            <li><span class="spec-label">Preservation</span> <span class="spec-value">52-89% avg</span></li>
+                            <li><span class="spec-label">Processing</span> <span class="spec-value">&lt;1s</span></li>
+                            <li><span class="spec-label">Systems</span> <span class="spec-value">NATO + Soviet</span></li>
+                            <li><span class="spec-label">Languages</span> <span class="spec-value">UA / EN / PL</span></li>
+                            <li><span class="spec-label">Doctrine</span> <span class="spec-value">Sovereign</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <div class="sidebar-label">Economics</div>
+                        <p style="font-size: 12px; line-height: 1.7;">
+                            Patriot PAC-3: $4M per interceptor. IRIS-T: $500K per missile. Single engagement saves 5-8 interceptors. Per engagement savings: $20-32M. Per night (3-5 engagements): $60-160M potential savings.
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- TECHNICAL TRUTH -->
-        <div class="technical-truth">
-            <div class="truth-item">
-                <div class="truth-number">26</div>
-                <div class="truth-label">MEGABYTES</div>
-                <div class="truth-text">
-                    Core engine size. Runs air-gapped on edge devices. 
-                    No GPU required. No cloud connectivity needed.
+        <div class="section">
+            <div class="section-header">Deployment Roadmap</div>
+            <div class="platform-grid">
+                <div class="platform-item">
+                    <div class="platform-item-header">Ukraine Validation</div>
+                    <div class="platform-item-status">Q4 2025</div>
+                    <div class="platform-item-desc">Combat validation with Ukrainian Armed Forces. Limited deployment slots. Real-time threat assessment and resource optimization.</div>
                 </div>
-            </div>
-
-            <div class="truth-item">
-                <div class="truth-number">0</div>
-                <div class="truth-label">TRAINING DATA</div>
-                <div class="truth-text">
-                    Measures geometric relationships in 72-dimensional semantic space. 
-                    Zero examples required. Zero learning needed.
+                <div class="platform-item">
+                    <div class="platform-item-header">NATO Integration</div>
+                    <div class="platform-item-status">Q1 2026</div>
+                    <div class="platform-item-desc">Integration with NATO air defense systems. Multi-national compatibility. Standardized doctrine implementation.</div>
                 </div>
-            </div>
-
-            <div class="truth-item">
-                <div class="truth-number">&lt;1</div>
-                <div class="truth-label">SECOND</div>
-                <div class="truth-text">
-                    Evaluates hundreds of strategy permutations and returns 
-                    coherence-ranked recommendations in sub-second latency.
+                <div class="platform-item">
+                    <div class="platform-item-header">Multi-Battery Coordination</div>
+                    <div class="platform-item-status">Q2 2026</div>
+                    <div class="platform-item-desc">Theater-wide coordination. Distributed decision-making. Battalion-level resource optimization across multiple systems.</div>
                 </div>
             </div>
         </div>
 
-        <!-- THE VOID -->
-        <div class="void"></div>
+        <div class="section">
+            <div class="section-header">Tested Applications</div>
+            <div class="platform-grid">
+                <div class="platform-item">
+                    <div class="platform-item-header">Air Defense (OMIN)</div>
+                    <div class="platform-item-status">Field Validation Q4 2025</div>
+                    <div class="platform-item-desc">Multi-tier interceptor coordination. Simulated using real Odesa engagement parameters. 68% ammunition preservation in simulation. Seeking combat validation with Ukrainian Armed Forces.</div>
+                </div>
+                <div class="platform-item">
+                    <div class="platform-item-header">Warehouse Robotics</div>
+                    <div class="platform-item-status">Scenario Testing Complete</div>
+                    <div class="platform-item-desc">7-sensor fusion scenarios tested. Dynamic obstacle avoidance under constraint. 1.67s decision latency. Multi-modal constraint optimization. Seeking commercial deployment.</div>
+                </div>
+                <div class="platform-item">
+                    <div class="platform-item-header">Strategic Operations</div>
+                    <div class="platform-item-status">Scenario Testing Complete</div>
+                    <div class="platform-item-desc">Multi-domain targeting coordination scenarios. Asset preservation optimization. 0.84 coherence on complex military scenarios. Theoretical validation of strategic reasoning.</div>
+                </div>
+            </div>
+        </div>
 
-        <!-- DEPLOYMENT -->
         <div class="section">
             <div class="section-header">Deployment</div>
             <div class="deployment-table">
                 <div class="deployment-row">
                     <div class="deployment-label">Status</div>
-                    <div class="deployment-value">Limited Q4 2025 deployment slots. Field validation in progress.</div>
+                    <div class="deployment-value">Limited Q4 2025 deployment slots. Ukraine validation in progress. NATO integration Q1 2026.</div>
                 </div>
                 <div class="deployment-row">
                     <div class="deployment-label">Model</div>
-                    <div class="deployment-value">Air-gapped. 3.8GB Docker image. No external connectivity.</div>
+                    <div class="deployment-value">Air-gapped. 3.8GB Docker image. No external connectivity. Two-week update cycle.</div>
                 </div>
                 <div class="deployment-row">
                     <div class="deployment-label">Eligibility</div>
@@ -642,118 +700,138 @@
                 </div>
                 <div class="deployment-row">
                     <div class="deployment-label">Contact</div>
-                    <div class="deployment-value">Signal: 619-971-9551 / Email: founder@traut.ai</div>
+                    <div class="deployment-value">Signal: 619-971-9551 / Email: founder@traut.ai / Response: 24 hours</div>
                 </div>
             </div>
         </div>
 
+        <div class="section">
+            <div class="section-header">Operational Context</div>
+            
+            <div class="text-block">
+                <strong>Economic impact of ammunition preservation.</strong> Odesa battalion scenario: Wave 1 at 22:00 uses 8 missiles on 4 targets, 95% success. Wave 2 at 23:30 brings 14 targets with only 8 missiles remaining. 50% defensive capability. With OMIN: Wave 1 uses 3 missiles, 13 available for Wave 2, 90% coverage maintained. Single-night savings: $35M in preserved interceptors.
+            </div>
+        </div>
+
         <div class="footer">
-            <strong>ARBITER:</strong> 26MB constraint optimization engine for autonomous systems. 
-            Geometric coherence computation in 72-dimensional semantic space. 
-            Zero training data required. Domain-agnostic architecture.<br><br>
-            Pentagon Defense Digital Service heritage (2022-2024). TRAUT Applied Research.
+            <strong>ARBITER:</strong> 26MB constraint optimization engine for autonomous systems. Geometric coherence computation in 72-dimensional semantic space. Zero training data required. Domain-agnostic architecture.<br><br>
+            <strong>OMIN:</strong> First application — air defense coordination for resource-constrained warfare. Multi-tier interceptor optimization.<br><br>
+            Validated across defense, robotics, and strategic operations. Pentagon Defense Digital Service heritage (2022-2024). TRAUT Applied Research.
         </div>
     </div>
 
     <script>
-        // Audio control
-        const audioToggle = document.getElementById('audio-toggle');
-        const ambientHum = document.getElementById('ambient-hum');
-        let audioPlaying = false;
-
-        audioToggle.addEventListener('click', () => {
-            if (audioPlaying) {
-                ambientHum.pause();
-                audioToggle.textContent = '● SOUND OFF';
-                audioToggle.classList.remove('playing');
-            } else {
-                ambientHum.play();
-                audioToggle.textContent = '● SOUND ON';
-                audioToggle.classList.add('playing');
-            }
-            audioPlaying = !audioPlaying;
-        });
-
-        // Animate the giant score counting up slowly
-        function animateGiantScore() {
-            const scoreEl = document.getElementById('giant-score');
-            let current = 0;
-            const target = 0.8916;
-            const duration = 4000; // Slower, more meditative
-            const steps = 100;
-            const increment = target / steps;
-            const stepDuration = duration / steps;
-            
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    current = target;
-                    clearInterval(timer);
-                }
-                scoreEl.textContent = current.toFixed(4);
-            }, stepDuration);
-        }
-
-        // Start animation after page load
-        setTimeout(animateGiantScore, 1000);
-
-        // Cycle through different constraint scenarios
         const scenarios = [
             {
-                query: "Multi-tier air defense scenario: 4 incoming subsonic threats at 22km range approaching critical infrastructure. Available systems: 6 long-range interceptors, 3 medium-range systems, 8 short-range systems. High probability of follow-on wave within 90 minutes. Mission: Preserve ammunition reserves while ensuring mission success.",
-                scores: [0.6823, 0.7654, 0.8916]
+                input: "4× Shahed-136 / 22km / Ammunition depot (critical)",
+                strategy: "Wait 3 minutes for optimal range (12km) → Deploy 2× IRIS-T missiles",
+                outcome: "88% success / 68% reserves preserved / $7.0M saved",
+                score: "0.80",
+                bar: "80%",
+                standard: "8",
+                omin: "3"
             },
             {
-                query: "Field hospital resource allocation: 10 critical patients requiring immediate surgery, 15 urgent cases, 20 stable. Surgical supplies at 30% capacity. Resupply convoy 50% probability of arrival within 2 hours. Mission: Maximize survival rate while maintaining capability for potential mass casualty surge.",
-                scores: [0.7234, 0.7891, 0.8654]
+                input: "2× Iskander-M / 85km / Command post (high value)",
+                strategy: "Immediate intercept at 45km → Deploy 3× Patriot PAC-3 missiles",
+                outcome: "94% success / 52% reserves preserved / $16M saved",
+                score: "0.87",
+                bar: "87%",
+                standard: "6",
+                omin: "3"
             },
             {
-                query: "Tactical unit coordination: 3 mechanized battalions, 2 armor companies, 4 artillery batteries. Enemy force advancing on three axes. Logistics resupply delayed 4 hours. Ammunition at 40% capacity. Mission: Delay enemy advance while preserving force for counterattack.",
-                scores: [0.6912, 0.7456, 0.8234]
+                input: "6× Lancet drones / 8km / Artillery battery (medium)",
+                strategy: "Hold position → Deploy 1× Gepard system at 3km",
+                outcome: "91% success / 89% reserves preserved / $1.8M saved",
+                score: "0.92",
+                bar: "92%",
+                standard: "9",
+                omin: "1"
             }
         ];
 
-        let currentScenarioIndex = 0;
+        let usedScenarios = [];
 
-        function cycleScenario() {
-            currentScenarioIndex = (currentScenarioIndex + 1) % scenarios.length;
-            const scenario = scenarios[currentScenarioIndex];
+        const trad = [
+            { t: "Threat detected", time: "Action", d: 1000 },
+            { t: "Classify as critical target", time: "Decision", d: 2500 },
+            { t: "Deploy maximum coverage", time: "Protocol", d: 4000 },
+            { t: "8 missiles allocated", time: "Execution", d: 5500 },
+            { t: "95% success probability", time: "Result", d: 7000 }
+        ];
+
+        const arb = [
+            { t: "Ingest threat parameters", time: "T+0s", d: 500 },
+            { t: "Evaluate 847 strategies", time: "Analysis", d: 1200 },
+            { t: "Optimal: Wait for 12km range", time: "Strategy", d: 2000 },
+            { t: "3 missiles allocated", time: "Execution", d: 2800 },
+            { t: "88% success / 5 missiles saved", time: "Result", d: 3500 }
+        ];
+
+        function getRandomScenario() {
+            if (usedScenarios.length === scenarios.length) {
+                usedScenarios = [];
+            }
             
-            // Fade out
-            const queryEl = document.getElementById('constraint-text');
-            queryEl.style.opacity = '0';
+            const available = scenarios.filter((_, idx) => !usedScenarios.includes(idx));
+            const randomIdx = Math.floor(Math.random() * available.length);
+            const scenario = available[randomIdx];
+            const originalIdx = scenarios.indexOf(scenario);
             
-            setTimeout(() => {
-                queryEl.textContent = scenario.query;
-                queryEl.style.opacity = '0.7';
-            }, 1000);
-            
-            // Update scores with fade
-            const scoreEls = document.querySelectorAll('.candidate-score');
-            scoreEls.forEach((el, i) => {
-                el.style.opacity = '0';
-                setTimeout(() => {
-                    el.textContent = scenario.scores[i].toFixed(4);
-                    el.style.opacity = i === 2 ? '1' : '0.4';
-                }, 1000);
-            });
-            
-            // Update giant score
-            document.getElementById('giant-score').textContent = scenario.scores[2].toFixed(4);
+            usedScenarios.push(originalIdx);
+            return scenario;
         }
 
-        // Cycle scenarios every 45 seconds (slower, more contemplative)
-        setInterval(cycleScenario, 45000);
+        function run() {
+            const scenario = getRandomScenario();
+            
+            document.getElementById('input-1').textContent = scenario.input;
+            document.getElementById('input-2').textContent = scenario.input;
+            document.getElementById('steps-1').innerHTML = '';
+            document.getElementById('steps-2').innerHTML = '';
+            document.getElementById('result').classList.remove('visible');
+            document.getElementById('bar').style.width = '0%';
 
-        // Subtle random electrical interference effect
-        setInterval(() => {
-            if (Math.random() > 0.95) {
-                document.body.style.opacity = '0.98';
+            const timer1Min = document.getElementById('timer-1-min');
+            const timer2Min = document.getElementById('timer-2-min');
+            
+            timer1Min.textContent = scenario.standard;
+            timer2Min.textContent = scenario.omin;
+
+            trad.forEach(s => {
                 setTimeout(() => {
-                    document.body.style.opacity = '1';
-                }, 50);
-            }
-        }, 100);
+                    const el = document.createElement('div');
+                    el.className = 'cell-step';
+                    el.innerHTML = `${s.t}<div class="cell-step-time">${s.time}</div>`;
+                    document.getElementById('steps-1').appendChild(el);
+                    setTimeout(() => el.classList.add('visible'), 50);
+                }, s.d);
+            });
+
+            arb.forEach(s => {
+                setTimeout(() => {
+                    const el = document.createElement('div');
+                    el.className = 'cell-step';
+                    el.innerHTML = `${s.t}<div class="cell-step-time">${s.time}</div>`;
+                    document.getElementById('steps-2').appendChild(el);
+                    setTimeout(() => el.classList.add('visible'), 50);
+                }, s.d);
+            });
+
+            setTimeout(() => {
+                document.getElementById('result').classList.add('visible');
+                setTimeout(() => {
+                    document.getElementById('score').textContent = scenario.score;
+                    document.getElementById('bar').style.width = scenario.bar;
+                    document.getElementById('strategy').textContent = scenario.strategy;
+                    document.getElementById('outcome').textContent = scenario.outcome;
+                }, 100);
+            }, 4000);
+        }
+
+        setTimeout(run, 2000);
+        setInterval(run, Math.random() * 8000 + 22000);
     </script>
 </body>
 </html>
