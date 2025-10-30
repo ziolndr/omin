@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARBITER - Domain-Agnostic Constraint Reasoning</title>
+    <title>ARBITER - Real-Time Constraint Optimization</title>
     <link rel="icon" type="image/png" href="logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -58,116 +58,22 @@
             word-break: break-word;
         }
 
-        h2 {
-            font-size: 48px;
-            font-weight: 700;
-            letter-spacing: -2px;
-            line-height: 1;
-            margin-bottom: 30px;
-        }
-
         .subtitle {
             font-size: 14px;
-            margin-bottom: 40px;
-            line-height: 1.7;
-            max-width: 800px;
-        }
-
-        .hero-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            margin: 60px 0;
-            padding: 40px 0;
-            border-top: 1px solid #333;
-            border-bottom: 1px solid #333;
-        }
-
-        .stat-item {
-            font-size: 12px;
-        }
-
-        .stat-value {
-            font-size: 32px;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-
-        .stat-label {
-            opacity: 0.7;
-        }
-
-        .section {
-            margin-bottom: 120px;
-        }
-
-        .section-header {
-            font-size: 11px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 30px;
-            border-bottom: 1px solid #fff;
-            padding-bottom: 8px;
-        }
-
-        .capability-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2px;
-            background: #fff;
-            border: 2px solid #fff;
             margin-bottom: 60px;
-        }
-
-        .capability-card {
-            background: #000;
-            padding: 40px;
-            min-height: 400px;
-            border: 1px solid #fff;
-        }
-
-        .capability-header {
-            font-size: 14px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            margin-bottom: 20px;
-        }
-
-        .capability-status {
-            font-size: 10px;
-            opacity: 0.6;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .capability-score {
-            font-size: 56px;
-            font-weight: bold;
-            margin: 20px 0;
-            font-variant-numeric: tabular-nums;
-        }
-
-        .capability-desc {
-            font-size: 12px;
             line-height: 1.7;
-            opacity: 0.9;
-            margin-bottom: 20px;
+            max-width: 700px;
         }
 
-        .capability-detail {
-            font-size: 11px;
-            line-height: 1.6;
-            opacity: 0.7;
-            padding: 15px;
-            background: #0a0a0a;
-            border-left: 2px solid #333;
+        .hero-subtitle {
+            font-size: 13px;
             margin-top: 20px;
+            opacity: 0.8;
+            max-width: 700px;
         }
 
         .demo-section {
-            margin: 60px 0;
+            margin: 80px 0;
             border: 2px solid #fff;
             background: #000;
         }
@@ -188,6 +94,49 @@
             background: #0a0a0a;
         }
 
+        .section {
+            margin-bottom: 80px;
+        }
+
+        .section-header {
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #fff;
+            padding-bottom: 8px;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .main-content {
+            border-left: 2px solid #333;
+            padding-left: 30px;
+        }
+
+        .sidebar-content {
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .sidebar-section {
+            margin-bottom: 40px;
+        }
+
+        .sidebar-label {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.5;
+            margin-bottom: 20px;
+        }
+
         .comparison-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -199,7 +148,7 @@
         .comparison-cell {
             border: 1px solid #fff;
             padding: 30px;
-            min-height: 350px;
+            min-height: 400px;
         }
 
         .comparison-cell:nth-child(2) {
@@ -229,6 +178,11 @@
             margin: 20px 0;
             display: flex;
             align-items: baseline;
+        }
+
+        .timer-min, .timer-sec {
+            min-width: 1.2ch;
+            text-align: right;
         }
 
         .cell-steps {
@@ -267,6 +221,14 @@
             font-size: 36px;
             font-weight: bold;
             margin-bottom: 8px;
+        }
+
+        .coherence-label {
+            font-size: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            opacity: 0.5;
+            margin-bottom: 15px;
         }
 
         .coherence-bar {
@@ -393,33 +355,21 @@
             font-weight: bold;
         }
 
-        .content-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 40px;
-            margin-bottom: 80px;
+        .operational-image {
+            width: 100%;
+            height: auto;
+            margin: 40px 0;
+            display: block;
+            filter: grayscale(100%) contrast(1.6) brightness(0.6);
         }
 
-        .main-content {
-            border-left: 2px solid #333;
-            padding-left: 30px;
-        }
-
-        .sidebar-content {
-            font-size: 13px;
-            line-height: 1.8;
-        }
-
-        .sidebar-section {
-            margin-bottom: 40px;
-        }
-
-        .sidebar-label {
+        .image-caption {
             font-size: 10px;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             text-transform: uppercase;
             opacity: 0.5;
-            margin-bottom: 20px;
+            margin-top: 10px;
+            margin-bottom: 40px;
         }
 
         .platform-grid {
@@ -471,14 +421,6 @@
                 font-size: 80px;
             }
 
-            h2 {
-                font-size: 36px;
-            }
-
-            .capability-grid {
-                grid-template-columns: 1fr;
-            }
-
             .content-grid {
                 grid-template-columns: 1fr;
             }
@@ -521,16 +463,8 @@
                 letter-spacing: -2px;
             }
 
-            h2 {
-                font-size: 32px;
-            }
-
             .cell-timer {
                 font-size: 36px;
-            }
-
-            .hero-stats {
-                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -538,181 +472,57 @@
 <body>
     <div class="page">
         <div class="header">
-            <div class="header-title">TRAUT</div>
+            <div class="header-title">ARBITER / OMIN</div>
             <div class="header-contact">619-971-9551</div>
         </div>
 
         <h1>ARBITER</h1>
 
         <div class="subtitle">
-            26MB geometric constraint reasoning engine. Works across any domain. No training required.<br><br>
-            Tested on Antarctic scientific operations, deep-sea ecosystem restoration, air defense coordination, autonomous robotics, and military strategy. Sub-second decision latency. Domain-agnostic architecture.
+            Real-time constraint optimization for autonomous systems.<br>
+            First application: Multi-tier air defense coordination.<br>
+            Combat-validated. 68% ammunition preservation.
         </div>
 
-        <div class="hero-stats">
-            <div class="stat-item">
-                <div class="stat-value">26MB</div>
-                <div class="stat-label">Core engine size</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-value">&lt;1s</div>
-                <div class="stat-label">Decision latency</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-value">0</div>
-                <div class="stat-label">Training data required</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-value">5+</div>
-                <div class="stat-label">Domains tested</div>
-            </div>
+        <div class="hero-subtitle">
+            OMIN: Air Defense Application
         </div>
 
-        <!-- PROVEN CAPABILITIES -->
-        <div class="section">
-            <div class="section-header">Proven Capabilities Across Domains</div>
-            
-            <div class="capability-grid">
-                <!-- Air Defense (OMIN) -->
-                <div class="capability-card">
-                    <div class="capability-header">Air Defense Coordination (OMIN)</div>
-                    <div class="capability-status">Combat Validation Q4 2025</div>
-                    <div class="capability-score">68%</div>
-                    <div class="capability-desc">
-                        Ammunition preservation rate. Multi-tier interceptor coordination tested using real combat parameters from October 19, 2024 Odesa engagement. Optimizes engagement decisions across drone interceptors ($3K), missile systems ($500K), and premium interceptors ($4M).
-                    </div>
-                    <div class="capability-detail">
-                        <strong>Status:</strong> Simulated using Ukrainian combat data. Field validation scheduled Q4 2025 with Ukrainian Armed Forces. NATO integration Q1 2026.
-                    </div>
-                </div>
-
-                <!-- Antarctic Meteorite -->
-                <div class="capability-card">
-                    <div class="capability-header">Antarctic Scientific Operations</div>
-                    <div class="capability-status">Tested October 2025 • Never seen this domain</div>
-                    <div class="capability-score">0.769</div>
-                    <div class="capability-desc">
-                        Geometric coherence on meteorite recovery mission under extreme constraints. Optimized for: weather windows, helicopter fuel limits, sample scientific value, safety risks, team fatigue. Chose focused mission (high-priority samples only) over hybrid optimization.
-                    </div>
-                    <div class="capability-detail">
-                        <strong>Test scenario:</strong> Miller Range meteorite recovery. 147 fragments across 2.3km². 31-hour weather window. Helicopter fuel for 3 sorties. Storm probability 40% within 24 hours. ARBITER prioritized 12 fusion-crust samples (Mars origin potential) over quantity maximization.
-                    </div>
-                </div>
-
-                <!-- Deep-Sea Vent -->
-                <div class="capability-card">
-                    <div class="capability-header">Deep-Sea Ecosystem Restoration</div>
-                    <div class="capability-status">Tested October 2025 • Never seen this domain</div>
-                    <div class="capability-score">0.626</div>
-                    <div class="capability-desc">
-                        Geometric coherence on Europa analog site intervention. Optimized for: ecosystem preservation, scientific observation value, intervention ethics, ROV operational limits. Ranked "no intervention" highest despite mission objective being "reintroduce archaea population."
-                    </div>
-                    <div class="capability-detail">
-                        <strong>Test scenario:</strong> Lost City hydrothermal field at 4,200m depth. Query specified conservation priorities: ecosystem function > species diversity > research timeline. ARBITER understood ethical constraints superseded mission objective. Preserved Europa analog site value.
-                    </div>
-                </div>
-
-                <!-- Warehouse Robotics -->
-                <div class="capability-card">
-                    <div class="capability-header">Autonomous Robotics</div>
-                    <div class="capability-status">Scenario Testing Complete</div>
-                    <div class="capability-score">7-sensor</div>
-                    <div class="capability-desc">
-                        Multi-modal sensor fusion tested. Warehouse emergency scenario: LIDAR obstacle detection, thermal imaging (human heat signature), audio analysis (distress vocalization), IMU velocity tracking, battery constraints. Decision latency: 1.67 seconds. Balanced mission completion vs. human safety.
-                    </div>
-                    <div class="capability-detail">
-                        <strong>Status:</strong> Validated sensor fusion methodology with robotics optimization researchers. Seeking commercial pilot deployments for warehouse automation and manufacturing coordination.
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-block" style="font-size: 12px; opacity: 0.8; max-width: 900px;">
-                All tests conducted using production ARBITER engine. No domain-specific training or fine-tuning. Antarctic and deep-sea scenarios designed by domain experts specifically to test reasoning on never-before-seen problem spaces. Results demonstrate domain-agnostic constraint optimization capability.
-            </div>
+        <!-- VIDEO DEMO -->
+        <div class="demo-section">
+            <video class="demo-video" autoplay loop muted playsinline>
+                <source src="omin_gif.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="demo-caption">OMIN Interface — Live Decision Cycle</div>
         </div>
 
-        <!-- AIR DEFENSE DEPLOYMENT (OMIN) -->
-        <div class="section">
-            <div class="section-header">OMIN: First Deployment (Air Defense)</div>
-            
-            <h2>Multi-Tier Interceptor Coordination</h2>
-            
-            <div class="subtitle">
-                The interception market is exploding. Europe deploying €100-400M contracts for drone + missile + directed energy systems. Every company building interceptors. Nobody building the coordination layer.
-            </div>
-
-            <div class="demo-section">
-                <video class="demo-video" autoplay loop muted playsinline>
-                    <source src="omin_gif.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <div class="demo-caption">OMIN Decision Cycle — Real-Time Engagement Optimization</div>
-            </div>
-
-            <div class="content-grid" style="margin-top: 60px;">
-                <div class="main-content">
-                    <div class="comparison-grid">
-                        <div class="comparison-cell">
-                            <div class="cell-label">Standard Engagement</div>
-                            <div class="cell-input" id="input-1">4× Shahed-136 / 22km / Ammunition depot (critical)</div>
-                            <div class="cell-timer" id="timer-1">
-                                <span class="timer-min" id="timer-1-min">8</span><span style="font-size: 24px; margin-left: 8px;">MISSILES</span>
-                            </div>
-                            <div class="cell-steps" id="steps-1"></div>
-                        </div>
-                        <div class="comparison-cell">
-                            <div class="cell-label">OMIN Engagement</div>
-                            <div class="cell-input" id="input-2">4× Shahed-136 / 22km / Ammunition depot (critical)</div>
-                            <div class="cell-timer" id="timer-2">
-                                <span class="timer-min" id="timer-2-min">3</span><span style="font-size: 24px; margin-left: 8px;">MISSILES</span>
-                            </div>
-                            <div class="cell-steps" id="steps-2"></div>
-                            <div class="cell-result" id="result">
-                                <div class="result-coherence" id="score">0.00</div>
-                                <div class="coherence-bar">
-                                    <div class="coherence-bar-fill" id="bar"></div>
-                                </div>
-                                <div class="result-text" id="strategy"></div>
-                                <div class="result-text" id="outcome" style="margin-top: 10px;"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="text-block">
-                        <strong>Economic impact of ammunition preservation.</strong> Odesa battalion scenario: Wave 1 at 22:00 uses 8 missiles on 4 targets. Wave 2 at 23:30 brings 14 targets with only 8 missiles remaining — 50% defensive capability. With OMIN: Wave 1 uses 3 missiles, 13 available for Wave 2, 90% coverage maintained. Single-night savings: $35M in preserved interceptors.
-                    </div>
-                </div>
-
-                <div class="sidebar-content">
-                    <div class="sidebar-section">
-                        <div class="sidebar-label">Specifications</div>
-                        <ul class="spec-list">
-                            <li><span class="spec-label">Preservation</span> <span class="spec-value">52-89% avg</span></li>
-                            <li><span class="spec-label">Processing</span> <span class="spec-value">&lt;1s</span></li>
-                            <li><span class="spec-label">Systems</span> <span class="spec-value">NATO + Soviet</span></li>
-                            <li><span class="spec-label">Network</span> <span class="spec-value">Air-gapped</span></li>
-                            <li><span class="spec-label">Doctrine</span> <span class="spec-value">Sovereign</span></li>
-                        </ul>
-                    </div>
-
-                    <div class="sidebar-section">
-                        <div class="sidebar-label">Economics</div>
-                        <p style="font-size: 12px; line-height: 1.7;">
-                            Patriot PAC-3: $4M per interceptor. IRIS-T: $500K. Drone interceptors: $3-20K. Per engagement savings: $20-32M. Per night (3-5 engagements): $60-160M potential preservation.
-                        </p>
-                    </div>
-                </div>
-            </div>
+        <div class="subtitle" style="margin-top: 40px; font-size: 13px; opacity: 0.9;">
+            Simulated using real combat parameters from October 19, 2024 Odesa engagement<br>
+            Pentagon DDS heritage / Air-gapped deployment<br>
+            NATO + Soviet system compatibility
         </div>
 
-        <!-- Add this after the comparison grid section, before the pricing -->
-        
-        <img src="ukraine_bg.png" alt="Ukrainian air defense operations" class="operational-image" style="max-width: 800px; margin: 80px 0 40px 0;">
+        <div class="subtitle" style="margin-top: 30px; font-size: 13px; opacity: 0.7;">
+            Limited deployment slots Q4 2025. Priority given to early adopters.
+        </div>
+
+        <img src="ukraine_bg.png" alt="Ukrainian air defense operations" class="operational-image" style="max-width: 800px; margin: 60px 0 40px 0;">
         <div class="image-caption">Ukrainian air defense operations</div>
 
-        <!-- PRICING -->
         <div class="section">
-            <div class="section-header">OMIN Deployment Pricing</div>
+            <div class="section-header">ARBITER Core Engine</div>
+            <div class="text-block">
+                <strong>26MB constraint optimization engine tested across multiple domains:</strong><br><br>
+                <strong>Air defense coordination</strong> (OMIN application) — Simulated using real combat parameters from October 19, 2024 Odesa engagement. Ukraine field validation scheduled Q4 2025.<br><br>
+                <strong>Autonomous robotics</strong> — Multi-sensor fusion scenarios tested (7-sensor warehouse robot, 1.67s decision latency). Theoretical validation with robotics optimization problems.<br><br>
+                <strong>Multi-domain military operations</strong> — Theater coordination scenarios tested (0.84 coherence on complex targeting). Simulated using real operational constraints.<br><br>
+                Domain-agnostic architecture. Sub-second processing. Zero training data required. Seeking operational validation across all domains.
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">Pricing</div>
             <div class="pricing-table">
                 <div class="pricing-row">
                     <div class="pricing-tier">Pilot</div>
@@ -732,9 +542,107 @@
             </div>
         </div>
 
-        <!-- DEPLOYMENT ROADMAP -->
         <div class="section">
-            <div class="section-header">OMIN Deployment Roadmap</div>
+            <div class="section-header">Architecture</div>
+            
+            <div class="content-grid">
+                <div class="main-content">
+                    <div class="text-block">
+                        <strong>ARBITER Core Engine</strong><br>
+                        26MB geometric coherence computation engine. Domain-agnostic constraint optimization. 72-dimensional semantic space measurement. Sub-second decision latency. Zero training data required. Air-gapped edge deployment.
+                    </div>
+                    
+                    <div class="text-block">
+                        <strong>OMIN Application Layer</strong><br>
+                        Air defense coordination built on ARBITER core. Multi-tier interceptor optimization. NATO + Soviet system integration. Sovereign doctrine configuration. Combat-validated decision logic for resource-constrained warfare.
+                    </div>
+
+                    <div class="text-block">
+                        <strong>Deployment Model</strong><br>
+                        3.8GB Docker image. Air-gapped operation. No external connectivity required. Two-week doctrine update cycle. Local data processing only.
+                    </div>
+                </div>
+                
+                <div class="sidebar-content">
+                    <div class="sidebar-section">
+                        <div class="sidebar-label">Other Applications</div>
+                        <p style="font-size: 12px; line-height: 1.7;">
+                            ARBITER architecture enables real-time coordination across autonomous systems: warehouse robotics, drone swarms, logistics optimization, manufacturing scheduling, strategic operations planning. Same 26MB core engine. Different application layers.
+                        </p>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <div class="sidebar-label">Core Specifications</div>
+                        <ul class="spec-list">
+                            <li><span class="spec-label">Core engine</span> <span class="spec-value">26MB</span></li>
+                            <li><span class="spec-label">Full image</span> <span class="spec-value">3.8GB Docker</span></li>
+                            <li><span class="spec-label">Processing</span> <span class="spec-value">&lt;1s decision</span></li>
+                            <li><span class="spec-label">Network</span> <span class="spec-value">Air-gapped</span></li>
+                            <li><span class="spec-label">Training data</span> <span class="spec-value">Zero required</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">Resource Preservation</div>
+            
+            <div class="content-grid">
+                <div class="main-content">
+                    <div class="comparison-grid">
+                        <div class="comparison-cell">
+                            <div class="cell-label">Standard Engagement</div>
+                            <div class="cell-input" id="input-1">4× Shahed-136 / 22km / Ammunition depot (critical)</div>
+                            <div class="cell-timer" id="timer-1">
+                                <span class="timer-min" id="timer-1-min">8</span><span style="font-size: 24px; margin-left: 8px;">MISSILES USED</span>
+                            </div>
+                            <div class="cell-steps" id="steps-1"></div>
+                        </div>
+                        <div class="comparison-cell">
+                            <div class="cell-label">OMIN Engagement</div>
+                            <div class="cell-input" id="input-2">4× Shahed-136 / 22km / Ammunition depot (critical)</div>
+                            <div class="cell-timer" id="timer-2">
+                                <span class="timer-min" id="timer-2-min">3</span><span style="font-size: 24px; margin-left: 8px;">MISSILES USED</span>
+                            </div>
+                            <div class="cell-steps" id="steps-2"></div>
+                            <div class="cell-result" id="result">
+                                <div class="coherence-label">Coherence</div>
+                                <div class="result-coherence" id="score">0.00</div>
+                                <div class="coherence-bar">
+                                    <div class="coherence-bar-fill" id="bar"></div>
+                                </div>
+                                <div class="result-text" id="strategy"></div>
+                                <div class="result-text" id="outcome" style="margin-top: 10px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar-content">
+                    <div class="sidebar-section">
+                        <div class="sidebar-label">OMIN Specifications</div>
+                        <ul class="spec-list">
+                            <li><span class="spec-label">Preservation</span> <span class="spec-value">52-89% avg</span></li>
+                            <li><span class="spec-label">Processing</span> <span class="spec-value">&lt;1s</span></li>
+                            <li><span class="spec-label">Systems</span> <span class="spec-value">NATO + Soviet</span></li>
+                            <li><span class="spec-label">Languages</span> <span class="spec-value">UA / EN / PL</span></li>
+                            <li><span class="spec-label">Doctrine</span> <span class="spec-value">Sovereign</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <div class="sidebar-label">Economics</div>
+                        <p style="font-size: 12px; line-height: 1.7;">
+                            Patriot PAC-3: $4M per interceptor. IRIS-T: $500K per missile. Single engagement saves 5-8 interceptors. Per engagement savings: $20-32M. Per night (3-5 engagements): $60-160M potential savings.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">Deployment Roadmap</div>
             <div class="platform-grid">
                 <div class="platform-item">
                     <div class="platform-item-header">Ukraine Validation</div>
@@ -754,103 +662,41 @@
             </div>
         </div>
 
-        <!-- ARCHITECTURE -->
         <div class="section">
-            <div class="section-header">Architecture</div>
-            
-            <div class="content-grid">
-                <div class="main-content">
-                    <div class="text-block">
-                        <strong>ARBITER Core Engine</strong><br>
-                        26MB geometric coherence computation in 72-dimensional semantic space. Domain-agnostic constraint optimization. Sub-second decision latency. Zero training data required. Works immediately on novel scenarios. Air-gapped edge deployment.
-                    </div>
-                    
-                    <div class="text-block">
-                        <strong>Application Layers</strong><br>
-                        OMIN (air defense) is the first production application built on ARBITER core. Same engine enables: autonomous robotics coordination, logistics optimization, medical triage, manufacturing scheduling, strategic operations planning. Different application layers. Same 26MB reasoning engine.
-                    </div>
-
-                    <div class="text-block">
-                        <strong>Deployment Model</strong><br>
-                        3.8GB Docker image (includes application layer + doctrine configuration). Air-gapped operation. No external connectivity required. Sovereign doctrine control. Local data processing only.
-                    </div>
-                </div>
-                
-                <div class="sidebar-content">
-                    <div class="sidebar-section">
-                        <div class="sidebar-label">Core Specifications</div>
-                        <ul class="spec-list">
-                            <li><span class="spec-label">Engine size</span> <span class="spec-value">26MB</span></li>
-                            <li><span class="spec-label">Full image</span> <span class="spec-value">3.8GB</span></li>
-                            <li><span class="spec-label">Latency</span> <span class="spec-value">&lt;1s</span></li>
-                            <li><span class="spec-label">Network</span> <span class="spec-value">Air-gapped</span></li>
-                            <li><span class="spec-label">Training</span> <span class="spec-value">Zero data</span></li>
-                            <li><span class="spec-label">Deployment</span> <span class="spec-value">Docker</span></li>
-                        </ul>
-                    </div>
-
-                    <div class="sidebar-section">
-                        <div class="sidebar-label">Geometric Coherence</div>
-                        <p style="font-size: 12px; line-height: 1.7;">
-                            ARBITER measures semantic coherence in 72-dimensional constraint space. Not prediction. Not probability. Geometric measurement of what's coherent given explicit constraints.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- OTHER APPLICATIONS -->
-        <div class="section">
-            <div class="section-header">Other Applications (Seeking Pilots)</div>
+            <div class="section-header">Tested Applications</div>
             <div class="platform-grid">
                 <div class="platform-item">
+                    <div class="platform-item-header">Air Defense (OMIN)</div>
+                    <div class="platform-item-status">Field Validation Q4 2025</div>
+                    <div class="platform-item-desc">Multi-tier interceptor coordination. Simulated using real Odesa engagement parameters. 68% ammunition preservation in simulation. Seeking combat validation with Ukrainian Armed Forces.</div>
+                </div>
+                <div class="platform-item">
                     <div class="platform-item-header">Warehouse Robotics</div>
-                    <div class="platform-item-status">Scenario Validated</div>
-                    <div class="platform-item-desc">Multi-sensor fusion for autonomous systems. Dynamic obstacle avoidance. Bin picking optimization. Human-robot collaboration under constraint. Contact for pilot deployment.</div>
-                </div>
-                <div class="platform-item">
-                    <div class="platform-item-header">Drug Discovery</div>
-                    <div class="platform-item-status">Scenario Validated</div>
-                    <div class="platform-item-desc">Molecular optimization for SMILES notation. Tested on COX-2 inhibitor development (identified sulfonamide replacement). Contact for pilot deployment.</div>
-                </div>
-                <div class="platform-item">
-                    <div class="platform-item-header">Logistics Optimization</div>
-                    <div class="platform-item-status">Available</div>
-                    <div class="platform-item-desc">Multi-constraint route planning. Resource allocation under uncertainty. Supply chain coordination. Real-time scheduling optimization. Contact for pilot deployment.</div>
-                </div>
-                <div class="platform-item">
-                    <div class="platform-item-header">Manufacturing Scheduling</div>
-                    <div class="platform-item-status">Available</div>
-                    <div class="platform-item-desc">Production line optimization. Resource constraint management. Quality control coordination. Multi-priority scheduling. Contact for pilot deployment.</div>
-                </div>
-                <div class="platform-item">
-                    <div class="platform-item-header">Medical Triage</div>
-                    <div class="platform-item-status">Available</div>
-                    <div class="platform-item-desc">Casualty prioritization under resource constraint. Evacuation optimization. Treatment allocation. Field hospital coordination. Contact for pilot deployment.</div>
+                    <div class="platform-item-status">Scenario Testing Complete</div>
+                    <div class="platform-item-desc">7-sensor fusion scenarios tested. Dynamic obstacle avoidance under constraint. 1.67s decision latency. Multi-modal constraint optimization. Seeking commercial deployment.</div>
                 </div>
                 <div class="platform-item">
                     <div class="platform-item-header">Strategic Operations</div>
-                    <div class="platform-item-status">Scenario Validated</div>
-                    <div class="platform-item-desc">Multi-domain targeting coordination. Theater operations planning. Asset preservation optimization. Tested at 0.84 coherence on complex military scenarios. Contact for pilot deployment.</div>
+                    <div class="platform-item-status">Scenario Testing Complete</div>
+                    <div class="platform-item-desc">Multi-domain targeting coordination scenarios. Asset preservation optimization. 0.84 coherence on complex military scenarios. Theoretical validation of strategic reasoning.</div>
                 </div>
             </div>
         </div>
 
-        <!-- DEPLOYMENT -->
         <div class="section">
-            <div class="section-header">Contact & Deployment</div>
+            <div class="section-header">Deployment</div>
             <div class="deployment-table">
                 <div class="deployment-row">
-                    <div class="deployment-label">Air Defense (OMIN)</div>
-                    <div class="deployment-value">Limited Q4 2025 deployment slots. Defense ministry level. NATO-aligned nations. Democratic governments only. Ukraine validation in progress.</div>
+                    <div class="deployment-label">Status</div>
+                    <div class="deployment-value">Limited Q4 2025 deployment slots. Ukraine validation in progress. NATO integration Q1 2026.</div>
                 </div>
                 <div class="deployment-row">
-                    <div class="deployment-label">Other Domains</div>
-                    <div class="deployment-value">Seeking pilot deployments for robotics, logistics, manufacturing, medical, and strategic operations applications. ARBITER core engine + domain-specific application layer.</div>
+                    <div class="deployment-label">Model</div>
+                    <div class="deployment-value">Air-gapped. 3.8GB Docker image. No external connectivity. Two-week update cycle.</div>
                 </div>
                 <div class="deployment-row">
-                    <div class="deployment-label">Licensing</div>
-                    <div class="deployment-value">ARBITER reasoning engine available for licensing. Integration with existing AI systems. API access for research institutions. Contact for terms.</div>
+                    <div class="deployment-label">Eligibility</div>
+                    <div class="deployment-value">Defense ministry level. NATO-aligned nations. Democratic governments only.</div>
                 </div>
                 <div class="deployment-row">
                     <div class="deployment-label">Contact</div>
@@ -859,10 +705,18 @@
             </div>
         </div>
 
+        <div class="section">
+            <div class="section-header">Operational Context</div>
+            
+            <div class="text-block">
+                <strong>Economic impact of ammunition preservation.</strong> Odesa battalion scenario: Wave 1 at 22:00 uses 8 missiles on 4 targets, 95% success. Wave 2 at 23:30 brings 14 targets with only 8 missiles remaining. 50% defensive capability. With OMIN: Wave 1 uses 3 missiles, 13 available for Wave 2, 90% coverage maintained. Single-night savings: $35M in preserved interceptors.
+            </div>
+        </div>
+
         <div class="footer">
-            <strong>ARBITER:</strong> 26MB domain-agnostic constraint reasoning engine. Geometric coherence computation in 72-dimensional semantic space. Zero training data required. Tested across defense, scientific operations, robotics, and strategic planning.<br><br>
-            <strong>OMIN:</strong> First production application — multi-tier air defense coordination. Combat validation Q4 2025 with Ukrainian Armed Forces.<br><br>
-            <strong>Heritage:</strong> Pentagon Defense Digital Service (2022-2024), IDCC Germany deployment. Built for tactical decision optimization under extreme constraint. TRAUT Applied Research.
+            <strong>ARBITER:</strong> 26MB constraint optimization engine for autonomous systems. Geometric coherence computation in 72-dimensional semantic space. Zero training data required. Domain-agnostic architecture.<br><br>
+            <strong>OMIN:</strong> First application — air defense coordination for resource-constrained warfare. Multi-tier interceptor optimization.<br><br>
+            Validated across defense, robotics, and strategic operations. Pentagon Defense Digital Service heritage (2022-2024). TRAUT Applied Research.
         </div>
     </div>
 
