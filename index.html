@@ -135,9 +135,29 @@
             opacity: 0.6;
         }
 
+        /* Ukrainian operations image */
+        .proof-image {
+            width: 100%;
+            max-width: 900px;
+            height: auto;
+            margin: 80px auto 20px auto;
+            display: block;
+            filter: grayscale(100%) contrast(1.3) brightness(0.7);
+            opacity: 0.85;
+        }
+
+        .image-caption {
+            text-align: center;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.3;
+            margin-bottom: 80px;
+        }
+
         /* Video demo */
         .demo-container {
-            margin: 80px 0;
+            margin: 0 0 80px 0;
             aspect-ratio: 16/9;
             background: #0a0a0a;
             border: 1px solid rgba(255,255,255,0.1);
@@ -344,6 +364,10 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Ukrainian operations image -->
+            <img src="ukraine_bg.png" alt="Ukrainian air defense operations" class="proof-image">
+            <div class="image-caption">Ukrainian air defense operations</div>
 
             <!-- Demo video -->
             <div class="demo-container">
