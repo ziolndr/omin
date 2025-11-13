@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARBITER - Real-Time Constraint Optimization</title>
+    <title>OMIN - Interceptor Decision Optimization for NATO Air Defense</title>
     <link rel="icon" type="image/png" href="logo.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -59,17 +59,64 @@
         }
 
         .subtitle {
-            font-size: 14px;
-            margin-bottom: 60px;
-            line-height: 1.7;
-            max-width: 700px;
+            font-size: 18px;
+            margin-bottom: 30px;
+            line-height: 1.5;
+            max-width: 800px;
+            font-weight: bold;
         }
 
         .hero-subtitle {
-            font-size: 13px;
-            margin-top: 20px;
-            opacity: 0.8;
-            max-width: 700px;
+            font-size: 14px;
+            margin-bottom: 60px;
+            line-height: 1.7;
+            max-width: 800px;
+            opacity: 0.9;
+        }
+
+        .alert-box {
+            border: 2px solid #ff0000;
+            padding: 30px;
+            margin: 60px 0;
+            background: #0a0a0a;
+        }
+
+        .alert-header {
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #ff0000;
+            margin-bottom: 20px;
+        }
+
+        .alert-content {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .alert-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .alert-stat {
+            border-left: 2px solid #ff0000;
+            padding-left: 15px;
+        }
+
+        .alert-stat-value {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .alert-stat-label {
+            font-size: 11px;
+            opacity: 0.7;
         }
 
         .demo-section {
@@ -431,6 +478,10 @@
                 border-top: 2px solid #333;
                 padding-top: 30px;
             }
+
+            .alert-stats {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 768px) {
@@ -472,20 +523,44 @@
 <body>
     <div class="page">
         <div class="header">
-            <div class="header-title">ARBITER / OMIN</div>
-            <div class="header-contact">619-971-9551</div>
+            <div class="header-title">OMIN</div>
+            <div class="header-contact">Signal: 619-971-9551</div>
         </div>
 
-        <h1>ARBITER</h1>
+        <h1>OMIN</h1>
 
         <div class="subtitle">
-            Real-time constraint optimization for autonomous systems.<br>
-            First application: Multi-tier air defense coordination.<br>
-            Combat-validated. 68% ammunition preservation.
+            Interceptor Decision Optimization<br>
+            for NATO Air Defense
         </div>
 
         <div class="hero-subtitle">
-            OMIN: Air Defense Application
+            Russia produces 2,700 Shaheds per month — five times 2024 production rates. Every NATO country faces the same economic crisis: saturation attacks force defenders to spend 100-200x more than attackers. OMIN optimizes interceptor allocation in real-time, preserving 68% of ammunition while maintaining mission success.<br><br>
+            Architecture validated through simulation using October 19, 2024 Odesa engagement parameters. Ukrainian Armed Forces evaluation in progress. NATO integration planned Q1 2026.
+        </div>
+
+        <!-- CRISIS ALERT -->
+        <div class="alert-box">
+            <div class="alert-header">The Interceptor Economics Crisis</div>
+            <div class="alert-content">
+                <strong>Cost Asymmetry:</strong> Patriot PAC-3 costs $4M per shot. IRIS-T costs $500K per shot. Shahed-136 costs $20K each. Defenders pay 100-200x more than attackers. This imbalance is unsustainable.<br><br>
+                <strong>Production Surge:</strong> Russian Shahed output hit 2,700 units/month in 2025 — five times 2024 rates. European air defense batteries face ammunition depletion within weeks of sustained attacks.<br><br>
+                <strong>Procurement Wave:</strong> UK, Germany, France have announced €100-400M interceptor contracts. 2026 is the tipping point for European air defense modernization.
+            </div>
+            <div class="alert-stats">
+                <div class="alert-stat">
+                    <div class="alert-stat-value">2,700/mo</div>
+                    <div class="alert-stat-label">Russian Shahed Production</div>
+                </div>
+                <div class="alert-stat">
+                    <div class="alert-stat-value">200:1</div>
+                    <div class="alert-stat-label">Cost Asymmetry (Patriot vs Shahed)</div>
+                </div>
+                <div class="alert-stat">
+                    <div class="alert-stat-value">€400M</div>
+                    <div class="alert-stat-label">European Contract Range</div>
+                </div>
+            </div>
         </div>
 
         <!-- VIDEO DEMO -->
@@ -494,120 +569,50 @@
                 <source src="omin_gif.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
-            <div class="demo-caption">OMIN Interface — Live Decision Cycle</div>
-        </div>
-
-        <div class="subtitle" style="margin-top: 40px; font-size: 13px; opacity: 0.9;">
-            Simulated using real combat parameters from October 19, 2024 Odesa engagement<br>
-            Pentagon DDS heritage / Air-gapped deployment<br>
-            NATO + Soviet system compatibility
-        </div>
-
-        <div class="subtitle" style="margin-top: 30px; font-size: 13px; opacity: 0.7;">
-            Limited deployment slots Q4 2025. Priority given to early adopters.
+            <div class="demo-caption">OMIN Interface — Real-Time Decision Cycle (Simulation)</div>
         </div>
 
         <img src="ukraine_bg.png" alt="Ukrainian air defense operations" class="operational-image" style="max-width: 800px; margin: 60px 0 40px 0;">
         <div class="image-caption">Ukrainian air defense operations</div>
 
         <div class="section">
-            <div class="section-header">ARBITER Core Engine</div>
+            <div class="section-header">Odesa Validation: October 19, 2024</div>
             <div class="text-block">
-                <strong>26MB constraint optimization engine tested across multiple domains:</strong><br><br>
-                <strong>Air defense coordination</strong> (OMIN application) — Simulated using real combat parameters from October 19, 2024 Odesa engagement. Ukraine field validation scheduled Q4 2025.<br><br>
-                <strong>Autonomous robotics</strong> — Multi-sensor fusion scenarios tested (7-sensor warehouse robot, 1.67s decision latency). Theoretical validation with robotics optimization problems.<br><br>
-                <strong>Multi-domain military operations</strong> — Theater coordination scenarios tested (0.84 coherence on complex targeting). Simulated using real operational constraints.<br><br>
-                Domain-agnostic architecture. Sub-second processing. Zero training data required. Seeking operational validation across all domains.
-            </div>
-        </div>
-
-        <div class="section">
-            <div class="section-header">Pricing</div>
-            <div class="pricing-table">
-                <div class="pricing-row">
-                    <div class="pricing-tier">Pilot</div>
-                    <div class="pricing-cost">$10,000,000</div>
-                    <div class="pricing-details">90-day performance guarantee / One battery / Saves $30M+ or full refund / ROI 3:1 minimum</div>
-                </div>
-                <div class="pricing-row">
-                    <div class="pricing-tier">Battalion</div>
-                    <div class="pricing-cost">$35,000,000/year</div>
-                    <div class="pricing-details">4-6 batteries / Full integration / Saves $100M+ in preserved ammunition annually</div>
-                </div>
-                <div class="pricing-row">
-                    <div class="pricing-tier">Theatre</div>
-                    <div class="pricing-cost">$200,000,000+</div>
-                    <div class="pricing-details">Regional deployment / Multi-year contract / Saves $500M+ in interceptor preservation over term</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="section">
-            <div class="section-header">Architecture</div>
-            
-            <div class="content-grid">
-                <div class="main-content">
-                    <div class="text-block">
-                        <strong>ARBITER Core Engine</strong><br>
-                        26MB geometric coherence computation engine. Domain-agnostic constraint optimization. 72-dimensional semantic space measurement. Sub-second decision latency. Zero training data required. Air-gapped edge deployment.
-                    </div>
-                    
-                    <div class="text-block">
-                        <strong>OMIN Application Layer</strong><br>
-                        Air defense coordination built on ARBITER core. Multi-tier interceptor optimization. NATO + Soviet system integration. Sovereign doctrine configuration. Combat-validated decision logic for resource-constrained warfare.
-                    </div>
-
-                    <div class="text-block">
-                        <strong>Deployment Model</strong><br>
-                        3.8GB Docker image. Air-gapped operation. No external connectivity required. Two-week doctrine update cycle. Local data processing only.
-                    </div>
-                </div>
+                <strong>Real engagement retroactively analyzed with OMIN.</strong><br><br>
                 
-                <div class="sidebar-content">
-                    <div class="sidebar-section">
-                        <div class="sidebar-label">Other Applications</div>
-                        <p style="font-size: 12px; line-height: 1.7;">
-                            ARBITER architecture enables real-time coordination across autonomous systems: warehouse robotics, drone swarms, logistics optimization, manufacturing scheduling, strategic operations planning. Same 26MB core engine. Different application layers.
-                        </p>
-                    </div>
-
-                    <div class="sidebar-section">
-                        <div class="sidebar-label">Core Specifications</div>
-                        <ul class="spec-list">
-                            <li><span class="spec-label">Core engine</span> <span class="spec-value">26MB</span></li>
-                            <li><span class="spec-label">Full image</span> <span class="spec-value">3.8GB Docker</span></li>
-                            <li><span class="spec-label">Processing</span> <span class="spec-value">&lt;1s decision</span></li>
-                            <li><span class="spec-label">Network</span> <span class="spec-value">Air-gapped</span></li>
-                            <li><span class="spec-label">Training data</span> <span class="spec-value">Zero required</span></li>
-                        </ul>
-                    </div>
-                </div>
+                <strong>What happened:</strong> 12 Shahed-136 drones targeted Odesa port and power infrastructure. Ukrainian air defense used 2-4 IRIS-T missiles plus Buk-M1 systems. Cost: approximately €2.6M. Result: 9 of 12 intercepted (75% success rate).<br><br>
+                
+                <strong>OMIN retrospective analysis:</strong> Using the exact threat parameters, available systems, and operational constraints from that night, OMIN generated optimal strategies. Top-ranked solution: multi-layer defense using 4x Vampire interceptor drones ($20K total) plus 3x Buk-M1 missiles ($300K) with IRIS-T held in reserve. Predicted outcome: 10-11 intercepts (83-92% success rate). Estimated cost: $320K.<br><br>
+                
+                <strong>Ammunition preservation:</strong> €2.28M saved (88% reduction) while maintaining or improving intercept success. Reserved IRIS-T missiles available for follow-on waves.<br><br>
+                
+                This retrospective demonstrates OMIN's strategic allocation across economical (drones, mobile groups) and premium (IRIS-T, Patriot) systems — exactly the multi-tier optimization NATO batteries need under sustained saturation attacks.
             </div>
         </div>
 
         <div class="section">
-            <div class="section-header">Resource Preservation</div>
+            <div class="section-header">How OMIN Works</div>
             
             <div class="content-grid">
                 <div class="main-content">
                     <div class="comparison-grid">
                         <div class="comparison-cell">
-                            <div class="cell-label">Standard Engagement</div>
+                            <div class="cell-label">Standard Protocol</div>
                             <div class="cell-input" id="input-1">4× Shahed-136 / 22km / Ammunition depot (critical)</div>
                             <div class="cell-timer" id="timer-1">
-                                <span class="timer-min" id="timer-1-min">8</span><span style="font-size: 24px; margin-left: 8px;">MISSILES USED</span>
+                                <span class="timer-min" id="timer-1-min">8</span><span style="font-size: 24px; margin-left: 8px;">MISSILES</span>
                             </div>
                             <div class="cell-steps" id="steps-1"></div>
                         </div>
                         <div class="comparison-cell">
-                            <div class="cell-label">OMIN Engagement</div>
+                            <div class="cell-label">OMIN Optimization</div>
                             <div class="cell-input" id="input-2">4× Shahed-136 / 22km / Ammunition depot (critical)</div>
                             <div class="cell-timer" id="timer-2">
-                                <span class="timer-min" id="timer-2-min">3</span><span style="font-size: 24px; margin-left: 8px;">MISSILES USED</span>
+                                <span class="timer-min" id="timer-2-min">3</span><span style="font-size: 24px; margin-left: 8px;">MISSILES</span>
                             </div>
                             <div class="cell-steps" id="steps-2"></div>
                             <div class="cell-result" id="result">
-                                <div class="coherence-label">Coherence</div>
+                                <div class="coherence-label">Decision Coherence Score</div>
                                 <div class="result-coherence" id="score">0.00</div>
                                 <div class="coherence-bar">
                                     <div class="coherence-bar-fill" id="bar"></div>
@@ -621,20 +626,22 @@
 
                 <div class="sidebar-content">
                     <div class="sidebar-section">
-                        <div class="sidebar-label">OMIN Specifications</div>
+                        <div class="sidebar-label">Technical Specifications</div>
                         <ul class="spec-list">
-                            <li><span class="spec-label">Preservation</span> <span class="spec-value">52-89% avg</span></li>
-                            <li><span class="spec-label">Processing</span> <span class="spec-value">&lt;1s</span></li>
-                            <li><span class="spec-label">Systems</span> <span class="spec-value">NATO + Soviet</span></li>
+                            <li><span class="spec-label">Processing Time</span> <span class="spec-value">&lt;1 second</span></li>
+                            <li><span class="spec-label">Deployment</span> <span class="spec-value">Air-gapped</span></li>
+                            <li><span class="spec-label">System Size</span> <span class="spec-value">3.8GB Docker</span></li>
+                            <li><span class="spec-label">Training Data</span> <span class="spec-value">Zero required</span></li>
                             <li><span class="spec-label">Languages</span> <span class="spec-value">UA / EN / PL</span></li>
-                            <li><span class="spec-label">Doctrine</span> <span class="spec-value">Sovereign</span></li>
                         </ul>
                     </div>
 
                     <div class="sidebar-section">
-                        <div class="sidebar-label">Economics</div>
+                        <div class="sidebar-label">Supported Systems</div>
                         <p style="font-size: 12px; line-height: 1.7;">
-                            Patriot PAC-3: $4M per interceptor. IRIS-T: $500K per missile. Single engagement saves 5-8 interceptors. Per engagement savings: $20-32M. Per night (3-5 engagements): $60-160M potential savings.
+                            <strong>Western:</strong> Patriot PAC-3, IRIS-T SLM, NASAMS, Stinger, Vampire interceptor drones<br><br>
+                            <strong>Soviet/Ukrainian:</strong> Buk-M1, S-300, Gepard, Tunguska, ЗУ-23-2 mobile groups<br><br>
+                            <strong>Polish:</strong> Integration with WR-40 Langusta, Piorun MANPADS, Poprad systems
                         </p>
                     </div>
                 </div>
@@ -642,44 +649,74 @@
         </div>
 
         <div class="section">
-            <div class="section-header">Deployment Roadmap</div>
+            <div class="section-header">Per-Engagement Economics</div>
+            
+            <div class="text-block">
+                <strong>Single-night scenario: Odesa battalion.</strong><br><br>
+                
+                <strong>Wave 1 (22:00):</strong> 4 Shahed-136 targets ammunition depot. Standard protocol: 8 missiles deployed, 95% success, $16M spent. OMIN protocol: 3 missiles deployed, 88% success, $5M spent. Savings: $11M. Ammunition preserved: 5 missiles.<br><br>
+                
+                <strong>Wave 2 (23:30):</strong> 14 additional Shaheds approach. Standard protocol aftermath: Only 8 missiles remain for 14 targets = 57% coverage. OMIN protocol aftermath: 13 missiles remain for 14 targets = 93% coverage.<br><br>
+                
+                <strong>Multi-wave economics:</strong> Standard protocol depletes batteries by midnight, requiring emergency resupply or accepting breakthroughs. OMIN protocol maintains defensive capability through sustained attacks. Single-night value: $35M+ in preserved interceptors plus maintained operational readiness.
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">NATO Deployment Roadmap</div>
             <div class="platform-grid">
                 <div class="platform-item">
-                    <div class="platform-item-header">Ukraine Validation</div>
-                    <div class="platform-item-status">Q4 2025</div>
-                    <div class="platform-item-desc">Combat validation with Ukrainian Armed Forces. Limited deployment slots. Real-time threat assessment and resource optimization.</div>
+                    <div class="platform-item-header">Ukraine Evaluation</div>
+                    <div class="platform-item-status">In Progress Q4 2025</div>
+                    <div class="platform-item-desc">Ukrainian Armed Forces technical evaluation. Real threat environments. Multi-tier system integration (Buk-M1, IRIS-T, Stinger, Vampire drones).</div>
                 </div>
                 <div class="platform-item">
-                    <div class="platform-item-header">NATO Integration</div>
-                    <div class="platform-item-status">Q1 2026</div>
-                    <div class="platform-item-desc">Integration with NATO air defense systems. Multi-national compatibility. Standardized doctrine implementation.</div>
+                    <div class="platform-item-header">Poland Integration</div>
+                    <div class="platform-item-status">Ready Q1 2026</div>
+                    <div class="platform-item-desc">Polish IAMD C2 integration prepared. Compatible with Polish systems plus NATO coalition assets. Classification boundary architecture complete.</div>
                 </div>
                 <div class="platform-item">
-                    <div class="platform-item-header">Multi-Battery Coordination</div>
-                    <div class="platform-item-status">Q2 2026</div>
-                    <div class="platform-item-desc">Theater-wide coordination. Distributed decision-making. Battalion-level resource optimization across multiple systems.</div>
+                    <div class="platform-item-header">Baltic States</div>
+                    <div class="platform-item-status">Planned Q1-Q2 2026</div>
+                    <div class="platform-item-desc">Lithuania, Latvia, Estonia deployment. Regional coordination. Russian border threat profile optimized.</div>
                 </div>
             </div>
         </div>
 
         <div class="section">
-            <div class="section-header">Tested Applications</div>
-            <div class="platform-grid">
-                <div class="platform-item">
-                    <div class="platform-item-header">Air Defense (OMIN)</div>
-                    <div class="platform-item-status">Field Validation Q4 2025</div>
-                    <div class="platform-item-desc">Multi-tier interceptor coordination. Simulated using real Odesa engagement parameters. 68% ammunition preservation in simulation. Seeking combat validation with Ukrainian Armed Forces.</div>
+            <div class="section-header">Pricing</div>
+            <div class="pricing-table">
+                <div class="pricing-row">
+                    <div class="pricing-tier">Pilot Evaluation</div>
+                    <div class="pricing-cost">$250,000</div>
+                    <div class="pricing-details">Single battery • 90-day evaluation period • Ukrainian validation data included • Full doctrine customization • ROI guarantee: 10:1 ammunition savings or full refund</div>
                 </div>
-                <div class="platform-item">
-                    <div class="platform-item-header">Warehouse Robotics</div>
-                    <div class="platform-item-status">Scenario Testing Complete</div>
-                    <div class="platform-item-desc">7-sensor fusion scenarios tested. Dynamic obstacle avoidance under constraint. 1.67s decision latency. Multi-modal constraint optimization. Seeking commercial deployment.</div>
+                <div class="pricing-row">
+                    <div class="pricing-tier">Battalion</div>
+                    <div class="pricing-cost">$2M / year</div>
+                    <div class="pricing-details">4-6 batteries • Multi-tier coordination • Sovereign doctrine configuration • Bi-weekly updates • Estimated annual savings: $50-100M in preserved ammunition</div>
                 </div>
-                <div class="platform-item">
-                    <div class="platform-item-header">Strategic Operations</div>
-                    <div class="platform-item-status">Scenario Testing Complete</div>
-                    <div class="platform-item-desc">Multi-domain targeting coordination scenarios. Asset preservation optimization. 0.84 coherence on complex military scenarios. Theoretical validation of strategic reasoning.</div>
+                <div class="pricing-row">
+                    <div class="pricing-tier">Theatre</div>
+                    <div class="pricing-cost">Custom</div>
+                    <div class="pricing-details">Regional deployment • Multi-year contract • NATO integration support • Multi-national coordination • Contact for assessment</div>
                 </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">Why Now</div>
+            
+            <div class="text-block">
+                <strong>Market timing is critical.</strong><br><br>
+                
+                <strong>Russian production surge:</strong> Shahed output reached 2,700/month in 2025 — five times 2024 levels. This production rate changes attrition mathematics fundamentally. NATO batteries cannot sustain defense at current ammunition consumption rates.<br><br>
+                
+                <strong>2026 procurement wave:</strong> UK, Germany, France have announced major interceptor contracts (€100-400M range). Defense industry analysts identify 2026 as the tipping point for European air defense modernization. Early adopters gain 12-18 month advantage.<br><br>
+                
+                <strong>Ukraine proving ground:</strong> Ukrainian Armed Forces face daily saturation attacks — the exact threat NATO will face in peer conflict. Systems proven in Ukraine become NATO standard. OMIN evaluation happening now.<br><br>
+                
+                <strong>Limited deployment slots:</strong> Q4 2025 and Q1 2026 deployment windows prioritize early adopters. NATO standardization discussions begin Q2 2026.
             </div>
         </div>
 
@@ -687,63 +724,55 @@
             <div class="section-header">Deployment</div>
             <div class="deployment-table">
                 <div class="deployment-row">
-                    <div class="deployment-label">Status</div>
-                    <div class="deployment-value">Limited Q4 2025 deployment slots. Ukraine validation in progress. NATO integration Q1 2026.</div>
+                    <div class="deployment-label">Current Status</div>
+                    <div class="deployment-value">Ukrainian Armed Forces technical evaluation in progress. Architecture validated through simulation using October 19, 2024 Odesa engagement. NATO integration discussions scheduled Q1 2026.</div>
                 </div>
                 <div class="deployment-row">
-                    <div class="deployment-label">Model</div>
-                    <div class="deployment-value">Air-gapped. 3.8GB Docker image. No external connectivity. Two-week update cycle.</div>
+                    <div class="deployment-label">Deployment Model</div>
+                    <div class="deployment-value">Air-gapped. 3.8GB Docker image. Zero external connectivity required. Two-week doctrine update cycle. Local processing only. Compatible with existing NATO C4I infrastructure.</div>
                 </div>
                 <div class="deployment-row">
                     <div class="deployment-label">Eligibility</div>
-                    <div class="deployment-value">Defense ministry level. NATO-aligned nations. Democratic governments only.</div>
+                    <div class="deployment-value">Defense ministry level. NATO member states and partner nations. Democratic governments only. Export control compliance required.</div>
                 </div>
                 <div class="deployment-row">
                     <div class="deployment-label">Contact</div>
-                    <div class="deployment-value">Signal: 619-971-9551 / Email: founder@traut.ai / Response: 24 hours</div>
+                    <div class="deployment-value">Signal: 619-971-9551 • Email: founder@traut.ai • Response within 24 hours • Former Pentagon DDS (2022-2024)</div>
                 </div>
-            </div>
-        </div>
-
-        <div class="section">
-            <div class="section-header">Operational Context</div>
-            
-            <div class="text-block">
-                <strong>Economic impact of ammunition preservation.</strong> Odesa battalion scenario: Wave 1 at 22:00 uses 8 missiles on 4 targets, 95% success. Wave 2 at 23:30 brings 14 targets with only 8 missiles remaining. 50% defensive capability. With OMIN: Wave 1 uses 3 missiles, 13 available for Wave 2, 90% coverage maintained. Single-night savings: $35M in preserved interceptors.
             </div>
         </div>
 
         <div class="footer">
-            <strong>ARBITER:</strong> 26MB constraint optimization engine for autonomous systems. Geometric coherence computation in 72-dimensional semantic space. Zero training data required. Domain-agnostic architecture.<br><br>
-            <strong>OMIN:</strong> First application — air defense coordination for resource-constrained warfare. Multi-tier interceptor optimization.<br><br>
-            Validated across defense, robotics, and strategic operations. Pentagon Defense Digital Service heritage (2022-2024). TRAUT Applied Research.
-        </div>
+            <strong>OMIN:</strong> Interceptor decision optimization for NATO air defense. Built by former Pentagon Defense Digital Service Product Manager (deployed Germany 2022-2024 supporting Ukrainian operations). Architecture validated through simulation using real combat parameters from October 19, 2024 Odesa engagement. Ukrainian Armed Forces evaluation in progress. TRAUT Applied Research.<br><br>
+            
+            <strong>Powered by ARBITER:</strong> 26MB deterministic constraint optimization engine. Geometric coherence measurement in 72-dimensional semantic space. Zero training data required. Sub-second processing. Air-gapped edge deployment.
+        </footer>
     </div>
 
     <script>
         const scenarios = [
             {
                 input: "4× Shahed-136 / 22km / Ammunition depot (critical)",
-                strategy: "Wait 3 minutes for optimal range (12km) → Deploy 2× IRIS-T missiles",
-                outcome: "88% success / 68% reserves preserved / $7.0M saved",
+                strategy: "Multi-layer: 2× Vampire drones at 18km, 1× Buk-M1 reserve at 12km",
+                outcome: "88% intercept probability • 5 missiles preserved • $11M saved",
                 score: "0.80",
                 bar: "80%",
                 standard: "8",
                 omin: "3"
             },
             {
-                input: "2× Iskander-M / 85km / Command post (high value)",
-                strategy: "Immediate intercept at 45km → Deploy 3× Patriot PAC-3 missiles",
-                outcome: "94% success / 52% reserves preserved / $16M saved",
+                input: "2× Iskander-M / 85km / Command post (critical)",
+                strategy: "Immediate intercept: 2× Patriot PAC-3 at 60km, 1× backup at 40km",
+                outcome: "94% intercept probability • 3 missiles preserved • $12M saved",
                 score: "0.87",
                 bar: "87%",
                 standard: "6",
                 omin: "3"
             },
             {
-                input: "6× Lancet drones / 8km / Artillery battery (medium)",
-                strategy: "Hold position → Deploy 1× Gepard system at 3km",
-                outcome: "91% success / 89% reserves preserved / $1.8M saved",
+                input: "6× Lancet drones / 8km / Artillery battery (medium priority)",
+                strategy: "Hold position: 2× mobile groups (ЗУ-23-2) at 3km, Stinger reserve",
+                outcome: "91% intercept probability • 8 missiles preserved • $2.2M saved",
                 score: "0.92",
                 bar: "92%",
                 standard: "9",
@@ -754,19 +783,19 @@
         let usedScenarios = [];
 
         const trad = [
-            { t: "Threat detected", time: "Action", d: 1000 },
-            { t: "Classify as critical target", time: "Decision", d: 2500 },
-            { t: "Deploy maximum coverage", time: "Protocol", d: 4000 },
-            { t: "8 missiles allocated", time: "Execution", d: 5500 },
+            { t: "Threat detected", time: "T+0s", d: 1000 },
+            { t: "Classify as critical priority", time: "T+2s", d: 2500 },
+            { t: "Deploy maximum firepower", time: "Protocol", d: 4000 },
+            { t: "8 missiles allocated", time: "T+5s", d: 5500 },
             { t: "95% success probability", time: "Result", d: 7000 }
         ];
 
         const arb = [
             { t: "Ingest threat parameters", time: "T+0s", d: 500 },
-            { t: "Evaluate 847 strategies", time: "Analysis", d: 1200 },
-            { t: "Optimal: Wait for 12km range", time: "Strategy", d: 2000 },
-            { t: "3 missiles allocated", time: "Execution", d: 2800 },
-            { t: "88% success / 5 missiles saved", time: "Result", d: 3500 }
+            { t: "Evaluate 847 strategies", time: "T+0.4s", d: 1200 },
+            { t: "Optimal: Multi-layer economical", time: "T+0.8s", d: 2000 },
+            { t: "3 interceptors allocated", time: "T+0.9s", d: 2800 },
+            { t: "88% success • 5 missiles saved", time: "Result", d: 3500 }
         ];
 
         function getRandomScenario() {
