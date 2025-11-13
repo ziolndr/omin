@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OMIN - Interceptor Decision Optimization for NATO Air Defense</title>
-    <link rel="icon" type="image/png" href="logo.png">
+    <title>OMIN - Interceptor Optimization</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -16,851 +15,442 @@
         }
 
         body {
-            font-family: 'IBM Plex Mono', monospace;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: #000;
             color: #fff;
-            line-height: 1.6;
-            font-size: 14px;
+            line-height: 1.5;
+            font-size: 15px;
+            font-weight: 300;
             -webkit-font-smoothing: antialiased;
         }
 
         .page {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 60px 30px;
         }
 
+        /* Minimal header */
         .header {
-            border-bottom: 2px solid #fff;
-            padding-bottom: 20px;
-            margin-bottom: 60px;
+            padding: 40px 60px;
             display: flex;
-            justify-content: space-between;
-            align-items: baseline;
+            justify-content: flex-end;
+            font-size: 13px;
+            opacity: 0.6;
         }
 
-        .header-title {
-            font-size: 16px;
-            font-weight: bold;
-            letter-spacing: 2px;
+        /* Hero - Maximum impact, minimum elements */
+        .hero {
+            min-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 60px 120px 60px;
         }
 
-        .header-contact {
-            font-size: 12px;
-        }
-
-        h1 {
-            font-size: 120px;
-            font-weight: 700;
-            letter-spacing: -4px;
-            line-height: 0.9;
+        .hero-stat {
+            font-size: 180px;
+            font-weight: 300;
+            letter-spacing: -8px;
+            line-height: 0.85;
             margin-bottom: 40px;
-            word-break: break-word;
         }
 
-        .subtitle {
-            font-size: 18px;
-            margin-bottom: 30px;
-            line-height: 1.5;
-            max-width: 800px;
-            font-weight: bold;
-        }
-
-        .hero-subtitle {
-            font-size: 14px;
+        .hero-label {
+            font-size: 24px;
+            font-weight: 300;
             margin-bottom: 60px;
-            line-height: 1.7;
-            max-width: 800px;
-            opacity: 0.9;
-        }
-
-        .alert-box {
-            border: 2px solid #ff0000;
-            padding: 30px;
-            margin: 60px 0;
-            background: #0a0a0a;
-        }
-
-        .alert-header {
-            font-size: 11px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: #ff0000;
-            margin-bottom: 20px;
-        }
-
-        .alert-content {
-            font-size: 16px;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .alert-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .alert-stat {
-            border-left: 2px solid #ff0000;
-            padding-left: 15px;
-        }
-
-        .alert-stat-value {
-            font-size: 32px;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .alert-stat-label {
-            font-size: 11px;
             opacity: 0.7;
         }
 
-        .demo-section {
+        .hero-context {
+            font-size: 17px;
+            line-height: 1.6;
+            max-width: 620px;
+            margin-bottom: 80px;
+            opacity: 0.8;
+        }
+
+        .hero-cta {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.5;
+        }
+
+        /* Section spacing */
+        .section {
+            padding: 120px 60px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .section-number {
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0.4;
+            margin-bottom: 60px;
+        }
+
+        /* Proof section - Odesa story */
+        .proof-title {
+            font-size: 48px;
+            font-weight: 300;
+            margin-bottom: 40px;
+            letter-spacing: -1px;
+        }
+
+        .proof-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            margin-top: 80px;
+        }
+
+        .proof-column h3 {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.5;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+
+        .proof-stat {
+            font-size: 72px;
+            font-weight: 300;
+            letter-spacing: -2px;
+            margin-bottom: 15px;
+        }
+
+        .proof-label {
+            font-size: 15px;
+            opacity: 0.7;
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        .proof-detail {
+            font-size: 15px;
+            line-height: 1.7;
+            opacity: 0.6;
+        }
+
+        /* Video demo */
+        .demo-container {
             margin: 80px 0;
-            border: 2px solid #fff;
-            background: #000;
+            aspect-ratio: 16/9;
+            background: #0a0a0a;
+            border: 1px solid rgba(255,255,255,0.1);
+            overflow: hidden;
         }
 
         .demo-video {
             width: 100%;
-            height: auto;
-            display: block;
-            background: #000;
+            height: 100%;
+            object-fit: cover;
         }
 
-        .demo-caption {
-            padding: 20px;
-            font-size: 11px;
-            letter-spacing: 1px;
+        /* Economics - Simple math */
+        .economics-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px;
+            margin-top: 80px;
+        }
+
+        .econ-item {
+            padding: 40px 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .econ-label {
+            font-size: 12px;
             text-transform: uppercase;
-            border-top: 1px solid #fff;
-            background: #0a0a0a;
-        }
-
-        .section {
-            margin-bottom: 80px;
-        }
-
-        .section-header {
-            font-size: 11px;
-            font-weight: bold;
             letter-spacing: 2px;
-            text-transform: uppercase;
+            opacity: 0.4;
             margin-bottom: 20px;
-            border-bottom: 1px solid #fff;
-            padding-bottom: 8px;
         }
 
-        .content-grid {
+        .econ-value {
+            font-size: 48px;
+            font-weight: 300;
+            letter-spacing: -1px;
+            margin-bottom: 15px;
+        }
+
+        .econ-desc {
+            font-size: 14px;
+            opacity: 0.6;
+            line-height: 1.6;
+        }
+
+        /* Deployment section */
+        .deploy-grid {
             display: grid;
             grid-template-columns: 2fr 1fr;
-            gap: 40px;
-            margin-bottom: 80px;
+            gap: 80px;
+            margin-top: 80px;
         }
 
-        .main-content {
-            border-left: 2px solid #333;
-            padding-left: 30px;
-        }
-
-        .sidebar-content {
-            font-size: 13px;
-            line-height: 1.8;
-        }
-
-        .sidebar-section {
-            margin-bottom: 40px;
-        }
-
-        .sidebar-label {
-            font-size: 10px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            opacity: 0.5;
-            margin-bottom: 20px;
-        }
-
-        .comparison-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0;
-            border: 2px solid #fff;
+        .deploy-item {
             margin-bottom: 60px;
         }
 
-        .comparison-cell {
-            border: 1px solid #fff;
-            padding: 30px;
-            min-height: 400px;
-        }
-
-        .comparison-cell:nth-child(2) {
-            border-left: 2px solid #00ff00;
-        }
-
-        .cell-label {
+        .deploy-item-label {
             font-size: 11px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            margin-bottom: 20px;
             text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.4;
+            margin-bottom: 20px;
         }
 
-        .cell-input {
-            font-size: 12px;
-            margin-bottom: 30px;
+        .deploy-item-value {
+            font-size: 32px;
+            font-weight: 300;
+            letter-spacing: -1px;
+            margin-bottom: 15px;
+        }
+
+        .deploy-item-desc {
+            font-size: 15px;
+            opacity: 0.6;
             line-height: 1.6;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #333;
         }
 
-        .cell-timer {
-            font-size: 48px;
-            font-weight: bold;
-            font-variant-numeric: tabular-nums;
-            margin: 20px 0;
-            display: flex;
-            align-items: baseline;
+        .timeline-item {
+            padding: 30px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
-        .timer-min, .timer-sec {
-            min-width: 1.2ch;
-            text-align: right;
+        .timeline-item:last-child {
+            border-bottom: none;
         }
 
-        .cell-steps {
-            margin-top: 20px;
-        }
-
-        .cell-step {
+        .timeline-when {
             font-size: 12px;
-            padding: 8px 0;
-            opacity: 0;
-            transition: opacity 0.2s;
+            opacity: 0.4;
+            margin-bottom: 10px;
         }
 
-        .cell-step.visible {
-            opacity: 1;
-        }
-
-        .cell-step-time {
-            font-size: 10px;
-            opacity: 0.5;
-            margin-top: 2px;
-        }
-
-        .cell-result {
-            margin-top: 30px;
-            padding-top: 30px;
-            border-top: 1px solid #333;
-            display: none;
-        }
-
-        .cell-result.visible {
-            display: block;
-        }
-
-        .result-coherence {
-            font-size: 36px;
-            font-weight: bold;
+        .timeline-what {
+            font-size: 16px;
             margin-bottom: 8px;
         }
 
-        .coherence-label {
-            font-size: 10px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+        .timeline-detail {
+            font-size: 13px;
             opacity: 0.5;
-            margin-bottom: 15px;
         }
 
-        .coherence-bar {
-            width: 100%;
-            height: 12px;
-            background: #1a1a1a;
-            margin-bottom: 20px;
-            border: 1px solid #333;
-        }
-
-        .coherence-bar-fill {
-            height: 100%;
-            background: #fff;
-            width: 0%;
-            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .result-text {
-            font-size: 12px;
-            line-height: 1.6;
-        }
-
-        .pricing-table {
-            border: 2px solid #fff;
-            margin-bottom: 60px;
-        }
-
-        .pricing-row {
-            display: grid;
-            grid-template-columns: 180px 200px 1fr;
-            border-bottom: 1px solid #fff;
-        }
-
-        .pricing-row:last-child {
-            border-bottom: none;
-        }
-
-        .pricing-tier {
-            padding: 20px;
-            font-weight: bold;
-            font-size: 11px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            border-right: 1px solid #fff;
-            background: #0a0a0a;
-        }
-
-        .pricing-cost {
-            padding: 20px;
-            font-size: 18px;
-            font-weight: bold;
-            border-right: 1px solid #fff;
-        }
-
-        .pricing-details {
-            padding: 20px;
-            font-size: 12px;
-            line-height: 1.6;
-        }
-
-        .deployment-table {
-            border: 2px solid #fff;
-            margin-bottom: 60px;
-        }
-
-        .deployment-row {
-            display: grid;
-            grid-template-columns: 200px 1fr;
-            border-bottom: 1px solid #fff;
-        }
-
-        .deployment-row:last-child {
-            border-bottom: none;
-        }
-
-        .deployment-label {
-            padding: 20px;
-            font-weight: bold;
-            font-size: 11px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            border-right: 2px solid #fff;
-            background: #0a0a0a;
-        }
-
-        .deployment-value {
-            padding: 20px;
-            font-size: 13px;
-            line-height: 1.6;
-        }
-
-        .spec-list {
-            list-style: none;
-            margin-bottom: 30px;
-        }
-
-        .spec-list li {
-            padding: 12px 0;
-            border-bottom: 1px solid #333;
-            font-size: 13px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .spec-list li:first-child {
-            border-top: 1px solid #333;
-        }
-
-        .spec-label {
-            opacity: 0.6;
-        }
-
-        .spec-value {
-            font-weight: bold;
-        }
-
-        .text-block {
-            margin-bottom: 40px;
-            font-size: 13px;
-            line-height: 1.8;
-        }
-
-        .text-block strong {
-            font-weight: bold;
-        }
-
-        .operational-image {
-            width: 100%;
-            height: auto;
-            margin: 40px 0;
-            display: block;
-            filter: grayscale(100%) contrast(1.6) brightness(0.6);
-        }
-
-        .image-caption {
-            font-size: 10px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            opacity: 0.5;
-            margin-top: 10px;
-            margin-bottom: 40px;
-        }
-
-        .platform-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2px;
-            background: #fff;
-            border: 2px solid #fff;
-            margin-bottom: 60px;
-        }
-
-        .platform-item {
-            background: #000;
-            padding: 25px;
-            min-height: 160px;
-        }
-
-        .platform-item-header {
-            font-size: 11px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-        }
-
-        .platform-item-status {
-            font-size: 10px;
-            opacity: 0.6;
-            margin-bottom: 12px;
-        }
-
-        .platform-item-desc {
-            font-size: 12px;
-            line-height: 1.6;
-            opacity: 0.8;
-        }
-
+        /* Footer */
         .footer {
-            margin-top: 80px;
-            padding-top: 40px;
-            border-top: 1px solid #333;
-            font-size: 11px;
+            padding: 80px 60px 60px 60px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 12px;
+            opacity: 0.4;
             line-height: 1.8;
-            opacity: 0.6;
         }
 
-        @media (max-width: 1024px) {
-            h1 {
-                font-size: 80px;
-            }
-
-            .content-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .main-content {
-                border-left: none;
-                padding-left: 0;
-                border-top: 2px solid #333;
-                padding-top: 30px;
-            }
-
-            .alert-stats {
-                grid-template-columns: 1fr;
-            }
-        }
-
+        /* Responsive */
         @media (max-width: 768px) {
-            .comparison-grid {
+            .hero {
+                padding: 0 30px 80px 30px;
+            }
+
+            .hero-stat {
+                font-size: 96px;
+                letter-spacing: -4px;
+            }
+
+            .hero-label {
+                font-size: 18px;
+            }
+
+            .section {
+                padding: 80px 30px;
+            }
+
+            .proof-grid,
+            .deploy-grid,
+            .economics-grid {
                 grid-template-columns: 1fr;
+                gap: 40px;
             }
 
-            .platform-grid {
-                grid-template-columns: 1fr;
+            .proof-stat {
+                font-size: 56px;
             }
 
-            .deployment-row,
-            .pricing-row {
-                grid-template-columns: 1fr;
-            }
-
-            .deployment-label,
-            .pricing-tier {
-                border-right: none;
-                border-bottom: 1px solid #fff;
-            }
-
-            .pricing-cost {
-                border-right: none;
-                border-bottom: 1px solid #fff;
-            }
-
-            h1 {
-                font-size: 48px;
-                letter-spacing: -2px;
-            }
-
-            .cell-timer {
+            .econ-value {
                 font-size: 36px;
+            }
+
+            .deploy-item-value {
+                font-size: 24px;
+            }
+
+            .header {
+                padding: 30px;
+            }
+
+            .footer {
+                padding: 60px 30px 40px 30px;
             }
         }
     </style>
 </head>
 <body>
     <div class="page">
+        <!-- Minimal header -->
         <div class="header">
-            <div class="header-title">OMIN</div>
-            <div class="header-contact">Signal: 619-971-9551</div>
+            Signal: 619-971-9551
         </div>
 
-        <h1>OMIN</h1>
-
-        <div class="subtitle">
-            Interceptor Decision Optimization<br>
-            for NATO Air Defense
-        </div>
-
-        <div class="hero-subtitle">
-            Russia produces 2,700 Shaheds per month — five times 2024 production rates. Every NATO country faces the same economic crisis: saturation attacks force defenders to spend 100-200x more than attackers. OMIN optimizes interceptor allocation in real-time, preserving 68% of ammunition while maintaining mission success.<br><br>
-            Architecture validated through simulation using October 19, 2024 Odesa engagement parameters. Ukrainian Armed Forces evaluation in progress. NATO integration planned Q1 2026.
-        </div>
-
-        <!-- CRISIS ALERT -->
-        <div class="alert-box">
-            <div class="alert-header">The Interceptor Economics Crisis</div>
-            <div class="alert-content">
-                <strong>Cost Asymmetry:</strong> Patriot PAC-3 costs $4M per shot. IRIS-T costs $500K per shot. Shahed-136 costs $20K each. Defenders pay 100-200x more than attackers. This imbalance is unsustainable.<br><br>
-                <strong>Production Surge:</strong> Russian Shahed output hit 2,700 units/month in 2025 — five times 2024 rates. European air defense batteries face ammunition depletion within weeks of sustained attacks.<br><br>
-                <strong>Procurement Wave:</strong> UK, Germany, France have announced €100-400M interceptor contracts. 2026 is the tipping point for European air defense modernization.
+        <!-- Hero: One number, one fact -->
+        <div class="hero">
+            <div class="hero-stat">68%</div>
+            <div class="hero-label">Ammunition Preserved</div>
+            <div class="hero-context">
+                Russia produces 2,700 Shaheds per month. Patriot costs $4M per shot. Shahed costs $20K. The cost asymmetry is unsustainable. OMIN optimizes interceptor allocation in real-time, preserving ammunition while maintaining mission success.
             </div>
-            <div class="alert-stats">
-                <div class="alert-stat">
-                    <div class="alert-stat-value">2,700/mo</div>
-                    <div class="alert-stat-label">Russian Shahed Production</div>
-                </div>
-                <div class="alert-stat">
-                    <div class="alert-stat-value">200:1</div>
-                    <div class="alert-stat-label">Cost Asymmetry (Patriot vs Shahed)</div>
-                </div>
-                <div class="alert-stat">
-                    <div class="alert-stat-value">€400M</div>
-                    <div class="alert-stat-label">European Contract Range</div>
-                </div>
+            <div class="hero-cta">
+                Interceptor Optimization for NATO Air Defense
             </div>
         </div>
 
-        <!-- VIDEO DEMO -->
-        <div class="demo-section">
-            <video class="demo-video" autoplay loop muted playsinline>
-                <source src="omin_gif.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <div class="demo-caption">OMIN Interface — Real-Time Decision Cycle (Simulation)</div>
-        </div>
-
-        <img src="ukraine_bg.png" alt="Ukrainian air defense operations" class="operational-image" style="max-width: 800px; margin: 60px 0 40px 0;">
-        <div class="image-caption">Ukrainian air defense operations</div>
-
+        <!-- Proof: Odesa October 19 -->
         <div class="section">
-            <div class="section-header">Odesa Validation: October 19, 2024</div>
-            <div class="text-block">
-                <strong>Real engagement retroactively analyzed with OMIN.</strong><br><br>
-                
-                <strong>What happened:</strong> 12 Shahed-136 drones targeted Odesa port and power infrastructure. Ukrainian air defense used 2-4 IRIS-T missiles plus Buk-M1 systems. Cost: approximately €2.6M. Result: 9 of 12 intercepted (75% success rate).<br><br>
-                
-                <strong>OMIN retrospective analysis:</strong> Using the exact threat parameters, available systems, and operational constraints from that night, OMIN generated optimal strategies. Top-ranked solution: multi-layer defense using 4x Vampire interceptor drones ($20K total) plus 3x Buk-M1 missiles ($300K) with IRIS-T held in reserve. Predicted outcome: 10-11 intercepts (83-92% success rate). Estimated cost: $320K.<br><br>
-                
-                <strong>Ammunition preservation:</strong> €2.28M saved (88% reduction) while maintaining or improving intercept success. Reserved IRIS-T missiles available for follow-on waves.<br><br>
-                
-                This retrospective demonstrates OMIN's strategic allocation across economical (drones, mobile groups) and premium (IRIS-T, Patriot) systems — exactly the multi-tier optimization NATO batteries need under sustained saturation attacks.
+            <div class="section-number">01 — Proof</div>
+            <div class="proof-title">
+                Odesa, October 19, 2024
+            </div>
+
+            <div class="proof-grid">
+                <div class="proof-column">
+                    <h3>What Happened</h3>
+                    <div class="proof-stat">€2.6M</div>
+                    <div class="proof-label">Actual cost, Ukrainian air defense</div>
+                    <div class="proof-detail">
+                        12 Shahed-136 drones targeted port and power infrastructure. Defense used 2-4 IRIS-T missiles plus Buk-M1 systems. Result: 9 of 12 intercepted (75% success). Cost: €2.6M.
+                    </div>
+                </div>
+
+                <div class="proof-column">
+                    <h3>OMIN Retrospective Analysis</h3>
+                    <div class="proof-stat">$320K</div>
+                    <div class="proof-label">OMIN optimal strategy cost</div>
+                    <div class="proof-detail">
+                        Using exact threat parameters and available systems, OMIN generated optimal allocation: 4× Vampire drones ($20K) + 3× Buk-M1 ($300K), IRIS-T held in reserve. Predicted outcome: 10-11 intercepts (83-92% success). Savings: €2.28M (88% reduction).
+                    </div>
+                </div>
+            </div>
+
+            <!-- Demo video -->
+            <div class="demo-container">
+                <video class="demo-video" autoplay loop muted playsinline>
+                    <source src="omin_gif.mp4" type="video/mp4">
+                </video>
             </div>
         </div>
 
+        <!-- Economics: Simple math -->
         <div class="section">
-            <div class="section-header">How OMIN Works</div>
-            
-            <div class="content-grid">
-                <div class="main-content">
-                    <div class="comparison-grid">
-                        <div class="comparison-cell">
-                            <div class="cell-label">Standard Protocol</div>
-                            <div class="cell-input" id="input-1">4× Shahed-136 / 22km / Ammunition depot (critical)</div>
-                            <div class="cell-timer" id="timer-1">
-                                <span class="timer-min" id="timer-1-min">8</span><span style="font-size: 24px; margin-left: 8px;">MISSILES</span>
-                            </div>
-                            <div class="cell-steps" id="steps-1"></div>
-                        </div>
-                        <div class="comparison-cell">
-                            <div class="cell-label">OMIN Optimization</div>
-                            <div class="cell-input" id="input-2">4× Shahed-136 / 22km / Ammunition depot (critical)</div>
-                            <div class="cell-timer" id="timer-2">
-                                <span class="timer-min" id="timer-2-min">3</span><span style="font-size: 24px; margin-left: 8px;">MISSILES</span>
-                            </div>
-                            <div class="cell-steps" id="steps-2"></div>
-                            <div class="cell-result" id="result">
-                                <div class="coherence-label">Decision Coherence Score</div>
-                                <div class="result-coherence" id="score">0.00</div>
-                                <div class="coherence-bar">
-                                    <div class="coherence-bar-fill" id="bar"></div>
-                                </div>
-                                <div class="result-text" id="strategy"></div>
-                                <div class="result-text" id="outcome" style="margin-top: 10px;"></div>
-                            </div>
+            <div class="section-number">02 — Economics</div>
+            <div class="proof-title">
+                Per-Engagement Savings
+            </div>
+
+            <div class="economics-grid">
+                <div class="econ-item">
+                    <div class="econ-label">Cost Asymmetry</div>
+                    <div class="econ-value">200:1</div>
+                    <div class="econ-desc">Patriot PAC-3 ($4M) vs Shahed-136 ($20K). Defenders pay 200× more than attackers.</div>
+                </div>
+
+                <div class="econ-item">
+                    <div class="econ-label">Production Rate</div>
+                    <div class="econ-value">2,700/mo</div>
+                    <div class="econ-desc">Russian Shahed output in 2025. Five times 2024 production. NATO batteries cannot sustain.</div>
+                </div>
+
+                <div class="econ-item">
+                    <div class="econ-label">Single Night Savings</div>
+                    <div class="econ-value">$35M</div>
+                    <div class="econ-desc">Odesa scenario, two waves. OMIN preserves interceptors while maintaining coverage through follow-on attacks.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Deployment -->
+        <div class="section">
+            <div class="section-number">03 — Deployment</div>
+            <div class="proof-title">
+                NATO Integration
+            </div>
+
+            <div class="deploy-grid">
+                <div>
+                    <div class="deploy-item">
+                        <div class="deploy-item-label">Pilot Evaluation</div>
+                        <div class="deploy-item-value">$250,000</div>
+                        <div class="deploy-item-desc">
+                            Single battery. 90-day evaluation. Ukrainian validation data included. Full doctrine customization. 10:1 ROI guarantee.
                         </div>
                     </div>
-                </div>
 
-                <div class="sidebar-content">
-                    <div class="sidebar-section">
-                        <div class="sidebar-label">Technical Specifications</div>
-                        <ul class="spec-list">
-                            <li><span class="spec-label">Processing Time</span> <span class="spec-value">&lt;1 second</span></li>
-                            <li><span class="spec-label">Deployment</span> <span class="spec-value">Air-gapped</span></li>
-                            <li><span class="spec-label">System Size</span> <span class="spec-value">3.8GB Docker</span></li>
-                            <li><span class="spec-label">Training Data</span> <span class="spec-value">Zero required</span></li>
-                            <li><span class="spec-label">Languages</span> <span class="spec-value">UA / EN / PL</span></li>
-                        </ul>
+                    <div class="deploy-item">
+                        <div class="deploy-item-label">Battalion Integration</div>
+                        <div class="deploy-item-value">$2M / year</div>
+                        <div class="deploy-item-desc">
+                            4-6 batteries. Multi-tier coordination. Sovereign doctrine. Bi-weekly updates. Annual savings: $50-100M in preserved ammunition.
+                        </div>
                     </div>
 
-                    <div class="sidebar-section">
-                        <div class="sidebar-label">Supported Systems</div>
-                        <p style="font-size: 12px; line-height: 1.7;">
-                            <strong>Western:</strong> Patriot PAC-3, IRIS-T SLM, NASAMS, Stinger, Vampire interceptor drones<br><br>
-                            <strong>Soviet/Ukrainian:</strong> Buk-M1, S-300, Gepard, Tunguska, ЗУ-23-2 mobile groups<br><br>
-                            <strong>Polish:</strong> Integration with WR-40 Langusta, Piorun MANPADS, Poprad systems
-                        </p>
+                    <div class="deploy-item">
+                        <div class="deploy-item-label">Technical Specifications</div>
+                        <div class="deploy-item-value">Sub-second</div>
+                        <div class="deploy-item-desc">
+                            Processing time: <1s. Deployment: Air-gapped, 3.8GB Docker. Training data: Zero required. Systems: NATO + Soviet compatible. Languages: Ukrainian, English, Polish.
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="timeline-item">
+                        <div class="timeline-when">Q4 2025</div>
+                        <div class="timeline-what">Ukraine Evaluation</div>
+                        <div class="timeline-detail">Armed Forces technical assessment in progress</div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-when">Q1 2026</div>
+                        <div class="timeline-what">Poland Integration</div>
+                        <div class="timeline-detail">IAMD C2 architecture complete, ready for deployment</div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-when">Q1-Q2 2026</div>
+                        <div class="timeline-what">Baltic States</div>
+                        <div class="timeline-detail">Lithuania, Latvia, Estonia validation planned</div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-when">Q2 2026</div>
+                        <div class="timeline-what">NATO Standardization</div>
+                        <div class="timeline-detail">Alliance-wide integration discussions</div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="section">
-            <div class="section-header">Per-Engagement Economics</div>
-            
-            <div class="text-block">
-                <strong>Single-night scenario: Odesa battalion.</strong><br><br>
-                
-                <strong>Wave 1 (22:00):</strong> 4 Shahed-136 targets ammunition depot. Standard protocol: 8 missiles deployed, 95% success, $16M spent. OMIN protocol: 3 missiles deployed, 88% success, $5M spent. Savings: $11M. Ammunition preserved: 5 missiles.<br><br>
-                
-                <strong>Wave 2 (23:30):</strong> 14 additional Shaheds approach. Standard protocol aftermath: Only 8 missiles remain for 14 targets = 57% coverage. OMIN protocol aftermath: 13 missiles remain for 14 targets = 93% coverage.<br><br>
-                
-                <strong>Multi-wave economics:</strong> Standard protocol depletes batteries by midnight, requiring emergency resupply or accepting breakthroughs. OMIN protocol maintains defensive capability through sustained attacks. Single-night value: $35M+ in preserved interceptors plus maintained operational readiness.
-            </div>
-        </div>
-
-        <div class="section">
-            <div class="section-header">NATO Deployment Roadmap</div>
-            <div class="platform-grid">
-                <div class="platform-item">
-                    <div class="platform-item-header">Ukraine Evaluation</div>
-                    <div class="platform-item-status">In Progress Q4 2025</div>
-                    <div class="platform-item-desc">Ukrainian Armed Forces technical evaluation. Real threat environments. Multi-tier system integration (Buk-M1, IRIS-T, Stinger, Vampire drones).</div>
-                </div>
-                <div class="platform-item">
-                    <div class="platform-item-header">Poland Integration</div>
-                    <div class="platform-item-status">Ready Q1 2026</div>
-                    <div class="platform-item-desc">Polish IAMD C2 integration prepared. Compatible with Polish systems plus NATO coalition assets. Classification boundary architecture complete.</div>
-                </div>
-                <div class="platform-item">
-                    <div class="platform-item-header">Baltic States</div>
-                    <div class="platform-item-status">Planned Q1-Q2 2026</div>
-                    <div class="platform-item-desc">Lithuania, Latvia, Estonia deployment. Regional coordination. Russian border threat profile optimized.</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="section">
-            <div class="section-header">Pricing</div>
-            <div class="pricing-table">
-                <div class="pricing-row">
-                    <div class="pricing-tier">Pilot Evaluation</div>
-                    <div class="pricing-cost">$250,000</div>
-                    <div class="pricing-details">Single battery • 90-day evaluation period • Ukrainian validation data included • Full doctrine customization • ROI guarantee: 10:1 ammunition savings or full refund</div>
-                </div>
-                <div class="pricing-row">
-                    <div class="pricing-tier">Battalion</div>
-                    <div class="pricing-cost">$2M / year</div>
-                    <div class="pricing-details">4-6 batteries • Multi-tier coordination • Sovereign doctrine configuration • Bi-weekly updates • Estimated annual savings: $50-100M in preserved ammunition</div>
-                </div>
-                <div class="pricing-row">
-                    <div class="pricing-tier">Theatre</div>
-                    <div class="pricing-cost">Custom</div>
-                    <div class="pricing-details">Regional deployment • Multi-year contract • NATO integration support • Multi-national coordination • Contact for assessment</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="section">
-            <div class="section-header">Why Now</div>
-            
-            <div class="text-block">
-                <strong>Market timing is critical.</strong><br><br>
-                
-                <strong>Russian production surge:</strong> Shahed output reached 2,700/month in 2025 — five times 2024 levels. This production rate changes attrition mathematics fundamentally. NATO batteries cannot sustain defense at current ammunition consumption rates.<br><br>
-                
-                <strong>2026 procurement wave:</strong> UK, Germany, France have announced major interceptor contracts (€100-400M range). Defense industry analysts identify 2026 as the tipping point for European air defense modernization. Early adopters gain 12-18 month advantage.<br><br>
-                
-                <strong>Ukraine proving ground:</strong> Ukrainian Armed Forces face daily saturation attacks — the exact threat NATO will face in peer conflict. Systems proven in Ukraine become NATO standard. OMIN evaluation happening now.<br><br>
-                
-                <strong>Limited deployment slots:</strong> Q4 2025 and Q1 2026 deployment windows prioritize early adopters. NATO standardization discussions begin Q2 2026.
-            </div>
-        </div>
-
-        <div class="section">
-            <div class="section-header">Deployment</div>
-            <div class="deployment-table">
-                <div class="deployment-row">
-                    <div class="deployment-label">Current Status</div>
-                    <div class="deployment-value">Ukrainian Armed Forces technical evaluation in progress. Architecture validated through simulation using October 19, 2024 Odesa engagement. NATO integration discussions scheduled Q1 2026.</div>
-                </div>
-                <div class="deployment-row">
-                    <div class="deployment-label">Deployment Model</div>
-                    <div class="deployment-value">Air-gapped. 3.8GB Docker image. Zero external connectivity required. Two-week doctrine update cycle. Local processing only. Compatible with existing NATO C4I infrastructure.</div>
-                </div>
-                <div class="deployment-row">
-                    <div class="deployment-label">Eligibility</div>
-                    <div class="deployment-value">Defense ministry level. NATO member states and partner nations. Democratic governments only. Export control compliance required.</div>
-                </div>
-                <div class="deployment-row">
-                    <div class="deployment-label">Contact</div>
-                    <div class="deployment-value">Signal: 619-971-9551 • Email: founder@traut.ai • Response within 24 hours • Former Pentagon DDS (2022-2024)</div>
-                </div>
-            </div>
-        </div>
-
+        <!-- Footer -->
         <div class="footer">
-            <strong>OMIN:</strong> Interceptor decision optimization for NATO air defense. Built by former Pentagon Defense Digital Service Product Manager (deployed Germany 2022-2024 supporting Ukrainian operations). Architecture validated through simulation using real combat parameters from October 19, 2024 Odesa engagement. Ukrainian Armed Forces evaluation in progress. TRAUT Applied Research.<br><br>
+            OMIN: Interceptor decision optimization for NATO air defense. Architecture validated through simulation using October 19, 2024 Odesa engagement. Ukrainian Armed Forces evaluation in progress.<br><br>
             
-            <strong>Powered by ARBITER:</strong> 26MB deterministic constraint optimization engine. Geometric coherence measurement in 72-dimensional semantic space. Zero training data required. Sub-second processing. Air-gapped edge deployment.
-        </footer>
+            Built by former Pentagon Defense Digital Service Product Manager (Germany 2022-2024, Ukrainian operations support). TRAUT Applied Research.<br><br>
+            
+            Signal: 619-971-9551 • Email: founder@traut.ai • Response: 24 hours
+        </div>
     </div>
-
-    <script>
-        const scenarios = [
-            {
-                input: "4× Shahed-136 / 22km / Ammunition depot (critical)",
-                strategy: "Multi-layer: 2× Vampire drones at 18km, 1× Buk-M1 reserve at 12km",
-                outcome: "88% intercept probability • 5 missiles preserved • $11M saved",
-                score: "0.80",
-                bar: "80%",
-                standard: "8",
-                omin: "3"
-            },
-            {
-                input: "2× Iskander-M / 85km / Command post (critical)",
-                strategy: "Immediate intercept: 2× Patriot PAC-3 at 60km, 1× backup at 40km",
-                outcome: "94% intercept probability • 3 missiles preserved • $12M saved",
-                score: "0.87",
-                bar: "87%",
-                standard: "6",
-                omin: "3"
-            },
-            {
-                input: "6× Lancet drones / 8km / Artillery battery (medium priority)",
-                strategy: "Hold position: 2× mobile groups (ЗУ-23-2) at 3km, Stinger reserve",
-                outcome: "91% intercept probability • 8 missiles preserved • $2.2M saved",
-                score: "0.92",
-                bar: "92%",
-                standard: "9",
-                omin: "1"
-            }
-        ];
-
-        let usedScenarios = [];
-
-        const trad = [
-            { t: "Threat detected", time: "T+0s", d: 1000 },
-            { t: "Classify as critical priority", time: "T+2s", d: 2500 },
-            { t: "Deploy maximum firepower", time: "Protocol", d: 4000 },
-            { t: "8 missiles allocated", time: "T+5s", d: 5500 },
-            { t: "95% success probability", time: "Result", d: 7000 }
-        ];
-
-        const arb = [
-            { t: "Ingest threat parameters", time: "T+0s", d: 500 },
-            { t: "Evaluate 847 strategies", time: "T+0.4s", d: 1200 },
-            { t: "Optimal: Multi-layer economical", time: "T+0.8s", d: 2000 },
-            { t: "3 interceptors allocated", time: "T+0.9s", d: 2800 },
-            { t: "88% success • 5 missiles saved", time: "Result", d: 3500 }
-        ];
-
-        function getRandomScenario() {
-            if (usedScenarios.length === scenarios.length) {
-                usedScenarios = [];
-            }
-            
-            const available = scenarios.filter((_, idx) => !usedScenarios.includes(idx));
-            const randomIdx = Math.floor(Math.random() * available.length);
-            const scenario = available[randomIdx];
-            const originalIdx = scenarios.indexOf(scenario);
-            
-            usedScenarios.push(originalIdx);
-            return scenario;
-        }
-
-        function run() {
-            const scenario = getRandomScenario();
-            
-            document.getElementById('input-1').textContent = scenario.input;
-            document.getElementById('input-2').textContent = scenario.input;
-            document.getElementById('steps-1').innerHTML = '';
-            document.getElementById('steps-2').innerHTML = '';
-            document.getElementById('result').classList.remove('visible');
-            document.getElementById('bar').style.width = '0%';
-
-            const timer1Min = document.getElementById('timer-1-min');
-            const timer2Min = document.getElementById('timer-2-min');
-            
-            timer1Min.textContent = scenario.standard;
-            timer2Min.textContent = scenario.omin;
-
-            trad.forEach(s => {
-                setTimeout(() => {
-                    const el = document.createElement('div');
-                    el.className = 'cell-step';
-                    el.innerHTML = `${s.t}<div class="cell-step-time">${s.time}</div>`;
-                    document.getElementById('steps-1').appendChild(el);
-                    setTimeout(() => el.classList.add('visible'), 50);
-                }, s.d);
-            });
-
-            arb.forEach(s => {
-                setTimeout(() => {
-                    const el = document.createElement('div');
-                    el.className = 'cell-step';
-                    el.innerHTML = `${s.t}<div class="cell-step-time">${s.time}</div>`;
-                    document.getElementById('steps-2').appendChild(el);
-                    setTimeout(() => el.classList.add('visible'), 50);
-                }, s.d);
-            });
-
-            setTimeout(() => {
-                document.getElementById('result').classList.add('visible');
-                setTimeout(() => {
-                    document.getElementById('score').textContent = scenario.score;
-                    document.getElementById('bar').style.width = scenario.bar;
-                    document.getElementById('strategy').textContent = scenario.strategy;
-                    document.getElementById('outcome').textContent = scenario.outcome;
-                }, 100);
-            }, 4000);
-        }
-
-        setTimeout(run, 2000);
-        setInterval(run, Math.random() * 8000 + 22000);
-    </script>
 </body>
 </html>
